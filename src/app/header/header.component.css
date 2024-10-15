@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Bruno+Ace&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+    letter-spacing: 2px;
+}
+
+nav ul {
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+}
+
+nav ul li {
+    cursor: pointer;
+    transition: transform ease-out .1s;
+}
+
+a {
+    text-decoration: none;
+}
+
+.active-link {
+    color: white;
+    transform: translateY(-1px);
+}
+
+.logo {
+    font-family: "Bruno Ace", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.close-hamburger-icon {
+    color: red !important;
+}

@@ -1,0 +1,42 @@
+<header class="relative flex justify-center align-center container-fluid py-3 sm:container sm:justify-between sm:py-4">
+    <div *ngIf="!this.isMobileMenuOpen">
+        <h1 class="logo text-2xl select-none text-white mb-0 sm:text-2xl md:text-3xl">Anime Hub</h1>
+    </div>
+    <button (click)="this.isMobileMenuOpen=!this.isMobileMenuOpen;"
+        [ngClass]="{'close-hamburger-icon': this.isMobileMenuOpen}" type="button"
+        class="z-10 absolute left-2 text-2xl text-white material-icons-outlined sm:hidden">{{this.isMobileMenuOpen ?
+        'close'
+        : 'menu'}}</button>
+    <nav class="flex">
+        <ul class="hidden gap-4 align-center my-auto text-white sm:flex">
+            <li class="select-none text-[#bebebe] hover:text-white hover:-translate-y-px sm:mt-2 sm:text-md lg:text-lg">
+                <a routerLink="/" routerLinkActive="active-link">HOME</a>
+            </li>
+            <li class="select-none text-[#bebebe] hover:text-white hover:-translate-y-px sm:mt-2 sm:text-md lg:text-lg">
+                FEATURED
+            </li>
+            <li class="select-none text-[#bebebe] hover:text-white hover:-translate-y-px sm:mt-2 sm:text-md lg:text-lg">
+                TOP-AIRING</li>
+            <li class="select-none text-[#bebebe] hover:text-white hover:-translate-y-px sm:mt-2 sm:text-md lg:text-lg">
+                MOVIES
+            </li>
+        </ul>
+    </nav>
+    <!-- SMALL SCREEN MENU -->
+    <div *ngIf="this.isMobileMenuOpen" class="z-4 top-0 absolute w-full h-screen sm:hidden">
+        <nav style="background: linear-gradient(270deg, #5d0914 20%, rgba(93, 9, 20, 0))!important;" class="h-screen">
+            <ul class="h-screen flex flex-col gap-8 items-end p-4">
+                <li class="select-none text-[#bebebe] text-xl hover:text-white hover:-translate-y-px">HOME
+                </li>
+                <li class="select-none text-[#bebebe] text-xl hover:text-white hover:-translate-y-px">
+                    FEATURED
+                </li>
+                <li class="select-none text-[#bebebe] text-xl hover:text-white hover:-translate-y-px">
+                    TOP-AIRING</li>
+                <li class="select-none text-[#bebebe] text-xl hover:text-white hover:-translate-y-px">
+                    MOVIES
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>

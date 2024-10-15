@@ -1,1 +1,22 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --dark-grey: #191919;
+    --black: #080808;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    border-top: 4px solid red;
+    background-color: var(--dark-grey) !important;
+}
