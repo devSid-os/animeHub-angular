@@ -1,0 +1,14 @@
+@media screen and (max-width: 576px) {
+    main {
+        width: 100%;
+        /* Full width */
+        padding-right: var(--bs-gutter-x, 0.75rem);
+        /* Horizontal padding */
+        padding-left: var(--bs-gutter-x, 0.75rem);
+        /* Horizontal padding */
+        margin-right: auto;
+        /* Center alignment */
+        margin-left: auto;
+        /* Center alignment */
+    }
+}

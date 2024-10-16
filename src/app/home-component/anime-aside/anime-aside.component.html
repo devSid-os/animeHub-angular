@@ -1,0 +1,29 @@
+<ng-container *ngIf="this.animeData.length > 0;">
+    <div class="w-full">
+        <h3 class="p-3 text-lg tracking-wider flex items-center">
+            <span class="material-icons-outlined">
+                local_fire_department
+            </span>
+            Popular Animes
+        </h3>
+    </div>
+    <!-- POPULAR ANIMES DIV -->
+    <div class="w-full flex flex-col gap-3 py-3">
+        <div class="popular-anime-div p-2 w-full flex justify-between items-center gap-3"
+            *ngFor="let anime of this.animeData">
+            <img style="opacity: .9;" class="popular-anime-img select-none w-auto h-[130px] w-max rounded-sm"
+                [src]="anime.images.jpg.image_url" [alt]="anime.title" />
+            <div class="flex-1">
+                <p class="popular-anime-title text-sm tracking-wider font-[600]">{{anime.title_english || anime.title}}</p>
+                <p class="text-[12px] text-[#bebebe] mt-1">{{anime.title_japanese || anime.title}}</p>
+                <div class="flex items-center gap-1 mt-2">
+                    <span class="material-icons-outlined font-light text-[.9rem] -ml-1">
+                        local_fire_department
+                    </span>
+                    <p class="text-[.7rem] font-light tracking-wider mt-[2px]">{{anime.scored_by}}</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</ng-container>

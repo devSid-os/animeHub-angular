@@ -14,7 +14,6 @@ export class HeaderComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     const screenWidth = window.innerWidth;
-    console.log(screenWidth)
     this.isSmallScreen = screenWidth < 640; // For example, use 768px as the breakpoint
 
     // Automatically show background if screen is large

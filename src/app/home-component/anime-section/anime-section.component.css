@@ -1,0 +1,46 @@
+* {
+    letter-spacing: 2px;
+}
+
+p,
+h3 {
+    margin-bottom: 0 !important;
+}
+
+.linear-gradient-bg {
+    background: linear-gradient(180deg, rgba(0, 0, 0, .5), rgba(0, 0, 0, .15) 90%, transparent);
+}
+
+.anime-text-div {
+    background: linear-gradient(0deg, #000 30%, transparent);
+    transition: height .3s ease-in-out;
+}
+
+.anime-text-div p {
+    letter-spacing: 1px !important;
+    transition: color .3s ease-in-out, transform .3s ease-in-out;
+}
+
+.anime-card:hover .anime-text-div {
+    height: 100px;
+}
+
+.anime-card:hover .anime-text-div p {
+    transform: translateY(-0.7rem);
+}
+
+.anime-card:hover .anime-text-div p:first-child {
+    color: var(--color-yellow);
+}
+
+#anime-extra-info {
+    background: linear-gradient(180deg, #000, transparent);
+    border-top: 1px solid gray;
+}
+
+#anime-extra-info p,
+.anime-text-div p {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis !important;
+}
