@@ -9,6 +9,7 @@ import { AnimeService } from 'src/app/Services/anime.service';
 export class AnimeAsideComponent implements OnInit {
 
   animeData: Array<any> = [];
+  isError:boolean = false;
 
   constructor(private _animeService: AnimeService) { }
 
@@ -23,6 +24,7 @@ export class AnimeAsideComponent implements OnInit {
       })
       .catch((error: any) => {
         console.log("Error: ", error);
+        this.isError = true;
       })
   }
 
