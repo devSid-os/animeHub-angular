@@ -1,8 +1,9 @@
-<div *ngIf="this.animeData.length > 0" class="max-auto linear-gradient-bg w-full rounded-sm">
+<div class="max-auto linear-gradient-bg w-full rounded-sm">
     <h3 class="text-base text-[#ffc119] p-3">
         RECENT RELEASE
     </h3>
-    <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-5 gap-2 p-3 py-2"
+    <div *ngIf="this.animeData.length > 0;"
+        class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-5 gap-2 p-3 py-2"
         style="row-gap: 1.5rem!important;">
         <div *ngFor="let anime of this.animeData;">
             <div class="h-[16rem]">
@@ -35,5 +36,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div *ngIf="this.isError" class="flex flex-col items-center gap-4 mt-12">
+        <img src="../../../assets/errorPlaceholder1.gif" class="w-[20%]" />
+        <p>Something went wrong!! Please Try Re-loading the page.</p>
     </div>
 </div>

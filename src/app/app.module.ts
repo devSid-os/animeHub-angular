@@ -8,7 +8,7 @@ import { HttpClientModule } from "@angular/common/http"
 import { CommonModule } from '@angular/common';
 import { AnimeSectionComponent } from './home-component/anime-section/anime-section.component';
 import { AnimeAsideComponent } from './home-component/anime-aside/anime-aside.component';
-
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -16,13 +16,14 @@ import { AnimeAsideComponent } from './home-component/anime-aside/anime-aside.co
     HeaderComponent,
     HomeComponent,
     AnimeSectionComponent,
-    AnimeAsideComponent
+    AnimeAsideComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    CommonModule
+    CommonModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

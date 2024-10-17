@@ -23,4 +23,5 @@ html {
 body {
     border-top: 4px solid #bd0912;
     background-color: var(--dark-grey) !important;
+    height: 100vh!important;
 }

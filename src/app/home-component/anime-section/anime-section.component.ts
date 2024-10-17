@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AnimeService } from 'src/app/Services/anime.service';
 
@@ -14,6 +13,7 @@ export class AnimeSectionComponent implements OnInit {
 
   animePage: number = 1;
   animeData: Array<any> = [];
+  isError: boolean = false;
   constructor(private _animeService: AnimeService) { }
 
 
@@ -27,11 +27,13 @@ export class AnimeSectionComponent implements OnInit {
     const formattedDate = this.today.toISOString().split('T')[0];
     this._animeService.getAnimeSearch(filters)
       .then((response: any) => {
+        this.isError = false;
         this.animeData = this.animeData.concat(response.data);
         console.log("getAnimeSearch() from home component(Anime Section)", response.pagination);
       })
       .catch((error: any) => {
         console.log("Error: ", error)
+        this.isError = true;
       });
   }
 }
