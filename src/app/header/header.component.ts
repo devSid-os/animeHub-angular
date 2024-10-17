@@ -8,7 +8,31 @@ import { Component, HostListener, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   isMobileMenuOpen: boolean = false;
-  isSmallScreen;
+  isSmallScreen: boolean = false;
+  headerMenuItems: Array<any> = [
+    {
+      name: 'home',
+      urlRoute: '/',
+
+    },
+    {
+      name: 'characters',
+      urlRoute: '/characters',
+
+    },
+    {
+      name: 'manga',
+      urlRoute: '/manga',
+
+    },
+    {
+      name: 'movies',
+      urlRoute: '/movies',
+
+    }
+  ]
+
+
   constructor() { }
 
   @HostListener('window:resize', ['$event'])

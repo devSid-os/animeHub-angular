@@ -12,7 +12,11 @@ nav ul {
 
 nav ul li {
     cursor: pointer;
-    transition: transform ease-out .1s, color ease-in-out .1s;
+    transition: transform ease-out .1s;
+}
+
+nav ul li a {
+    transition: color ease-in-out .1s;
 }
 
 a {

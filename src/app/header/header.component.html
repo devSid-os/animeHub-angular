@@ -1,51 +1,30 @@
-<header style="z-index: 4!important;" class="container-fluid relative flex justify-center align-center py-3 sm:justify-between sm:py-4">
+<header style="z-index: 4!important;"
+    class="container-fluid relative flex justify-center align-center py-3 sm:justify-between sm:py-4">
     <div *ngIf="!this.isMobileMenuOpen">
         <h1 class="logo text-2xl select-none text-white mb-0 sm:text-2xl md:text-3xl">Anime Hub</h1>
     </div>
-    <button 
-        (click)="this.isMobileMenuOpen=!this.isMobileMenuOpen;"
-        [ngClass]="{'close-hamburger-icon': this.isMobileMenuOpen}" 
-        type="button"
-        class="z-10 absolute left-2 text-2xl text-white material-icons-outlined sm:hidden"
-    >
+    <button (click)="this.isMobileMenuOpen=!this.isMobileMenuOpen;"
+        [ngClass]="{'close-hamburger-icon': this.isMobileMenuOpen, 'fixed': this.isMobileMenuOpen, 'absolute': !this.isMobileMenuOpen}"
+        type="button" class="z-10 left-2 text-2xl text-white material-icons-outlined sm:hidden">
         {{this.isMobileMenuOpen ? 'close' : 'menu'}}
     </button>
     <nav class="flex">
         <ul class="hidden gap-4 align-center my-auto text-white sm:flex">
-            <li class="text-sm select-none text-[#bebebe] hover:text-white hover:-translate-y-px sm:mt-1">
-                <a routerLink="/" routerLinkActive="active-link">HOME</a>
-            </li>
-            <li class="text-sm select-none text-[#bebebe] hover:text-white hover:-translate-y-px sm:mt-1">
-                CHARACTERS
-            </li>
-            <li class="text-sm select-none text-[#bebebe] hover:text-white hover:-translate-y-px sm:mt-1">
-                MANGA
-            </li>
-            <li class="text-sm select-none text-[#bebebe] hover:text-white hover:-translate-y-px sm:mt-1">
-                MOVIES
+            <li *ngFor="let menuItem of this.headerMenuItems" class="text-sm select-none hover:-translate-y-px sm:mt-1">
+                <a class="text-[#bebebe] hover:text-white" [routerLink]="menuItem.urlRoute"
+                    routerLinkActive="active-link">
+                    {{menuItem.name.toUpperCase()}}
+                </a>
             </li>
         </ul>
     </nav>
     <!-- SMALL SCREEN MENU -->
-    <div 
-        *ngIf="this.isMobileMenuOpen" 
-        class="z-4 top-0 absolute bg-black w-full h-screen sm:hidden"
-    >
-        <nav 
-            style="background: linear-gradient(270deg, #5d0914 20%, rgba(93, 9, 20, 0))!important;" class="h-screen"
-        >
+    <div *ngIf="this.isMobileMenuOpen" class="z-4 top-0 bg-[rgba(0,0,0,0.9)] fixed w-full h-screen sm:hidden">
+        <nav style="background: linear-gradient(270deg, #5d0914 20%, rgba(93, 9, 20, 0))!important;" class="h-screen">
             <ul class="h-screen flex flex-col gap-8 items-end p-4">
-                <li class="select-none text-[#bebebe] text-xl hover:text-white hover:-translate-y-px">
-                    HOME
-                </li>
-                <li class="select-none text-[#bebebe] text-xl hover:text-white hover:-translate-y-px">
-                    CHARACTERS
-                </li>
-                <li class="select-none text-[#bebebe] text-xl hover:text-white hover:-translate-y-px">
-                    MANGA
-                </li>
-                <li class="select-none text-[#bebebe] text-xl hover:text-white hover:-translate-y-px">
-                    MOVIES
+                <li *ngFor="let menuItem of this.headerMenuItems"
+                    class="select-none text-[#bebebe] text-xl hover:text-white hover:-translate-y-px">
+                    {{menuItem.name.toUpperCase()}}
                 </li>
             </ul>
         </nav>

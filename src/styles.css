@@ -21,6 +21,6 @@ html {
 }
 
 body {
-    border-top: 4px solid red;
+    border-top: 4px solid #bd0912;
     background-color: var(--dark-grey) !important;
 }
