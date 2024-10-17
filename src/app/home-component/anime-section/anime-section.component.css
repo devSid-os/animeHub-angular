@@ -25,6 +25,10 @@ h3 {
     height: 100px;
 }
 
+.anime-card p {
+    letter-spacing: 0 !important;
+}
+
 .anime-card:hover .anime-text-div p {
     transform: translateY(-0.7rem);
 }
