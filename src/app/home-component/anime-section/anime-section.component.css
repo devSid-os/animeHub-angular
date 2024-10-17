@@ -37,14 +37,19 @@ h3 {
     color: var(--color-yellow);
 }
 
-#anime-extra-info {
+.anime-extra-info {
     background: linear-gradient(180deg, #000, transparent);
     border-top: 1px solid gray;
 }
 
-#anime-extra-info p,
+.anime-extra-info p,
 .anime-text-div p {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis !important;
+}
+
+.anime-extra-info:hover {
+    background-color: #5d0914;
+    border-top: 1px solid #5d0914;
 }
