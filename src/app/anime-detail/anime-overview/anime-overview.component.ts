@@ -1,9 +1,11 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { AnimeService } from 'src/app/Services/anime.service';
+import { TABS } from 'src/app/enums';
 
+type emitValue = TABS.CHARACTERS | TABS.OVERVIEW | TABS.RECOMMENDATIONS | TABS.REVIEWS;
 @Component({
   selector: 'app-anime-overview',
   templateUrl: './anime-overview.component.html',
@@ -11,11 +13,13 @@ import { AnimeService } from 'src/app/Services/anime.service';
 })
 export class AnimeOverviewComponent implements OnInit {
 
+  tabs: typeof TABS = TABS;
   @Input('anime') anime: any;
   @Input('animePictures') animePictures: Array<any> = [];
   @Input('animeStreamingData') animeStreamingData: Array<any> = [];
   @Input('animeCharacters') animeCharacters: Array<any> = [];
   @Input('animeRecommendations') animeRecommendations: Array<any> = [];
+  @Output() tabChange = new EventEmitter<emitValue>();
   imageNumber: number = 0;
   scoreArray: Array<"h" | "f" | "e"> = ["e", "e", "e", "e", "e"];
   isScreenShotsModalOpen: boolean = false;

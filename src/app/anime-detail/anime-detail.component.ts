@@ -1,13 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AnimeService } from '../Services/anime.service';
 import { ActivatedRoute } from '@angular/router';
-
-enum TABS {
-  OVERVIEW = 'overview',
-  RECCOMENDATIONS = 'reccomendations',
-  CHARACTERS = 'characters',
-  REVIEWS = 'reviews'
-}
+import { TABS } from '../enums';
+import { from, of } from 'rxjs';
+import { concatMap, delay, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-anime-detail',
@@ -24,7 +20,7 @@ export class AnimeDetailComponent implements OnInit, OnDestroy {
   animeCharacters: Array<any> = [];
   animeRecommendations: Array<any> = [];
   animeId: string | null = null;
-  selectedTab: 'overview' | 'reccomendations' | 'characters' | 'reviews' = this.tabs.OVERVIEW;
+  selectedTab: 'overview' | 'recommendations' | 'characters' | 'reviews' = this.tabs.OVERVIEW;
 
   constructor(private _animeService: AnimeService, private _route: ActivatedRoute) { }
 
@@ -47,75 +43,63 @@ export class AnimeDetailComponent implements OnInit, OnDestroy {
   }
 
   fetchAnimeData(animeId: string) {
-    if (this._animeService.selectedAnime === null) {
-      this.getFullAnime(animeId);
-      this.getAnimePictures(animeId);
-      this.getAnimeCharacters(animeId);
-      setTimeout(() => {
-        this.getAnimeStreaming(animeId);
-      }, 1000);
-      setTimeout(() => {
-        this.getAnimeRecommendations(animeId);
-      }, 2000);
-    }
-    else {
+    if (this._animeService.selectedAnime) {
       this.anime = this._animeService.selectedAnime;
-      this.getAnimeCharacters(animeId);
-      this.getAnimePictures(animeId);
-      this.getAnimeStreaming(animeId);
-      setTimeout(() => {
-        this.getAnimeRecommendations(animeId);
-      }, 1000);
     }
+    // Create an array of functions that return promises
+    const requests = [
+      ...(this._animeService.selectedAnime ? [] : [() => this.getFullAnime(animeId)]),
+      () => this.getAnimeCharacters(animeId),
+      () => this.getAnimePictures(animeId),
+      () => this.getAnimeStreaming(animeId),
+      () => this.getAnimeRecommendations(animeId)
+    ];
+
+    from(requests).pipe(
+      concatMap((requestFunc, index) => {
+        return from(requestFunc()).pipe(
+          delay(index < 3 ? 0 : 1000), // Add delay for subsequent requests
+          catchError(error => {
+            console.log("Error: ", error);
+            return of(null); // Handle error by returning null
+          })
+        );
+      })
+    ).subscribe(); // Execute the requests
   }
 
-  getFullAnime(animeId: string) {
-    this._animeService.getFullAnimeById(animeId)
+  getFullAnime(animeId: string): Promise<any> {
+    return this._animeService.getFullAnimeById(animeId)
       .then((response: any) => {
         this.anime = response.data;
-      })
-      .catch((error: any) => {
-        console.log("Error: ", error);
-      })
+      });
   }
 
-  getAnimeCharacters(animeId: string): void {
-    this._animeService.getAnimeCharacters(animeId)
+  getAnimeCharacters(animeId: string): Promise<any> {
+    return this._animeService.getAnimeCharacters(animeId)
       .then((response: any) => {
         this.animeCharacters = response.data;
-      })
-      .catch((error: any) => {
-        console.log("Error: ", error);
       });
   }
 
-  getAnimeRecommendations(animeId: string): void {
-    this._animeService.getAnimeRecommendations(animeId)
+  getAnimeRecommendations(animeId: string): Promise<any> {
+    return this._animeService.getAnimeRecommendations(animeId)
       .then((response: any) => {
         this.animeRecommendations = response.data;
-      })
-      .catch((error: any) => {
-        console.log("Error: ", error);
       });
   }
 
-  getAnimeStreaming(animeId: string): void {
-    this._animeService.getAnimeStreaming(animeId)
+  getAnimeStreaming(animeId: string): Promise<any> {
+    return this._animeService.getAnimeStreaming(animeId)
       .then((response: any) => {
         this.animeStreamingData = response.data;
-      })
-      .catch((error: any) => {
-        console.log("Error: ", error);
       });
   }
 
-  getAnimePictures(animeId: string): void {
-    this._animeService.getAnimePictures(animeId)
+  getAnimePictures(animeId: string): Promise<any> {
+    return this._animeService.getAnimePictures(animeId)
       .then((response: any) => {
         this.animePictures = response.data;
-      })
-      .catch((error: any) => {
-        console.log("Error: ", error);
       });
   }
 }

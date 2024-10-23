@@ -24,8 +24,8 @@
                     CHARACTERS
                 </li>
                 <li 
-                    (click)="this.selectedTab=this.tabs.RECCOMENDATIONS"
-                    [ngClass]="{'active-tab': this.selectedTab === this.tabs.RECCOMENDATIONS}"
+                    (click)="this.selectedTab=this.tabs.RECOMMENDATIONS"
+                    [ngClass]="{'active-tab': this.selectedTab === this.tabs.RECOMMENDATIONS}"
                     class="tracking-wider text-[.9rem] cursor-pointer">
                     RECOMMENDATIONS
                 </li>
@@ -37,9 +37,9 @@
                 </li>
             </ul>
         </nav>
-
         <!-- ANIME-OVERVIEW-CONTENT -->
         <app-anime-overview 
+            (tabChange)="this.selectedTab=$event"
             [animeCharacters]="this.animeCharacters"
             [animeRecommendations]="this.animeRecommendations"
             [animeStreamingData]="this.animeStreamingData" 
@@ -49,5 +49,6 @@
         >
         </app-anime-overview>
 
+        <app-anime-characters *ngIf="this.selectedTab===this.tabs.CHARACTERS"></app-anime-characters>
     </div>
 </div>
