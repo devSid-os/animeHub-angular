@@ -12,7 +12,7 @@
         <ul class="hidden gap-4 align-center my-auto text-white sm:flex">
             <li *ngFor="let menuItem of this.headerMenuItems" class="text-sm select-none hover:-translate-y-px sm:mt-1">
                 <a class="text-[#bebebe] hover:text-white" [routerLink]="menuItem.urlRoute"
-                    routerLinkActive="active-link">
+                    routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
                     {{menuItem.name.toUpperCase()}}
                 </a>
             </li>

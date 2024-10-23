@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AnimeService } from 'src/app/Services/anime.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class AnimeSectionComponent implements OnInit {
   animePage: number = 1;
   animeData: Array<any> = [];
   isError: boolean = false;
-  constructor(private _animeService: AnimeService) { }
+  constructor(private _animeService: AnimeService, private _router: Router) { }
 
 
   ngOnInit(): void {
@@ -23,7 +24,12 @@ export class AnimeSectionComponent implements OnInit {
     this.getAnimeSearch({ order_by: 'start_date', sort: "desc", status: "airing", type: "tv", page: this.animePage });
   }
 
-  getAnimeSearch(filters): void {
+  selectAnime(anime: any): void {
+    this._animeService.selectedAnime = anime;
+    this._router.navigate(['/anime', anime.mal_id]);
+  }
+
+  getAnimeSearch(filters: any): void {
     const formattedDate = this.today.toISOString().split('T')[0];
     this._animeService.getAnimeSearch(filters)
       .then((response: any) => {

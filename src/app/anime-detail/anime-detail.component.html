@@ -1,0 +1,53 @@
+<div *ngIf="this.anime" class="container-fluid w-full py-3">
+    <div id="overview-content">
+        <!-- ANIME TITLES -->
+        <h2 class="font-oswald tracking-wide">
+            {{anime.title_english || anime.title}}
+        </h2>
+        <h6 class="font-oswald tracking-wider text-[#bebebe]">
+            {{anime.title || anime.title_japanese}}
+        </h6>
+
+        <!-- TABS -->
+        <nav class="mt-4 rounded-sm">
+            <ul class="flex gap-3 flex-wrap py-2 p-3">
+                <li 
+                    (click)="this.selectedTab=this.tabs.OVERVIEW"
+                    [ngClass]="{'active-tab': this.selectedTab === this.tabs.OVERVIEW}"
+                    class="tracking-wider text-[.9rem] cursor-pointer">
+                    OVERVIEW
+                </li>
+                <li 
+                    (click)="this.selectedTab=this.tabs.CHARACTERS"
+                    [ngClass]="{'active-tab': this.selectedTab === this.tabs.CHARACTERS}"
+                    class="tracking-wider text-[.9rem] cursor-pointer">
+                    CHARACTERS
+                </li>
+                <li 
+                    (click)="this.selectedTab=this.tabs.RECCOMENDATIONS"
+                    [ngClass]="{'active-tab': this.selectedTab === this.tabs.RECCOMENDATIONS}"
+                    class="tracking-wider text-[.9rem] cursor-pointer">
+                    RECOMMENDATIONS
+                </li>
+                <li 
+                    (click)="this.selectedTab=this.tabs.REVIEWS"
+                    [ngClass]="{'active-tab': this.selectedTab === this.tabs.REVIEWS}"
+                    class="tracking-wider text-[.9rem] cursor-pointer">
+                    REVIEWS
+                </li>
+            </ul>
+        </nav>
+
+        <!-- ANIME-OVERVIEW-CONTENT -->
+        <app-anime-overview 
+            [animeCharacters]="this.animeCharacters"
+            [animeRecommendations]="this.animeRecommendations"
+            [animeStreamingData]="this.animeStreamingData" 
+            [animePictures]="this.animePictures" 
+            [anime]="this.anime"
+            *ngIf="this.selectedTab===this.tabs.OVERVIEW"
+        >
+        </app-anime-overview>
+
+    </div>
+</div>

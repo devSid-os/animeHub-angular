@@ -1,0 +1,249 @@
+<div class="container-fluid mt-2 py-3">
+    <div class="grid-cols-2 gap-y-8 grid md:grid-cols-5 md:gap-x-8">
+        <!-- ANIME IMAGE FOR SMALLER SCREENS AND BELOW -->
+        <div style="display: flex;flex-direction: column; align-items: center;" id="anime-img-div-sm">
+            <div class="overflow-hidden h-full md:col-span-1 md:hidden">
+                <img class="rounded-md w-full h-full" [src]="this.anime.images.webp.large_image_url"
+                    [alt]="this.anime.title" />
+            </div>
+            <button (click)="this.isScreenShotsModalOpen=true;" *ngIf="this.animePictures.length > 0;"
+                class="mt-3 bg-[#3e3e3e] p-2 px-3 text-[12px] rounded-md tracking-[1px] font-bold">SCREESHOTS</button>
+        </div>
+        <!-- ANIME DETAIL HEADER -->
+        <div
+            class="col-span-1 flex flex-col gap-4 justify-start md:items-center md:justify-between md:flex-row md:col-span-5 md:gap-0">
+            <div class="detail-header gap-1 md:flex-1">
+                <span class="material-icons-outlined">
+                    desktop_windows
+                </span>
+                <span class="font-[300]">{{this.anime.type}}</span>
+                <span class="font-[300]" *ngIf="this.anime.episodes">({{this.anime.episodes}} episodes)</span>
+            </div>
+            <div class="detail-header gap-1 md:flex-1">
+                <span class="font-[300]">{{this.anime.source}}</span>
+            </div>
+            <div class="detail-header gap-1 md:flex-1">
+                <span class="material-icons-outlined">
+                    calendar_month
+                </span>
+                <span class="font-[300]">{{this.anime.aired.from | date : 'yyyy'}} -
+                    {{(this.anime.aired.to | date :
+                    'yyyy') ||
+                    '?'}}</span>
+            </div>
+            <div class="detail-header gap-1 md:flex-1">
+                <span class="material-icons-outlined">
+                    local_fire_department
+                </span>
+                <span class="font-[300]">{{this.anime.scored_by || 'n/a'}}</span>
+            </div>
+            <div class="detail-header gap-1 md:flex-1">
+                <span style="font-weight: normal!important;">Rank</span>
+                <span style="font-weight: 300!important;" class="font-light">#{{anime.rank || 'n/a'}}</span>
+            </div>
+        </div>
+        <!-- ANIME IMAGE FOR MEDIUM SCREENS AND ABOVE -->
+        <div id="anime-img-div-lg" style="display: flex;flex-direction: column; align-items: center;"
+            class="hidden col-span-1 min-h-[20rem] md:col-span-1 md:block">
+            <div class="overflow-hidden h-full max-w-[15rem] max-h-[20rem]">
+                <img class="rounded-lg w-full h-full object-cover" [src]="this.anime.images.webp.large_image_url"
+                    [alt]="this.anime.title" />
+            </div>
+            <button *ngIf="this.animePictures.length > 0;" type="button" (click)="this.isScreenShotsModalOpen = true;"
+                class="mt-3 bg-[#3e3e3e] p-2 px-3 text-sm rounded-md tracking-[1px] font-bold">SCREESHOTS</button>
+        </div>
+        <!-- ANIME SYNOPSIS or BACKGROUND, TAGS DIV -->
+        <div class="flex flex-col items-start gap-3 col-span-2 md:col-span-3">
+            <p class="font-mulish text-justify mb-0">
+                {{this.anime.synopsis || this.anime.background || 'Synopsis is currently unavailable at this time.'}}
+            </p>
+
+            <button *ngIf="this.anime.trailer.embed_url" (click)="this.isTrailerModalOpen=true;" id="trailer-btn"
+                class="flex items-center gap-2 px-[.7rem] bg-black py-1 w-max rounded-[.2rem]">
+                <div class="h-full w-full max-h-[25px]">
+                    <img class="w-full h-full" src="../../../assets/youtube.png" />
+                </div>
+                <span class="whitespace-nowrap text-[13px] tracking-[.06rem]">WATCH TRAILER</span>
+            </button>
+
+            <!-- ANIME GENRES -->
+            <div *ngIf="this.anime.genres.length>0;">
+                <p class="font-mulish font-[600] mb-2">Tags</p>
+                <mat-chip-list>
+                    <mat-chip *ngFor="let genre of this.anime.genres" class="custom-chip">{{genre.name}}</mat-chip>
+                </mat-chip-list>
+            </div>
+        </div>
+        <!-- ANIME STATUS, THEMES AND PLATFORMS DIV -->
+        <div class="flex flex-col gap-4 col-span-2 md:col-span-1">
+            <!-- ANIME STATUS -->
+            <div *ngIf="this.anime.status">
+                <p class="mb-1 tracking-[1px] md:text-[15px]">{{this.anime.status}}</p>
+                <div class="bg-[rgba(0,0,0,.3)] rounded-md">
+                    <div [ngClass]="{'bg-[seagreen] airing': this.anime.status.toLowerCase() === 'currently airing', 'bg-[red] completed':this.anime.status.toLowerCase()==='finished airing', 'bg-[#ffd600] upcoming': this.anime.status.toLowerCase()==='not yet aired'}"
+                        style="padding: .1rem 0" class="h-full rounded-md"></div>
+                </div>
+            </div>
+            <!-- RATINGS, SOURCE AND DURATION -->
+            <div class="flex flex-col gap-2">
+                <p class="mb-0 font-light tracking-wider md:text-[15px]">
+                    <span class="font-normal">Ratings: </span>
+                    <span *ngFor="let star of this.scoreArray" class="text-[1rem] material-icons-outlined"
+                        [ngClass]="{'text-[#ffd600]': star ==='f' || star ==='h'}">
+                        {{(star === 'f' || star === 'e') ? 'star' : 'star_half'}}
+                    </span>
+                </p>
+                <p class="mb-0 font-light tracking-wider md:text-[15px]">
+                    <span class="font-normal">Source: </span> {{this.anime.source || 'N/A'}}
+                </p>
+                <p class="mb-0 font-light tracking-wider md:text-[15px]">
+                    <span class="font-normal">Duration: </span> {{this.anime.duration || 'N/A'}}
+                </p>
+            </div>
+            <!-- ANIME THEMES -->
+            <div>
+                <p class="font-[400] tracking-wider mb-2 md:text-[15px]">THEMES</p>
+                <ng-container *ngIf="this.anime.themes.length > 0;else themesPlaceholder;">
+                    <div class="theme-item cursor-pointer p-1 px-2 rounded-sm" *ngFor="let theme of this.anime.themes">
+                        <p class="mb-0 tracking-[.07rem] text-sm select-none">{{theme.name}}</p>
+                    </div>
+                </ng-container>
+            </div>
+            <ng-template #themesPlaceholder>
+                <p class="font-mulish mb-0">No themes are available for this anime.</p>
+            </ng-template>
+            <!-- ANIME STREAMING PLATFORMS DIV -->
+            <div *ngIf="this.animeStreamingData.length > 0">
+                <p class="font-[400] tracking-wider mb-2 md:text-[15px]">WATCH IT ON</p>
+                <div id="streaming-div" class="grid grid-cols-2 md:grid-cols-1">
+                    <div *ngFor="let platform of this.animeStreamingData"
+                        class="flex gap-2 items-center w-full md:translate-x-1">
+                        <div class="overflow-hidden h-[25px]">
+                            <img class="w-full h-full" *ngIf="platform.name.toLowerCase()==='crunchyroll'"
+                                src="../../../assets/crunchy.png" />
+                            <img class="w-full h-full" *ngIf="platform.name.toLowerCase()==='netflix'"
+                                src="../../../assets/netflix.png" />
+                            <span
+                                *ngIf="platform.name.toLowerCase()!=='crunchyroll' || platform.name.toLowerCase()==='netflix'"
+                                class="material-icons-outlined" style="font-weight: 100!important;">
+                                cast_connected
+                            </span>
+                        </div>
+                        <a [href]="platform.url" target="_blank" target="_blank"
+                            class="text-decoration-none font-light tracking-[.05rem] text-[15px]">{{platform.name}}</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ANIME CHARACTERS DIV -->
+    <div *ngIf="this.animeCharacters.length > 0;" class="mt-12">
+        <h4 class="font-[400] tracking-wider">Characters</h4>
+        <div class="mt-3 grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <div class="flex gap-2 items-stretch bg-[#313131] rounded-[.25rem] overflow-hidden"
+                style="box-shadow: -2px 3px 3px rgba(0,0,0,.4);"
+                *ngFor="let character of this.animeCharacters.slice(0,8)">
+                <div class="w-full max-w-[30%] h-[131px]">
+                    <img class="h-full w-full object-cover" [src]="character.character.images.webp.image_url" />
+                </div>
+                <div class="flex flex-col justify-between py-1 flex-1 overflow-hidden">
+                    <div>
+                        <p
+                            class="font-[.9rem] tracking-wider text-base mb-0 overflow-hidden text-ellipsis whitespace-nowrap">
+                            {{character.character.name}}</p>
+                        <p *ngIf="character.voice_actors && character.voice_actors.length > 0"
+                            class="text-[12px] font-light text-[#bebebe] tracking-[1px]">
+                            {{character.voice_actors[0].person.name }}
+                        </p>
+
+                    </div>
+                    <p class="mb-1 tracking-wider text-sm">
+                        Role:&nbsp;{{character.role || 'n/a'}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="mt-3 text-center">
+            <button type="button" class="mx-auto bg-[#3e3e3e] p-2 px-3 text-sm rounded-md tracking-[1px] font-bold">SEE ALL
+                CHARACTERS</button>
+        </div>
+    </div>
+
+    <!-- ANIME RECOMMENDATIONS DIV -->
+    <div *ngIf="this.animeRecommendations.length > 0;" class="mt-12">
+        <h4 class="font-[400] tracking-wider">If you like this anime, you might like...</h4>
+        <div style="margin-top: 1rem;" class="p-4 border-1 border-[#353330]">
+            <div style="margin-top: 1rem;"
+                class="grid overflow-hidden gap-3 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+                <div (click)="this.redirectToAnimeDetailPage(item.entry.mal_id);"
+                    class="cursor-pointer overflow-hidden h-max w-full max-w-[210px]"
+                    *ngFor="let item of this.animeRecommendations.slice(0, 6);">
+                    <div class="anime-card relative w-full h-[15rem] rounded-[.2rem] overflow-hidden sm:h-[17rem]">
+                        <img class="w-full h-full" [src]="item.entry.images.webp.large_image_url"
+                            [alt]="item.entry.title" />
+                    </div>
+                    <p (click)="this.redirectToAnimeDetailPage(item.entry.mal_id);"
+                        class="text-center tracking-wider mt-1 overflow-hidden hover:text-[#bd0912]">
+                        {{item.entry.title}}
+                    </p>
+                </div>
+            </div>
+            <div class="text-center mt-2 md:mt-0">
+                <button type="button"
+                    class="mx-auto bg-[#3e3e3e] p-2 px-3 text-sm rounded-md tracking-[1px] font-bold">SEE ALL
+                    RECOMMENDATIONS</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TRAILER MODAL -->
+<div *ngIf="this.isTrailerModalOpen" style="z-index: 7!important"
+    class="bg-[rgba(0,0,0,.7)] fixed top-0 left-0 w-screen h-screen">
+    <div class="flex items-center justify-center w-full h-full">
+        <div class="relative rounded-sm w-[90%] h-full max-h-[35vh] md:max-h-[55vh] lg:max-h-[75vh] sm:w-3/4">
+            <iframe loading="lazy" style="width: 100%;height: 100%;"
+                [src]="this.sanitizer.bypassSecurityTrustResourceUrl(this.anime.trailer.embed_url)" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+            <button (click)="this.isTrailerModalOpen=false;" type="button"
+                class="p-0 absolute -bottom-12 left-[50%] text-[2rem] bg-[#191919] rounded-full w-[25px] h-[25px] flex items-center justify-center border-1"
+                id="close-trailer-btn">
+                <span class="-mt-[1px]">&times;</span>
+            </button>
+        </div>
+    </div>
+</div>
+<!-- ANIME IMAGES VIEWER MODAL -->
+<div *ngIf="this.isScreenShotsModalOpen" style="z-index: 7!important"
+    class="bg-[rgba(0,0,0,.7)] fixed top-0 left-0 w-screen h-screen">
+    <div class="flex flex-col justify-around items-center gap-2 w-full h-full">
+        <div class="flex flex-col items-center gap-3 w-max max-w-[95%] max-h-[85%]">
+            <div class="flex items-center gap-3 h-full">
+                <button (click)="this.showPrevImage();" class="border-2 rounded-full flex items-center">
+                    <span class="material-icons-outlined">
+                        chevron_left
+                    </span>
+                </button>
+                <div class="relative  w-full h-full">
+                    <button type="button" (click)="this.isScreenShotsModalOpen = false;"
+                        class="border-2 border-white absolute -top-2 -right-2 text-white bg-black flex w-[25px] h-[25px] rounded-full items-center justify-center">
+                        <span class="text-3xl">&times;</span>
+                    </button>
+                    <img class="w-full h-full rounded-sm border-8 border-white object-cover"
+                        [src]="this.animePictures[this.imageNumber].webp.large_image_url" />
+                </div>
+                <button (click)="this.showNextImage();" class="border-2 rounded-full flex items-center">
+                    <span class="material-icons-outlined">
+                        chevron_right
+                    </span>
+                </button>
+            </div>
+            <p class="font-mulish">
+                {{this.imageNumber+1}} / {{this.animePictures.length}}
+            </p>
+        </div>
+    </div>
+</div>

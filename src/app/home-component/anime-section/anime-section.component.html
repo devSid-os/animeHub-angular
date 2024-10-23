@@ -5,7 +5,7 @@
     <div *ngIf="this.animeData.length > 0;"
         class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-5 gap-2 p-3 py-2"
         style="row-gap: 1.5rem!important;">
-        <div *ngFor="let anime of this.animeData;">
+        <div (click)="this.selectAnime(anime);" *ngFor="let anime of this.animeData;">
             <div class="h-[17rem]">
                 <div class="anime-card relative cursor-pointer w-full h-full rounded-[1px] overflow-hidden">
                     <div class="w-full h-full">
@@ -23,7 +23,8 @@
                     </div>
                 </div>
             </div>
-            <div class="anime-extra-info w-full p-2 flex justify-between items-start rounded-bl-lg rounded-br-lg cursor-pointer">
+            <div
+                class="anime-extra-info w-full p-2 flex justify-between items-start rounded-bl-lg rounded-br-lg cursor-pointer">
                 <div class="max-w-[60%] flex flex-col">
                     <p class="text-[12px] font-bold">#{{anime.rank}}</p>
                     <p class="text-[10px] text-[gray]">{{anime.duration!=='Unknown' ? anime.duration : anime.rating}}

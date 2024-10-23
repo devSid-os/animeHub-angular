@@ -9,7 +9,10 @@ import { CommonModule } from '@angular/common';
 import { AnimeSectionComponent } from './home-component/anime-section/anime-section.component';
 import { AnimeAsideComponent } from './home-component/anime-aside/anime-aside.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatTooltipModule } from "@angular/material/tooltip"
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatChipsModule } from "@angular/material/chips";
+import { AnimeDetailComponent } from './anime-detail/anime-detail.component';
+import { AnimeOverviewComponent } from './anime-detail/anime-overview/anime-overview.component'
 
 @NgModule({
   declarations: [
@@ -18,6 +21,8 @@ import { MatTooltipModule } from "@angular/material/tooltip"
     HomeComponent,
     AnimeSectionComponent,
     AnimeAsideComponent,
+    AnimeDetailComponent,
+    AnimeOverviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,7 +30,8 @@ import { MatTooltipModule } from "@angular/material/tooltip"
     HttpClientModule,
     CommonModule,
     BrowserAnimationsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

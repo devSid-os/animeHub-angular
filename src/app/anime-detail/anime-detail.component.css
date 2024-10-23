@@ -1,0 +1,30 @@
+.font-oswald {
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
+}
+
+nav {
+    background: -webkit-gradient(linear, right top, left top, from(rgba(220, 9, 20, .5)), to(rgba(220, 9, 20, 0)));
+    background: linear-gradient(90deg, rgba(220, 9, 20, .5), rgba(220, 9, 20, 0));
+}
+
+nav ul {
+    margin-bottom: 0 !important;
+}
+
+.active-tab {
+    color: var(--color-yellow);
+}
+
+@media screen and (min-width: 768px) {
+    #overview-content {
+        width: 100%;
+        max-width: 1250px;
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

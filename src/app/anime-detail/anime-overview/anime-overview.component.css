@@ -1,0 +1,166 @@
+* {
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+#trailer-btn {
+    transition: transform .1s ease-out;
+}
+
+#trailer-btn:hover {
+    background-color: #bd0912 !important;
+    color: black !important;
+    transform: scale(1.01);
+
+}
+
+#close-trailer-btn:hover {
+    transition: background-color .2s ease-in-out;
+}
+
+#close-trailer-btn:hover {
+    background-color: #fff;
+    border: 1px solid #191919;
+}
+
+#close-trailer-btn:hover span {
+    color: black;
+}
+
+
+.material-icons-outlined {
+    font-family: 'Material Icons Outlined' !important;
+}
+
+.font-mulish {
+    font-family: "Mulish", sans-serif;
+}
+
+.detail-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.detail-header span {
+    letter-spacing: .05em;
+}
+
+.custom-chip {
+    display: inline-block;
+    margin: 0 5px 5px 0;
+    padding: 3px 9px;
+    letter-spacing: .07rem;
+    background-color: #2e2e2e;
+    color: #bebebe;
+    border-radius: 6px;
+    font-weight: 300 !important;
+}
+
+.custom-chip:hover {
+    background-color: #272727;
+}
+
+.theme-item {
+    background: -webkit-gradient(linear, right top, left top, from(rgba(0, 0, 0, .5)), to(rgba(220, 9, 20, 0)));
+    background: linear-gradient(90deg, rgba(0, 0, 0, .5), rgba(220, 9, 20, 0));
+    margin-top: .5rem;
+    transition: transform .2s ease-in-out;
+}
+
+.theme-item:first-child {
+    margin-top: 0;
+}
+
+.theme-item p {
+    font-weight: 300 !important;
+}
+
+.theme-item:hover {
+    transform: translateX(-1%);
+    background-color: seagreen;
+}
+
+.airing {
+    animation: airingProgress 1s ease-in-out forwards;
+}
+
+.completed {
+    animation: completedProgress 1s ease-in-out forwards;
+}
+
+.upcoming {
+    animation: upcomingProgress 1s ease-in-out forwards;
+}
+
+.anime-card {
+    img {
+        opacity: .9;
+        transition: opacity .2s ease-in-out, transform .2s ease-in-out;
+    }
+}
+
+.anime-card:hover {
+    img {
+        opacity: 1;
+        transform: scale(1.02);
+    }
+}
+
+@keyframes airingProgress {
+    0% {
+        width: 0px;
+    }
+
+    100% {
+        width: 50%;
+    }
+}
+
+@keyframes completedProgress {
+    0% {
+        width: 0px;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+@keyframes upcomingProgress {
+    0% {
+        width: 0px;
+    }
+
+    100% {
+        width: 10%;
+    }
+}
+
+#streaming-div {
+    /* display: flex; */
+    row-gap: .5rem;
+}
+
+@media screen and (max-width: 768px) {
+    #anime-img-div-lg {
+        display: none !important;
+    }
+}
+
+@media screen and (min-width: 768px) {
+
+    #anime-img-div-sm {
+        display: none !important;
+    }
+
+    .detail-header {
+        border-right: 1px solid gray;
+    }
+
+    .detail-header:last-child {
+        border-right: none;
+    }
+}
