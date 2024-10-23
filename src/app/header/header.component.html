@@ -1,7 +1,7 @@
 <header style="z-index: 4!important;"
     class="container-fluid relative flex justify-center align-center py-3 sm:justify-between sm:py-4">
-    <div *ngIf="!this.isMobileMenuOpen">
-        <h1 class="logo text-2xl select-none text-white mb-0 sm:text-2xl md:text-3xl">Anime Hub</h1>
+    <div>
+        <h1 class="logo text-2xl select-none text-white mb-0 sm:text-2xl md:text-3xl">Anime Stop</h1>
     </div>
     <button (click)="this.isMobileMenuOpen=!this.isMobileMenuOpen;"
         [ngClass]="{'close-hamburger-icon': this.isMobileMenuOpen, 'fixed': this.isMobileMenuOpen, 'absolute': !this.isMobileMenuOpen}"
@@ -24,7 +24,10 @@
             <ul class="h-screen flex flex-col gap-8 items-end p-4">
                 <li *ngFor="let menuItem of this.headerMenuItems"
                     class="select-none text-[#bebebe] text-xl hover:text-white hover:-translate-y-px">
-                    {{menuItem.name.toUpperCase()}}
+                    <a class="text-[#bebebe] hover:text-white" [routerLink]="menuItem.urlRoute"
+                        routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+                        {{menuItem.name.toUpperCase()}}
+                    </a>
                 </li>
             </ul>
         </nav>
