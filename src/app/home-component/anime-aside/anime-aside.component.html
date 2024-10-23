@@ -13,7 +13,7 @@
             class="popular-anime-div p-2 w-full flex justify-between items-center gap-3"
             *ngFor="let anime of this.animeData">
             <img style="opacity: .9;" class="popular-anime-img select-none w-auto h-[130px] w-max rounded-sm"
-                [src]="anime.images.jpg.image_url" [alt]="anime.title" />
+                [src]="anime.images.webp.image_url || anime.images.jpg.image_url" [alt]="anime.title" />
             <div class="flex-1">
                 <p class="popular-anime-title text-sm tracking-wider font-[600]">{{anime.title_english || anime.title}}
                 </p>

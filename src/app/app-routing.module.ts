@@ -5,7 +5,7 @@ import { AnimeDetailComponent } from './anime-detail/anime-detail.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
-  { path: "anime/:id", component: AnimeDetailComponent }
+  { path: "anime/:id", loadChildren: () => import('./anime-detail/anime-detail.module').then(mod => mod.AnimeDetailModule) }
 ];
 
 @NgModule({

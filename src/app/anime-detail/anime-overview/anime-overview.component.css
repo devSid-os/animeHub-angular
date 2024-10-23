@@ -49,14 +49,15 @@
 }
 
 .custom-chip {
-    display: inline-block;
+    display: inline-flex;
     margin: 0 5px 5px 0;
     padding: 3px 9px;
     letter-spacing: .07rem;
     background-color: #2e2e2e;
     color: #bebebe;
     border-radius: 6px;
-    font-weight: 300 !important;
+    font-weight: 400 !important;
+    font-size: .8rem;
 }
 
 .custom-chip:hover {
