@@ -18,6 +18,7 @@
                     OVERVIEW
                 </li>
                 <li 
+                    *ngIf="this.animeCharacters.length > 0"
                     (click)="this.selectedTab=this.tabs.CHARACTERS"
                     [ngClass]="{'active-tab': this.selectedTab === this.tabs.CHARACTERS}"
                     class="tracking-wider text-[.9rem] cursor-pointer">
@@ -40,7 +41,7 @@
         <!-- ANIME-OVERVIEW-CONTENT -->
         <app-anime-overview 
             (tabChange)="this.selectedTab=$event"
-            [animeCharacters]="this.animeCharacters"
+            [animeCharacters]="this.animeCharacters.slice(0, 8)"
             [animeRecommendations]="this.animeRecommendations"
             [animeStreamingData]="this.animeStreamingData" 
             [animePictures]="this.animePictures" 
@@ -49,6 +50,11 @@
         >
         </app-anime-overview>
 
-        <app-anime-characters *ngIf="this.selectedTab===this.tabs.CHARACTERS"></app-anime-characters>
+        <app-anime-characters 
+            [animeCharacters]="this.animeCharacters"
+            [animeImages]="this.anime.images"
+            *ngIf="this.animeCharacters.length > 0 && this.selectedTab===this.tabs.CHARACTERS"
+        >
+        </app-anime-characters>
     </div>
 </div>
