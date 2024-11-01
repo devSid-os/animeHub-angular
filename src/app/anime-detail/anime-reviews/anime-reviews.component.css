@@ -1,0 +1,20 @@
+* {
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+.font-mulish {
+    font-family: "Mulish", sans-serif;
+}
+
+.blur-bottom {
+    width: 100%;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0), #000 20%);
+    mask-image: linear-gradient(to top, rgba(0, 0, 0, 0), #000 20%);
+}
+
+.material-icons-outlined {
+    font-family: 'Material Icons Outlined' !important;
+}

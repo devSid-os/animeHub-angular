@@ -17,11 +17,19 @@ export class AnimeService {
         return this._selectedAnime;
     }
 
-    getAnimeCharacters(animeId: string) {
+    getAnimeReviews(animeId: string, page:any): Promise<any> {
+        return this._http.get(`${this._JIKAN_BASE_URL}/anime/${animeId}/reviews`, {
+            params: {
+                page
+            }
+        }).toPromise();
+    }
+
+    getAnimeCharacters(animeId: string): Promise<any> {
         return this._http.get(`${this._JIKAN_BASE_URL}/anime/${animeId}/characters`).toPromise();
     }
 
-    getAnimeRecommendations(animeId: string) {
+    getAnimeRecommendations(animeId: string): Promise<any> {
         return this._http.get(`${this._JIKAN_BASE_URL}/anime/${animeId}/recommendations`).toPromise();
     }
 

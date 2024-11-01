@@ -1,0 +1,80 @@
+<div class="mt-2 py-3 sm:container-fluid">
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-y-6 md:gap-x-4 md:gap-y-0">
+        <div class="w-full flex justify-center">
+            <div class="w-full max-w-[13rem] h-full max-h-[20rem] overflow-hidden rounded-md">
+                <img class="w-full h-full object-cover"
+                    [src]="this.animeImages.webp.large_image_url || this.animeImages.jpg.large_image_url" />
+            </div>
+        </div>
+        <div class="md:col-span-4">
+            <h4 class="tracking-wider font-normal mb-2">
+                Reviews
+            </h4>
+            <div class="grid gap-y-8">
+                <div *ngFor="let review of this.animeReviews.data.slice(this.reviewPagination.from,this.reviewPagination.to); trackBy: this.trackByReviewId;"
+                    class="flex flex-col gap-4">
+                    <!-- USER IMAGE AND NAME -->
+                    <div class="flex items-center gap-2">
+                        <div class="w-[35px] h-[35px] rounded-full overflow-hidden">
+                            <img [src]="review.user.images.webp.image_url || review.user.images.jpg.image_url"
+                                class="w-full h-full object-cover" />
+                        </div>
+                        <div>
+                            <p class="mb-0 tracking-wide text-[#aabee4] text-2xl font-mulish">
+                                {{review.user.username}}
+                            </p>
+                            <p class="mb-0 tracking-wide font-mulish font-light text-[#676767] text-[12px]">
+                                {{review.date | date : 'MMM dd, yyy'}}
+                            </p>
+                        </div>
+                    </div>
+                    <!-- USER REVIEW TEXT -->
+                    <div checkOverflow>
+                        <div class="blur-bottom max-h-[208px] overflow-hidden">
+                            <p class="font-mulish tracking-wide">
+                                {{review.review}}
+                            </p>
+                        </div>
+                    </div>
+                    <!-- USER REVIEW REACTIONS -->
+                    <div class="grid gap-y-4 grid-cols-4 md:grid-cols-7">
+                        <ng-container *ngFor="let reaction of review.reactions | keyvalue">
+                            <ng-container *ngIf="reaction.key!=='overall'">
+                                <div class="text-center gap-2">
+                                    <p class="font-mulish tracking-wide mb-0 text-lg md:text-xl">{{reaction.value}}
+                                    </p>
+                                    <p class="font-mulish tracking-wider mb-0 text-[12px]">
+                                        {{reaction.key.replace('_', ' ') | uppercase}}
+                                    </p>
+                                </div>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+            <!-- PAGINATION DIV -->
+            <div class="flex justify-center mt-12">
+                <div class="flex gap-2 items-stretch">
+                    <button [ngClass]="{'hover:bg-[seagreen]': (this.reviewPagination.pageNo>1) && !this.loading}"
+                        [disabled]="(this.reviewPagination.pageNo<2) || this.loading"
+                        (click)="this.onPrevReviewChange(this.reviewPagination.pageNo-1);"
+                        class="select-none text-[13px] tracking-[1px] bg-[#3e3e3e] px-2">
+                        Prev
+                    </button>
+                    <button #pageBtns (click)="this.onReviewPageChange(page+1)"
+                        [ngClass]="{'bg-[#6c6b6b]': this.reviewPagination.pageNo === (page+1)}"
+                        class="text-sm font-mulish bg-[#3e3e3e] p-2 py-1 font-bold hover:bg-[#6c6b6b]"
+                        *ngFor="let page of this.items.slice(this.reviewPagination.buttonRange.from, this.reviewPagination.buttonRange.to)">
+                        {{page+1}}
+                    </button>
+                    <button (click)="this.onNextPageChange(this.reviewPagination.pageNo+1)"
+                        *ngIf="this.animeReviews.pagination.has_next_page" [disabled]="this.loading"
+                        class="select-none text-[13px] tracking-[1px] bg-[#3e3e3e] px-2"
+                        [ngClass]="{'hover:bg-[seagreen]': !this.loading}">
+                        Next
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

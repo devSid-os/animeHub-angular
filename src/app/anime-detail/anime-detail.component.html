@@ -25,16 +25,17 @@
                     CHARACTERS
                 </li>
                 <li 
-                    (click)="this.selectedTab=this.tabs.RECOMMENDATIONS"
-                    [ngClass]="{'active-tab': this.selectedTab === this.tabs.RECOMMENDATIONS}"
-                    class="tracking-wider text-[.9rem] cursor-pointer">
-                    RECOMMENDATIONS
-                </li>
-                <li 
+                    *ngIf="this.animeReviews.data.length > 0"
                     (click)="this.selectedTab=this.tabs.REVIEWS"
                     [ngClass]="{'active-tab': this.selectedTab === this.tabs.REVIEWS}"
                     class="tracking-wider text-[.9rem] cursor-pointer">
                     REVIEWS
+                </li>
+                <li 
+                    (click)="this.selectedTab=this.tabs.RECOMMENDATIONS"
+                    [ngClass]="{'active-tab': this.selectedTab === this.tabs.RECOMMENDATIONS}"
+                    class="tracking-wider text-[.9rem] cursor-pointer">
+                    RECOMMENDATIONS
                 </li>
             </ul>
         </nav>
@@ -50,11 +51,21 @@
         >
         </app-anime-overview>
 
+        <!-- ALL ANIME-CHARACTERS -->
         <app-anime-characters 
             [animeCharacters]="this.animeCharacters"
             [animeImages]="this.anime.images"
             *ngIf="this.animeCharacters.length > 0 && this.selectedTab===this.tabs.CHARACTERS"
         >
         </app-anime-characters>
+
+        <!-- ALL ANIME REVIEWS -->
+        <app-anime-reviews
+            [animeImages]="this.anime.images"
+            [animeReviews]="this.animeReviews"
+            [animeId]="this.animeId"
+            *ngIf="this.animeReviews.data.length > 0 && this.selectedTab===this.tabs.REVIEWS"
+        >   
+        </app-anime-reviews>
     </div>
 </div>
