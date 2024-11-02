@@ -305,11 +305,11 @@
             >
                 <div 
                     (click)="this.redirectToAnimeDetailPage(item.entry.mal_id);"
-                    class="cursor-pointer overflow-hidden h-max w-full max-w-[210px]"
+                    class="anime-card cursor-pointer overflow-hidden h-max w-full max-w-[210px]"
                     *ngFor="let item of this.animeRecommendations.slice(0, 6);"
                 >
                     <div 
-                        class="anime-card relative w-full h-[15rem] rounded-[.2rem] overflow-hidden sm:h-[17rem]"
+                        class="relative w-full h-[15rem] rounded-[.2rem] overflow-hidden sm:h-[17rem]"
                     >
                         <img 
                             class="w-full h-full" [src]="item.entry.images.webp.large_image_url"
@@ -317,7 +317,7 @@
                     </div>
                     <p 
                         (click)="this.redirectToAnimeDetailPage(item.entry.mal_id);"
-                        class="text-center tracking-wider mt-1 overflow-hidden hover:text-[#bd0912]"
+                        class="text-center tracking-wider mt-1 overflow-hidden"
                     >
                         {{item.entry.title}}
                     </p>

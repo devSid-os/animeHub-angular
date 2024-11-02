@@ -32,6 +32,7 @@
                     REVIEWS
                 </li>
                 <li 
+                    *ngIf="this.animeRecommendations.length > 0"
                     (click)="this.selectedTab=this.tabs.RECOMMENDATIONS"
                     [ngClass]="{'active-tab': this.selectedTab === this.tabs.RECOMMENDATIONS}"
                     class="tracking-wider text-[.9rem] cursor-pointer">
@@ -67,5 +68,16 @@
             *ngIf="this.animeReviews.data.length > 0 && this.selectedTab===this.tabs.REVIEWS"
         >   
         </app-anime-reviews>
+
+        <app-anime-recommendations
+            (onTotalRecommendationsChange)="this.totalRecommendations = this.totalRecommendations + 12;"
+            [totalRecommendations]="this.totalRecommendations"
+            [animeTitle]="this.anime.title_english || this.anime.title || this.anime.title_japanese"
+            [animeRecommendations]="this.animeRecommendations"
+            [animeImages]="this.anime.images"
+            *ngIf="this.animeRecommendations.length > 0 && this.selectedTab === this.tabs.RECOMMENDATIONS"
+        >
+
+        </app-anime-recommendations>
     </div>
 </div>

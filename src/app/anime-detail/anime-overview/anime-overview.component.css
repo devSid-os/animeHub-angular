@@ -103,10 +103,18 @@
     }
 }
 
+.anime-card p {
+    transition: color .1s linear;
+}
+
 .anime-card:hover {
     img {
         opacity: 1;
         transform: scale(1.02);
+    }
+
+    p {
+        color: #bd0912;
     }
 }
 
