@@ -22,13 +22,15 @@ export class AnimeDetailComponent implements OnInit, OnDestroy {
   animeRecommendations: Array<any> = [];
   animeReviews: { pagination: Object, data: Array<any> } = { pagination: {}, data: [] };
   animeId: string | null = null;
-  selectedTab: 'overview' | 'recommendations' | 'characters' | 'reviews' = this.tabs.REVIEWS;
+  totalRecommendations: number = 12;
+  selectedTab: 'overview' | 'recommendations' | 'characters' | 'reviews' = this.tabs.OVERVIEW;
   sub1: Subscription | null = null;
 
   constructor(private _animeService: AnimeService, private _route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.sub1 = this._route.paramMap.subscribe(params => {
+      this.resetProperties();
       this.animeId = params.get('id');
       this.fetchAnimeData(this.animeId);
     });
@@ -36,6 +38,11 @@ export class AnimeDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.sub1 instanceof Subscription) this.sub1.unsubscribe();
+    this.resetProperties();
+  }
+  
+  private resetProperties(): void {
+    this.selectedTab = this.tabs.OVERVIEW;
     this._animeService.selectedAnime = null;
     this.anime = null;
     this.animeStats = null;
@@ -45,6 +52,7 @@ export class AnimeDetailComponent implements OnInit, OnDestroy {
     this.animeRecommendations = [];
     this.animeReviews = { pagination: {}, data: [] };
     this.animeId = null;
+    this.totalRecommendations = 12;
   }
 
   fetchAnimeData(animeId: string) {
@@ -65,7 +73,7 @@ export class AnimeDetailComponent implements OnInit, OnDestroy {
     from(requests).pipe(
       concatMap((requestFunc, index) => {
         return from(requestFunc()).pipe(
-          delay(333), // Add delay for subsequent requests
+          delay(index < 3 ? 0 : index === 3 ? 1000 : 333), // Add delay for subsequent requests
           catchError(error => {
             console.log("Error: ", error);
             return of(null); // Handle error by returning null

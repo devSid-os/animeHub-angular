@@ -7,13 +7,14 @@ import { MatChipsModule } from "@angular/material/chips";
 import { AnimeCharactersComponent } from './anime-characters/anime-characters.component';
 import { AnimeReviewsComponent } from './anime-reviews/anime-reviews.component';
 import { CheckOverflowDirective } from './anime-reviews/text-overflow.directive';
+import { AnimeRecommendationsComponent } from './anime-recommendations/anime-recommendations.component';
 
 const routes: Routes = [
     { path: '', component: AnimeDetailComponent }
 ];
 
 @NgModule({
-    declarations: [CheckOverflowDirective, AnimeDetailComponent, AnimeOverviewComponent, AnimeCharactersComponent, AnimeReviewsComponent],
+    declarations: [CheckOverflowDirective, AnimeDetailComponent, AnimeOverviewComponent, AnimeCharactersComponent, AnimeReviewsComponent, AnimeRecommendationsComponent],
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
