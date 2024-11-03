@@ -259,10 +259,10 @@
                 </div>
                 <div class="flex flex-col justify-between p-2 flex-1 overflow-hidden">
                     <div>
-                        <p
-                            class="text-[.9rem] tracking-wide font-bold mb-0 overflow-hidden text-ellipsis whitespace-nowrap font-mulish">
+                        <a [routerLink]="'/character/'+character.character.mal_id"
+                            class="text-[#aabee4] text-[.9rem] w-max tracking-wide font-bold mb-0 cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap font-mulish hover:text-[#fff]">
                             {{character.character.name}}
-                        </p>
+                        </a>
                         <p *ngIf="character.voice_actors && character.voice_actors.length > 0"
                             class="text-[12px] font-light text-[#bebebe] font-mulish"
                         >
@@ -361,46 +361,11 @@
     </div>
 </div>
 <!-- ANIME IMAGES VIEWER MODAL -->
-<div 
-    *ngIf="this.isScreenShotsModalOpen" 
-    style="z-index: 7!important"
-    class="bg-[rgba(0,0,0,.7)] fixed top-0 left-0 w-screen h-screen"
+<app-image-viewer 
+    *ngIf="this.isScreenShotsModalOpen"  
+    [images]="this.animePictures"
+    [imageNumber]="this.imageNumber"
+    (onCloseImageViewer)="this.isScreenShotsModalOpen=!$event;"
+    (onImageChange)="$event === 'prev' ? this.showPrevImage() : this.showNextImage();"
 >
-    <div class="flex flex-col justify-around items-center gap-2 w-full h-full">
-        <div class="flex flex-col items-center gap-3 w-max max-w-[95%] max-h-[85%]">
-            <div class="flex items-center gap-3 h-full">
-                <button 
-                    (click)="this.showPrevImage();" 
-                    class="border-2 rounded-full flex items-center"
-                >
-                    <span class="material-icons-outlined">
-                        chevron_left
-                    </span>
-                </button>
-                <div class="relative  w-full h-full">
-                    <button 
-                        type="button" 
-                        (click)="this.isScreenShotsModalOpen = false;"
-                        class="border-2 border-white absolute -top-2 -right-2 text-white bg-black flex w-[25px] h-[25px] rounded-full items-center justify-center"
-                    >
-                        <span class="text-3xl">&times;</span>
-                    </button>
-                    <img 
-                        class="w-full h-full rounded-sm border-8 border-white object-cover"
-                        [src]="this.animePictures[this.imageNumber].webp.large_image_url" />
-                </div>
-                <button 
-                    (click)="this.showNextImage();" 
-                    class="border-2 rounded-full flex items-center"
-                >
-                    <span class="material-icons-outlined">
-                        chevron_right
-                    </span>
-                </button>
-            </div>
-            <p class="font-mulish">
-                {{this.imageNumber+1}} / {{this.animePictures.length}}
-            </p>
-        </div>
-    </div>
-</div>
+</app-image-viewer>

@@ -29,7 +29,7 @@
                         </div>
                         <!-- CHARACTER NAME AND ROLE (ADDITIONAL INFO) -->
                         <div class="flex-1">
-                            <a class="tracking-wider text-[#aabee4] hover:text-[#fff]">
+                            <a [routerLink]="'/character/'+character.character.mal_id" class="tracking-wider text-[#aabee4] hover:text-[#fff]">
                                 {{character.character.name}}
                             </a>
                             <p class="tracking-wider text-[#bebebe] font-light text-sm mt-[2px] mb-0">

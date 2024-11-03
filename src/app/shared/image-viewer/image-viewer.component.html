@@ -1,0 +1,42 @@
+<div  
+    style="z-index: 7!important"
+    class="bg-[rgba(0,0,0,.7)] fixed top-0 left-0 w-screen h-screen"
+>
+    <div class="flex flex-col justify-around items-center gap-2 w-full h-full">
+        <div class="flex flex-col items-center gap-3 w-max max-w-[95%] max-h-[85%]">
+            <div class="flex items-center gap-3 h-full">
+                <button 
+                    (click)="this.onImageChange.emit('prev');" 
+                    class="border-2 rounded-full flex items-center"
+                >
+                    <span class="material-icons-outlined">
+                        chevron_left
+                    </span>
+                </button>
+                <div class="relative  w-full h-full">
+                    <button 
+                        (click)="this.onCloseImageViewer.emit(true);"
+                        type="button" 
+                        class="border-2 border-white absolute -top-2 -right-2 text-white bg-black flex w-[25px] h-[25px] rounded-full items-center justify-center"
+                    >
+                        <span class="text-3xl">&times;</span>
+                    </button>
+                    <img 
+                        class="w-full h-full rounded-sm border-8 border-white object-cover"
+                        [src]="this.images[this.imageNumber]?.webp?.large_image_url || this.images[this.imageNumber]?.jpg?.large_image_url || this.images[this.imageNumber]?.webp?.image_url || this.images[this.imageNumber]?.jpg?.image_url" />
+                </div>
+                <button 
+                    (click)="this.onImageChange.emit('next')" 
+                    class="border-2 rounded-full flex items-center"
+                >
+                    <span class="material-icons-outlined">
+                        chevron_right
+                    </span>
+                </button>
+            </div>
+            <p class="font-mulish">
+                {{this.imageNumber+1}} / {{this.images.length}}
+            </p>
+        </div>
+    </div>
+</div>

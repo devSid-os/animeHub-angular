@@ -27,7 +27,6 @@ export class AnimeOverviewComponent implements OnInit {
 
   constructor(public sanitizer: DomSanitizer, private _router: Router, private _animeService: AnimeService) { }
 
-
   ngOnInit(): void {
     // RATINGS LOGIC
     const stars: number = Number(this.anime.score) / 2;

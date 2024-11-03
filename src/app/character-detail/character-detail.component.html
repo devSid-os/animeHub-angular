@@ -1,0 +1,69 @@
+<div *ngIf="this.characterData" class="container-fluid w-full py-3">
+    <!-- CHARACTER NAME -->
+    <div id="overview-content">
+        <h2 class="tracking-wide">
+            {{this.characterData?.name}}
+        </h2>
+        <h6 *ngIf="this.characterData.nicknames.length || this.characterData.name_kanji"
+            class="tracking-wider text-[#bebebe]">
+            <ng-container *ngIf="this.characterData.nicknames.length;else name_kanji;">
+                Aka: <span class="text-[#bebebe] tracking-wider"
+                    *ngFor="let name of this.characterData.nicknames;let i = index;">
+                    {{name}}{{(i!=this.characterData.nicknames.length-1) ? ',' : ''}}
+                </span>
+            </ng-container>
+            <ng-template #name_kanji>
+                {{this.characterData.name_kanji}}
+            </ng-template>
+        </h6>
+
+        <nav class="mt-4 rounded-sm">
+            <ul class="flex gap-3 flex-wrap py-2 p-3">
+                <li class="active-tab tracking-wider text-[.9rem] cursor-pointer">
+                    OVERVIEW
+                </li>
+            </ul>
+        </nav>
+
+        <div class="mt-2 py-3 content-container">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-y-6 md:gap-x-8 md:gap-y-0">
+                <div class="w-full flex flex-col items-center">
+                    <div class="w-full max-w-[13rem] h-full max-h-[18rem] overflow-hidden rounded-[5px]">
+                        <img class="w-full h-full object-cover"
+                            [src]="this.characterData.images.webp.image_url || this.characterData.images.jpg.image_url" />
+                    </div>
+                    <button 
+                        *ngIf="this.characterPictures.length > 0;" 
+                        type="button" 
+                        (click)="this.isScreenshotModalOpen = true;"
+                        class="mt-3 bg-[#3e3e3e] p-2 px-3 text-sm rounded-md tracking-[1px] font-bold">
+                        SCREESHOTS
+                    </button>
+                </div>
+                <div class="md:col-span-4">
+                    <p *ngIf="this.characterData.about.length;else noDesc;" class="leading-8 tracking-wide font-mulish" [innerHTML]="this.characterData.about"></p>
+                    <ng-template #noDesc>
+                        <p class="leading-8 tracking-wide font-mulish">
+                            Currently, There is no Information available about <b style="font-weight: 700;" class="font-mulish">{{this.characterData?.name}}</b>.
+                        </p>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+        <div class="md:content-container">
+            <app-anime-roles 
+                [animeRoles]="this.characterData.anime"
+                *ngIf="this.characterData.anime && this.characterData.anime.length">
+            </app-anime-roles>
+        </div>
+    </div>
+</div>
+
+<app-image-viewer 
+    *ngIf="this.isScreenshotModalOpen"  
+    [images]="this.characterPictures"
+    [imageNumber]="this.imageNumber"
+    (onCloseImageViewer)="this.isScreenshotModalOpen=!$event;"
+    (onImageChange)="$event === 'prev' ? this.showPrevImage() : this.showNextImage();"
+>
+</app-image-viewer>

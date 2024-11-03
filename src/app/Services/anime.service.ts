@@ -17,7 +17,15 @@ export class AnimeService {
         return this._selectedAnime;
     }
 
-    getAnimeReviews(animeId: string, page:any): Promise<any> {
+    getCharacterPictures(characterId: string): Promise<any> {
+        return this._http.get(`${this._JIKAN_BASE_URL}/characters/${characterId}/pictures`).toPromise();
+    }
+
+    getCharacterFullById(characterId: string): Promise<any> {
+        return this._http.get(`${this._JIKAN_BASE_URL}/characters/${characterId}/full`).toPromise();
+    }
+
+    getAnimeReviews(animeId: string, page: any): Promise<any> {
         return this._http.get(`${this._JIKAN_BASE_URL}/anime/${animeId}/reviews`, {
             params: {
                 page

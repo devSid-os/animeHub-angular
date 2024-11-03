@@ -1,0 +1,46 @@
+* {
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
+}
+
+a {
+    text-decoration: none;
+}
+
+.font-mulish {
+    font-family: "Mulish", sans-serif;
+}
+
+p b {
+    font-family: "Mulish", sans-serif;
+    letter-spacing: .025rem;
+}
+
+.anime-role-row:first-child,
+.anime-role-row:nth-child(2) {
+    border-top: 1px solid #bebeeb;
+}
+
+.anime-role-row {
+    border-bottom: 1px solid #bebeeb;
+}
+
+.anime-role-row .anime-img {
+    opacity: .9;
+    transition: opacity .1s linear;
+}
+
+.anime-role-row:hover .anime-img {
+    opacity: 1!important;
+}
+
+@media screen and (max-width: 768px) {
+    .anime-role-row:nth-child(even) {
+        background-color: transparent!important;
+    }
+    .anime-role-row:nth-child(odd) {
+        background-color: #202020!important;
+    }
+}
