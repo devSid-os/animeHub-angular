@@ -23,7 +23,7 @@ export class AnimeDetailComponent implements OnInit, OnDestroy {
   animeReviews: { pagination: Object, data: Array<any> } = { pagination: {}, data: [] };
   animeId: string | null = null;
   totalRecommendations: number = 12;
-  selectedTab: 'overview' | 'recommendations' | 'characters' | 'reviews' = this.tabs.OVERVIEW;
+  selectedTab: TABS.OVERVIEW | TABS.RECOMMENDATIONS | TABS.REVIEWS | TABS.CHARACTERS = this.tabs.OVERVIEW;
   sub1: Subscription | null = null;
 
   constructor(private _animeService: AnimeService, private _route: ActivatedRoute) { }
@@ -40,7 +40,7 @@ export class AnimeDetailComponent implements OnInit, OnDestroy {
     if (this.sub1 instanceof Subscription) this.sub1.unsubscribe();
     this.resetProperties();
   }
-  
+
   private resetProperties(): void {
     this.selectedTab = this.tabs.OVERVIEW;
     this._animeService.selectedAnime = null;

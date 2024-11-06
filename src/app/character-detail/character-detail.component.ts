@@ -3,6 +3,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AnimeService } from '../Services/anime.service';
 import { HttpClientModule } from '@angular/common/http';
+import { TABS } from '../enums';
 
 @Component({
   selector: 'app-character-detail',
@@ -11,12 +12,14 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class CharacterDetailComponent implements OnInit, OnDestroy {
 
+  tabs: typeof TABS = TABS;
   characterId: string | null = null;
   sub1: Subscription | null = null;
   characterData: any = null;
   characterPictures: Array<any> = [];
   imageNumber: number = 0;
   isScreenshotModalOpen: boolean = false;
+  selectedTab: TABS.OVERVIEW | TABS.VOICE_ACTORS = this.tabs.OVERVIEW;
   constructor(private _route: ActivatedRoute, private _animeService: AnimeService) { }
 
   ngOnInit(): void {

@@ -6,16 +6,16 @@ import { AnimeOverviewComponent } from "./anime-overview/anime-overview.componen
 import { MatChipsModule } from "@angular/material/chips";
 import { AnimeCharactersComponent } from './anime-characters/anime-characters.component';
 import { AnimeReviewsComponent } from './anime-reviews/anime-reviews.component';
-import { CheckOverflowDirective } from './anime-reviews/text-overflow.directive';
 import { AnimeRecommendationsComponent } from './anime-recommendations/anime-recommendations.component';
 import { SharedModule } from '../shared/shared.module';
+import { CheckOverflowDirective } from './anime-reviews/text-overflow.directive';
 
 const routes: Routes = [
     { path: '', component: AnimeDetailComponent }
 ];
 
 @NgModule({
-    declarations: [CheckOverflowDirective, AnimeDetailComponent, AnimeOverviewComponent, AnimeCharactersComponent, AnimeReviewsComponent, AnimeRecommendationsComponent],
+    declarations: [AnimeDetailComponent, AnimeOverviewComponent, AnimeCharactersComponent, AnimeReviewsComponent, AnimeRecommendationsComponent, CheckOverflowDirective],
     imports: [
         CommonModule,
         RouterModule.forChild(routes),

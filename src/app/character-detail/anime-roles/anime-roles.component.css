@@ -19,7 +19,8 @@ p b {
 }
 
 .anime-role-row:first-child,
-.anime-role-row:nth-child(2) {
+.anime-role-row:nth-child(2),
+.anime-role-row:nth-child(3) {
     border-top: 1px solid #bebeeb;
 }
 
@@ -32,15 +33,55 @@ p b {
     transition: opacity .1s linear;
 }
 
+
 .anime-role-row:hover .anime-img {
-    opacity: 1!important;
+    opacity: 1 !important;
+}
+
+@media screen and (min-width: 1024px) {
+    .anime-role-row:nth-child(6n + 3),
+    .anime-role-row:nth-child(6n + 2),
+    .anime-role-row:nth-child(6n + 1) {
+        background-color: #202020 !important;
+    }
+    
+    .anime-role-row :not(:nth-child(6n)):not(:nth-child(6n + 1)):not(:nth-child(6n + 3)) {
+        background-color: transparent !important;
+    }
+}
+
+
+@media screen and (max-width: 1024px) {
+
+    .anime-role-row:nth-child(4n + 2),
+    .anime-role-row:nth-child(4n + 1) {
+        background-color: #202020 !important;
+    }
+
+    .anime-role-row:nth-child(3) {
+        border-top: 0;
+    }
+
+    .anime-role-row :not(:nth-child(4n)):not(:nth-child(4n + 1)) {
+        background-color: transparent !important;
+    }
 }
 
 @media screen and (max-width: 768px) {
     .anime-role-row:nth-child(even) {
-        background-color: transparent!important;
+        background-color: transparent !important;
     }
+
+    .anime-role-row:nth-child(even):hover {
+        background-color: #202020 !important;
+    }
+
     .anime-role-row:nth-child(odd) {
-        background-color: #202020!important;
+        background-color: #202020 !important;
+    }
+
+    .anime-role-row:nth-child(2),
+    .anime-role-row:nth-child(3) {
+        border-top: 0;
     }
 }
