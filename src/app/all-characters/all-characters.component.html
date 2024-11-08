@@ -1,0 +1,101 @@
+<div class="py-3">
+    <div class="custom-container">
+        <!-- SEARCH DIV -->
+        <div
+            class="search-container bg-[#303134] p-2 px-3 flex items-stretch gap-2 rounded-3xl mx-auto sm:w-[85%] md:w-1/3">
+            <span class="search-icon material-icons-outlined text-[#bebebe] select-none">
+                search
+            </span>
+            <input 
+                type="text"
+                class="flex-1 bg-transparent font-mulish tracking-wider text-sm focus:outline-none hover:cursor-text"
+                spellcheck="false" 
+                placeholder="Search Characters" 
+            />
+        </div>
+        <!-- CHARACTERS LIST -->
+        <div class="mt-8 grid gap-y-2 sm:gap-x-4 sm:grid-cols-2 md:grid-cols-3">
+            <!-- CHARACTERS ITEMS -->
+            <div 
+                *ngFor="let character of this.characters;"
+                class="character-item relative group flex items-center gap-3 pb-1 border-b-[1px] border-[#9d9b9b] hover:bg-[rgba(0,0,0,.6)]"
+            >
+                <div
+                    class="relative transition-colors duration-100 w-[20%] h-[85px] bg-[#202020] shadow-md rounded-sm overflow-hidden group-hover:bg-[#fff]"
+                >
+                    <img 
+                        loading="lazy" 
+                        class="w-full h-full object-contain"
+                        [src]="character.images.webp.image_url || character.images.jpg.image_url" 
+                    />
+                </div>
+                <div clas="flex-1">
+                    <a 
+                        [routerLink]="'/character/'+character.mal_id"
+                        class="font-mulish text-lg font-[600] text-white tracking-wider w-max hover:text-[#aabee4!important]">
+                            {{character.name}}
+                    </a>
+                </div>
+                <button 
+                    (click)="this.openModal(character);" type="button"
+                    class="material-icons-outlined select-none text-[#aabee4] pr-2 absolute top-[50%] -translate-y-[50%] right-0 hover:text-[#c1cad9]"
+                >
+                    info
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CHARACTERS OVERVIEW MODAL -->
+<div 
+    *ngIf="this.isModalOpen" 
+    class="z-10 bg-[rgba(0,0,0,.7)] w-full h-full fixed top-0 left-0"
+>
+    <div 
+        (click)="this.closeModal();" 
+        class="w-full h-full flex items-center justify-center"
+    >
+        <div 
+            #modal 
+            style="transform: scale(0);"
+            class="relative character-modal border-4 border-white rounded-sm bg-[#191919]"
+        >
+            <div 
+                class="hide-scrollbar p-3 flex flex-col items-center gap-6 overflow-auto max-w-[90vw] max-h-[80vh] sm:max-h-[90vh] sm:max-w-[80vw] md:max-w-[55vw] lg:max-w-[45vw]"
+                (click)="$event.stopPropagation();"
+            >
+                <div class="w-full h-full flex flex-col items-center gap-2">
+                    <img 
+                        class="w-max h-max rounded-sm mt-2"
+                        [src]="this.modalData.images.webp.image_url || this.modalData.images.jpg.image_url" 
+                    />
+                    <h6 class="text-2xl tracking-wider">{{this.modalData.name}}</h6>
+                </div>
+                <div>
+                    <p 
+                        *ngIf="this.modalData.nicknames && this.modalData.nicknames.length > 0"
+                        class="font-mulish tracking-wider"
+                        >
+                        <span class="font-mulish font-bold">Also Known as:</span><ng-container
+                            *ngFor="let nickName of this.modalData.nicknames;let nickNameIndex = index;">
+                            {{nickName + (nickNameIndex != (this.modalData.nicknames.length -1) ? ',' : '')}}
+                        </ng-container>
+                    </p>
+                    <p 
+                        style="line-height: 2rem;" 
+                        [innerHTML]="this.modalData.about"
+                        class="mb-0 font-mulish tracking-wider text-justify"
+                    ></p>
+                </div>
+            </div>
+            <button
+                class="border-2 border-white absolute -top-[15px] -right-[15px] text-white bg-black flex w-[25px] h-[25px] rounded-full items-center justify-center"
+                style="font-size: 1.8rem;" 
+                type="button"
+            >
+                <span class="-mt-[1px]">&times;</span>
+            </button>
+        </div>
+    </div>
+</div>

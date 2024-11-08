@@ -1,0 +1,52 @@
+* {
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+    transition: color .15s linear;
+}
+
+.font-mulish {
+    font-family: "Mulish", sans-serif;
+}
+
+.material-icons-outlined {
+    font-family: 'Material Icons Outlined' !important;
+}
+
+.search-container:focus-within .search-icon {
+    color: #fff;
+}
+
+.character-item {
+    transition: background-color .1s linear;
+}
+
+.character-modal {
+    transition: transform .15s ease-in!important;
+}
+
+.hide-scrollbar {
+    overflow: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+}
+
+@media screen and (min-width: 640px) {
+    .custom-container {
+        width: 100%;
+        max-width: 1250px;
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

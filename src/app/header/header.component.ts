@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
     },
     {
       name: 'characters',
-      urlRoute: '/characters',
+      urlRoute: '/all-characters',
 
     },
     {
