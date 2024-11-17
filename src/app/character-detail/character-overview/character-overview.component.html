@@ -13,7 +13,7 @@
         </div>
         <div checkOverflow class="md:col-span-4">
             <div class="blur-bottom max-h-[500px] ">
-                <p *ngIf="this.characterData.about?.length;" class="leading-8 tracking-wide font-mulish"
+                <p *ngIf="this.characterData.about?.length;else noDesc;" class="leading-8 tracking-wide font-mulish"
                     [innerHTML]="this.characterData.about"></p>
                 <ng-template #noDesc>
                     <p class="leading-8 tracking-wide font-mulish">

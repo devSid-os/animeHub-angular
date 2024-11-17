@@ -10,6 +10,7 @@ import { AnimeSectionComponent } from './home-component/anime-section/anime-sect
 import { AnimeAsideComponent } from './home-component/anime-aside/anime-aside.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { LoaderModule } from './loader/loader.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { MatTooltipModule } from "@angular/material/tooltip";
     HttpClientModule,
     CommonModule,
     BrowserAnimationsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    LoaderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

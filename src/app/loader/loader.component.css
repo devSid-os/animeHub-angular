@@ -1,0 +1,42 @@
+.loading {   
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .7);
+}
+
+.loading > .loading-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.loading > .loading-container > img {
+    width: 8%;
+}
+
+.loading > .loading-container > p {
+    color: var(--color-yellow);
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
+    letter-spacing: 1px;
+    font-size: 1.3rem;
+    user-select: none;
+}
+
+.loading > .loading-container > p > span {
+    user-select: none;
+    color: var(--color-yellow);
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
+}

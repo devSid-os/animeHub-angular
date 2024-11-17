@@ -63,3 +63,5 @@
     (onImageChange)="$event === 'prev' ? this.showPrevImage() : this.showNextImage();"
 >
 </app-image-viewer>
+
+<app-loader *ngIf="this.loading"></app-loader>

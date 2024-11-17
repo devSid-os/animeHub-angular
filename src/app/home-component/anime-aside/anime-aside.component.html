@@ -8,10 +8,10 @@
         </h3>
     </div>
     <!-- POPULAR ANIMES DIV -->
-    <div *ngIf="this.animeData.length > 0;" class="w-full flex flex-col gap-3 py-3">
+    <div *ngIf="this.animeAsideData.length > 0;" class="w-full flex flex-col gap-3 py-3">
         <div (click)="this.selectAnime(anime)"
             class="popular-anime-div p-2 w-full flex justify-between items-center gap-3"
-            *ngFor="let anime of this.animeData">
+            *ngFor="let anime of this.animeAsideData">
             <img style="opacity: .9;" class="popular-anime-img select-none w-auto h-[130px] w-max rounded-sm"
                 [src]="anime.images.webp.image_url || anime.images.jpg.image_url" [alt]="anime.title" />
             <div class="flex-1">
@@ -30,7 +30,7 @@
     </div>
 </ng-container>
 
-<div *ngIf="this.isError" class="flex flex-col items-center gap-4 mt-12 px-2">
+<div *ngIf="this.isErrorAside" class="flex flex-col items-center gap-4 mt-12 px-2">
     <img src="../../../assets/errorPlaceholder2.gif" class="w-[20%]" />
     <p class="text-center text-sm tracking-[2px]">Something went wrong!! Please Try Re-loading the page.</p>
 </div>

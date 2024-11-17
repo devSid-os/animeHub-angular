@@ -9,6 +9,7 @@ import { AnimeReviewsComponent } from './anime-reviews/anime-reviews.component';
 import { AnimeRecommendationsComponent } from './anime-recommendations/anime-recommendations.component';
 import { SharedModule } from '../shared/shared.module';
 import { CheckOverflowDirective } from './anime-reviews/text-overflow.directive';
+import { LoaderModule } from '../loader/loader.module';
 
 const routes: Routes = [
     { path: '', component: AnimeDetailComponent }
@@ -20,7 +21,8 @@ const routes: Routes = [
         CommonModule,
         RouterModule.forChild(routes),
         MatChipsModule,
-        SharedModule
+        SharedModule,
+        LoaderModule
     ]
 })
 export class AnimeDetailModule { }

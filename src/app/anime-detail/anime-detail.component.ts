@@ -3,7 +3,7 @@ import { AnimeService } from '../Services/anime.service';
 import { ActivatedRoute } from '@angular/router';
 import { TABS } from '../enums';
 import { from, of, Subscription } from 'rxjs';
-import { concatMap, delay, catchError } from 'rxjs/operators';
+import { concatMap, delay, catchError, toArray, finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-anime-detail',
@@ -71,15 +71,17 @@ export class AnimeDetailComponent implements OnInit, OnDestroy {
     ];
 
     from(requests).pipe(
-      concatMap((requestFunc, index) => {
+      concatMap((requestFunc) => {
         return from(requestFunc()).pipe(
-          delay(index < 3 ? 0 : index === 3 ? 1000 : 333), // Add delay for subsequent requests
+          delay(333), // Add delay for subsequent requests
           catchError(error => {
             console.log("Error: ", error);
             return of(null); // Handle error by returning null
           })
         );
       })
+      ,toArray(),
+      finalize(() => this.loading = false)
     ).subscribe(); // Execute the requests
   }
 
@@ -123,7 +125,6 @@ export class AnimeDetailComponent implements OnInit, OnDestroy {
       .then((response: any) => {
         const concatReviews = this.animeReviews.data.concat(response.data);
         this.animeReviews = { pagination: { ...response.pagination }, data: concatReviews };
-        this.loading = false;
       });
   }
 }
