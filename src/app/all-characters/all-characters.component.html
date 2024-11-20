@@ -23,24 +23,48 @@
                     <p class="font-mulish tracking-wider text-lg">No Results found for "{{this.searchQuery}}"</p>
                 </div>
             </ng-container>
-            <div *ngFor="let character of this.characters;"
-                class="character-item relative group flex items-center gap-3 pb-1 border-b-[1px] border-[#322f2f] hover:bg-[rgba(0,0,0,.6)]">
-                <div
-                    class="transition-colors duration-100 w-[20%] h-[85px] bg-[#202020] shadow-md rounded-sm overflow-hidden group-hover:bg-[#fff]">
-                    <img loading="lazy" class="w-full h-full object-contain"
-                        [src]="character.images.webp.image_url || character.images.jpg.image_url" />
-                </div>
-                <div clas="flex-1">
-                    <a [routerLink]="'/character/'+character.mal_id"
-                        class="font-mulish text-lg font-[600] text-white tracking-wider w-max hover:text-[#aabee4!important]">
-                        {{character.name}}
-                    </a>
-                </div>
-                <button *ngIf="character.about" (click)="this.openModal(character);" type="button"
-                    class="material-icons-outlined select-none text-[#aabee4] pr-2 absolute top-[50%] -translate-y-[50%] right-0 hover:text-[#c1cad9]">
-                    info
-                </button>
-            </div>
+            <ng-container [ngSwitch]="this.searchQuery.length > 0">
+                <ng-container *ngSwitchCase="false">
+                    <div *ngFor="let character of this.characters;"
+                        class="character-item relative group flex items-center gap-3 pb-1 border-b-[1px] border-[#322f2f] hover:bg-[rgba(0,0,0,.6)]">
+                        <div
+                            class="transition-colors duration-100 w-[20%] h-[85px] bg-[#202020] shadow-md rounded-sm overflow-hidden group-hover:bg-[#fff]">
+                            <img loading="lazy" class="w-full h-full object-contain"
+                                [src]="character.images.webp.image_url || character.images.jpg.image_url" />
+                        </div>
+                        <div clas="flex-1">
+                            <a [routerLink]="'/character/'+character.mal_id"
+                                class="font-mulish text-lg font-[600] text-white tracking-wider w-max hover:text-[#aabee4!important]">
+                                {{character.name}}
+                            </a>
+                        </div>
+                        <button *ngIf="character.about" (click)="this.openModal(character);" type="button"
+                            class="material-icons-outlined select-none text-[#aabee4] pr-2 absolute top-[50%] -translate-y-[50%] right-0 hover:text-[#c1cad9]">
+                            info
+                        </button>
+                    </div>
+                </ng-container>
+                <ng-container *ngSwitchCase="true">
+                    <div *ngFor="let character of this.searchedCharacters;"
+                        class="character-item relative group flex items-center gap-3 pb-1 border-b-[1px] border-[#322f2f] hover:bg-[rgba(0,0,0,.6)]">
+                        <div
+                            class="transition-colors duration-100 w-[20%] h-[85px] bg-[#202020] shadow-md rounded-sm overflow-hidden group-hover:bg-[#fff]">
+                            <img loading="lazy" class="w-full h-full object-contain"
+                                [src]="character.images.webp.image_url || character.images.jpg.image_url" />
+                        </div>
+                        <div clas="flex-1">
+                            <a [routerLink]="'/character/'+character.mal_id"
+                                class="font-mulish text-lg font-[600] text-white tracking-wider w-max hover:text-[#aabee4!important]">
+                                {{character.name}}
+                            </a>
+                        </div>
+                        <button *ngIf="character.about" (click)="this.openModal(character);" type="button"
+                            class="material-icons-outlined select-none text-[#aabee4] pr-2 absolute top-[50%] -translate-y-[50%] right-0 hover:text-[#c1cad9]">
+                            info
+                        </button>
+                    </div>
+                </ng-container>
+            </ng-container>
         </div>
         <div *ngIf="this.characterListPagination && this.characterListPagination.has_next_page"
             class="mt-4 text-center flex items-center gap-3">

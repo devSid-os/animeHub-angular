@@ -15,14 +15,14 @@ export class AllCharactersComponent implements OnInit {
   loading: boolean = false;
   characters: Array<any> = [];
   characterListPagination: any = null;
+  searchedCharacters: Array<any> = [];
+  searchedCharacterListPagination: any = null;
   searchQuery: string = '';
   searchInterval: any = null;
-  commonCharactersData: Array<any> = [];
-  commonCharactersListPagination: any = null;
   modalData: any = null;
 
   ngOnInit(): void {
-    this.getCharactersList({ order_by: 'favorites', sort: 'desc', page: 1, limit: 24 });
+    this.getCharactersList({ order_by: 'favorites', sort: 'desc', page: 1, limit: 24 }, false, false);
   }
 
   openModal(data: any): void {
@@ -45,45 +45,45 @@ export class AllCharactersComponent implements OnInit {
 
   getMoreCharacters(): void {
     if (!this.searchQuery.length)
-      this.getCharactersList({ order_by: 'favorites', sort: 'desc', page: (this.characterListPagination.current_page + 1), limit: 24 });
-    else {
-      this.getCharactersList({ q: this.searchQuery, limit: 24, page: (this.characterListPagination.current_page + 1) }, true);
-    }
+      this.getCharactersList({ order_by: 'favorites', sort: 'desc', page: (this.characterListPagination.current_page + 1), limit: 24 }, false, false);
+    else this.getCharactersList({ q: this.searchQuery, limit: 24, page: (this.searchedCharacterListPagination.current_page + 1) }, true, true);
+
   }
 
   searchCharacters(event: any): void {
     this.searchQuery = event.target.value;
-    if (this.searchQuery.length) {
-      clearTimeout(this.searchInterval)
+    clearTimeout(this.searchInterval)
+    if (this.searchQuery.length > 0) {
       this.searchInterval = setTimeout(() => {
-        this.getCharactersList({ q: this.searchQuery, limit: 24 }, true);
+        this.getCharactersList({ q: this.searchQuery, limit: 24 }, true, false);
       }, 500);
     }
     else {
-      this.characters = this.commonCharactersData;
-      this.characterListPagination = this.commonCharactersListPagination;
+      this.clearSearchQuery();
     }
   }
 
   clearSearchQuery() {
     this.searchQuery = '';
-    this.characters = this.commonCharactersData;
-    this.characterListPagination = this.commonCharactersListPagination;
+    this.searchedCharacters = [];
+    this.searchedCharacterListPagination = null;
   }
 
-  getCharactersList(filters: any, isSearched: boolean = false): void {
+  getCharactersList(filters: any, isSearched: boolean = false, getMoreSearched: boolean = false): void {
     this.loading = true;
     this._animeService.getAllCharacters(filters)
       .then((response: any) => {
         if (!isSearched) {
-          this.commonCharactersData = this.commonCharactersData.concat(response.data);
-          this.commonCharactersListPagination = response.pagination;
-          this.characters = this.commonCharactersData;
-          this.characterListPagination = this.commonCharactersListPagination;
+          this.characters = this.characters.concat(response.data);
+          this.characterListPagination = response.pagination;
         }
         else {
-          this.characters = response.data;
-          this.characterListPagination = response.pagination;
+          if (!getMoreSearched) this.searchedCharacters = response.data;
+          else {
+            this.searchedCharacters = this.searchedCharacters.concat(response.data);
+            console.log("here")
+          }
+          this.searchedCharacterListPagination = response.pagination;
         }
         this.loading = false;
       })
