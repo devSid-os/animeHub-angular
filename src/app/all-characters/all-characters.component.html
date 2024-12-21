@@ -97,7 +97,7 @@
             <div class="hide-scrollbar p-3 flex flex-col items-center gap-6 overflow-auto max-w-[90vw] max-h-[80vh] sm:max-h-[90vh] sm:max-w-[80vw] md:max-w-[55vw] lg:max-w-[45vw]"
                 (click)="$event.stopPropagation();">
                 <div class="w-full h-full flex flex-col items-center gap-2">
-                    <img class="w-max h-max rounded-sm mt-2"
+                    <img class="w-max h-max max-h-[400px] rounded-sm mt-2"
                         [src]="this.modalData.images.webp.image_url || this.modalData.images.jpg.image_url" />
                     <h6 class="text-2xl tracking-wider">{{this.modalData.name}}</h6>
                 </div>

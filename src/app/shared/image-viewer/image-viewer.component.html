@@ -22,6 +22,7 @@
                         <span class="text-3xl">&times;</span>
                     </button>
                     <img 
+                        loading="lazy"
                         class="w-full h-full rounded-sm border-8 border-white object-cover"
                         [src]="this.images[this.imageNumber]?.webp?.large_image_url || this.images[this.imageNumber]?.jpg?.large_image_url || this.images[this.imageNumber]?.webp?.image_url || this.images[this.imageNumber]?.jpg?.image_url" />
                 </div>
