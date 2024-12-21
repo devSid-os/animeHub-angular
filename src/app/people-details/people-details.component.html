@@ -1,0 +1,45 @@
+<div *ngIf="this.personData" class="container-fluid w-full py-3">
+    <!-- CHARACTER NAME -->
+    <div id="overview-content">
+        <h2 class="tracking-wide">
+            {{this.personData.name}}
+        </h2>
+        <h6 *ngIf="this.personData.alternate_names.length || this.personData.given_name"
+            class="tracking-wider text-[#bebebe]">
+            <ng-container *ngIf="this.personData.alternate_names.length;else given_name;">
+                Aka: <span class="text-[#bebebe] tracking-wider"
+                    *ngFor="let name of this.personData.alternate_names;let i = index;">
+                    {{name}}{{(i!=this.personData.alternate_names.length-1) ? ',' : ''}}
+                </span>
+            </ng-container>
+            <ng-template #given_name>
+                {{this.personData.given_name}}
+            </ng-template>
+        </h6>
+
+        <nav class="mt-4 rounded-sm">
+            <ul class="flex gap-3 flex-wrap py-2 p-3">
+                <li (click)="this.selectedTab=this.tabs.OVERVIEW"
+                    [ngClass]="{'active-tab': this.tabs.OVERVIEW===this.selectedTab}"
+                    class="tracking-wider text-[.9rem] cursor-pointer">
+                    OVERVIEW
+                </li>
+                <li (click)="this.selectedTab=this.tabs.VOICE_ROLES"
+                    [ngClass]="{'active-tab': this.tabs.VOICE_ROLES===this.selectedTab}"
+                    class="tracking-wider text-[.9rem] cursor-pointer">
+                    VOICE ROLES
+                </li>
+            </ul>
+        </nav>
+        <app-people-overwiew [personData]="this.personData" [personPictures]="this.personPictures"
+            *ngIf="this.selectedTab===this.tabs.OVERVIEW">
+        </app-people-overwiew>
+
+        <app-people-voice-roles [personVoices]="this.personData.voices" [personName]="this.personData.name"
+            [personImage]="this.personData.images"
+            *ngIf="this.selectedTab===this.tabs.VOICE_ROLES && this.personData?.voices.length > 0"></app-people-voice-roles>
+
+    </div>
+</div>
+
+<app-loader *ngIf="this.loading"></app-loader>

@@ -1,0 +1,51 @@
+<div class="mt-2 py-3 content-container">
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-y-6 md:gap-x-8 md:gap-y-0">
+        <div class="w-full flex flex-col items-center">
+            <div class="w-full max-w-[13rem] h-[18rem] overflow-hidden rounded-[5px]">
+                <img loading="lazy" class="w-full h-full object-cover" [alt]="this.personName + ' Image'"
+                    [src]="this.personImage?.webp?.image_url || this.personImage?.jpg?.image_url" />
+            </div>
+        </div>
+        <div class="md:col-span-4">
+            <h4 class="tracking-wider">
+                Bringing Characters to Life: Voice Roles
+            </h4>
+            <div class="flex flex-col mt-2">
+                <div style="border-bottom: 1px solid #322f2f;"
+                    *ngFor="let voice of this.personVoices.slice(0,this.sliceIndex);"
+                    class="grid grid-cols-2 gap-x-2 mb-2 pb-1">
+                    <div class="flex items-start gap-2">
+                        <div
+                            class="min-w-[60px] w-[60px] min-h-[75px] h-[75px] md:min-w-[75px] md:min-h-[90px] md:w-[75px] md:h-[90px]">
+                            <img loading="lazy" class="w-full h-full object-cover"
+                                [src]="voice?.anime?.images?.webp?.large_image_url || voice?.anime?.images?.jpg?.large_image_url || voice?.anime?.images?.webp?.image_url || voice?.anime?.images?.jpg?.image_url" />
+                        </div>
+                        <div>
+                            <a [routerLink]="'/anime/'+voice?.anime?.mal_id" style="text-decoration: none;"
+                                class="title-hyperlink text-wrap tracking-wider cursor-pointer text-[#aabee4] hover:text-[#fff]">{{voice?.anime?.title}}</a>
+                            <p class="role-text tracking-wider text-[#bebebe] font-light text-sm mt-[2px] mb-0">
+                                Role: {{voice?.role || 'n/a'}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <div
+                            class="min-w-[60px] w-[60px] min-h-[75px] h-[75px] md:min-w-[75px] md:min-h-[90px] md:w-[75px] md:h-[90px]">
+                            <img loading="lazy" class="w-full h-full object-cover"
+                                [src]="voice?.character?.images?.webp?.large_image_url || voice?.character?.images?.jpg?.large_image_url || voice?.character?.images?.webp?.image_url || voice?.character?.images?.jpg?.image_url" />
+                        </div>
+                        <div>
+                            <a [routerLink]="'/character/'+voice?.character?.mal_id" style="text-decoration: none;"
+                                class="title-hyperlink text-wrap tracking-wider cursor-pointer text-[#aabee4] hover:text-[#fff]">{{voice?.character?.name}}</a>
+                        </div>
+                    </div>
+                </div>
+                <button *ngIf="this.sliceIndex<this.personVoices.length;" (click)="this.sliceIndex=this.sliceIndex+8;" title="view more" class="mt-2 rounded-full pt-1 px-1 mx-auto w-max bg-[#322f2f]">
+                    <span class="material-icons-outlined">
+                        keyboard_double_arrow_down
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

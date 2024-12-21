@@ -19,8 +19,8 @@
                             [src]="actor.person.images?.webp?.image_url || actor.person.images?.jpg?.image_url" />
                     </div>
                     <div class="flex flex-col p-1 flex-1 overflow-hidden">
-                        <a style="font-weight: 600;"
-                            class="text-[#aabee4] w-max tracking-wider mb-0 cursor-pointer font-mulish hover:text-[#fff]">
+                        <a [routerLink]="'/people/'+actor.person.mal_id" style="font-weight: 600;cursor:pointer!important;"
+                            class="text-[#aabee4] w-max tracking-wider mb-0 font-mulish hover:text-[#fff]">
                             {{actor.person.name}}
                         </a>
                         <p class="font-bold mb-1 tracking-wider text-[13px] font-mulish">

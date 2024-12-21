@@ -39,7 +39,7 @@
                                 class="text-[#bebebe] tracking-wider text-sm mt-2 mb-0">
                                 Voice Actors:
                                 <ng-container *ngFor="let vc of character.voice_actors">
-                                    <a class="text-[#aabee4] vc-p">
+                                    <a [routerLink]="'/people/'+vc.person.mal_id" class="text-[#aabee4] vc-p">
                                         {{vc.person.name}}
                                     </a>
                                 </ng-container>

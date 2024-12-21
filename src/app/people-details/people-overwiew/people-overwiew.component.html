@@ -1,0 +1,37 @@
+<div class="mt-2 py-3 content-container">
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-y-6 md:gap-x-8 md:gap-y-0">
+        <div class="w-full flex flex-col items-center">
+            <div class="w-full max-w-[13rem] h-[18rem] overflow-hidden rounded-[5px]">
+                <img class="w-full h-full object-cover"
+                    [src]="this.personData.images?.webp?.image_url || this.personData.images?.jpg?.image_url" [alt]="this.personData.name + ' Image'" />
+            </div>
+            <button *ngIf="this.personPictures.length > 0;" type="button"
+                (click)="this.isScreenshotModalOpen = true;"
+                class="mt-3 bg-[#3e3e3e] p-2 px-3 text-sm rounded-md tracking-[1px] font-bold">
+                SCREESHOTS
+            </button>
+        </div>
+        <div checkOverflow class="md:col-span-4">
+            <div class="blur-bottom max-h-[500px] ">
+                <p *ngIf="this.personData.about?.length;else noDesc;" class="leading-8 tracking-wide font-mulish"
+                    [innerHTML]="this.personData.about"></p>
+                <ng-template #noDesc>
+                    <p class="leading-8 tracking-wide font-mulish">
+                        Currently, There is no Information available about <b style="font-weight: 700;"
+                            class="font-mulish">{{this.personData?.name}}</b>.
+                    </p>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-image-viewer 
+    *ngIf="this.isScreenshotModalOpen"  
+    [images]="this.personPictures"
+    [imageNumber]="this.imageNumber"
+    (onCloseImageViewer)="this.isScreenshotModalOpen=!$event;"
+    (onImageChange)="$event === 'prev' ? this.showPrevImage() : this.showNextImage();"
+>
+</app-image-viewer>
+<!--  -->
