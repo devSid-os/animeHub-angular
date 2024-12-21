@@ -11,7 +11,7 @@
     <nav class="flex">
         <ul class="hidden gap-4 align-center my-auto text-white sm:flex">
             <li *ngFor="let menuItem of this.headerMenuItems" class="text-sm select-none hover:-translate-y-px sm:mt-1">
-                <a class="text-[#bebebe] hover:text-white" [routerLink]="menuItem.urlRoute"
+                <a (click)="this.isMobileMenuOpen=false;" class="text-[#bebebe] hover:text-white" [routerLink]="menuItem.urlRoute"
                     routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
                     {{menuItem.name.toUpperCase()}}
                 </a>
@@ -24,7 +24,7 @@
             <ul class="h-screen flex flex-col gap-8 items-end p-4">
                 <li *ngFor="let menuItem of this.headerMenuItems"
                     class="select-none text-[#bebebe] text-xl hover:text-white hover:-translate-y-px">
-                    <a class="text-[#bebebe] hover:text-white" [routerLink]="menuItem.urlRoute"
+                    <a (click)="this.isMobileMenuOpen=false;" class="text-[#bebebe] hover:text-white" [routerLink]="menuItem.urlRoute"
                         routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
                         {{menuItem.name.toUpperCase()}}
                     </a>
