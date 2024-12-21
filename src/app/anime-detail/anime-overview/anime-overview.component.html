@@ -7,6 +7,7 @@
         >
             <div class="overflow-hidden h-full md:col-span-1 md:hidden">
                 <img 
+                    loading="lazy"
                     class="rounded-md w-full h-full" 
                     [src]="this.anime.images.webp.large_image_url"
                     [alt]="this.anime.title" 
@@ -78,6 +79,7 @@
         >
             <div class="overflow-hidden rounded-md h-full max-w-[15rem] max-h-[20rem]">
                 <img 
+                    loading="lazy"
                     class="w-full h-full object-cover" 
                     [src]="this.anime.images.webp.large_image_url"
                     [alt]="this.anime.title" />
@@ -104,6 +106,7 @@
             >
                 <div class="w-full max-w-[25px] h-full max-h-[25px]">
                     <img 
+                        loading="lazy"
                         class="w-full h-full" 
                         src="../../../assets/youtube.png" 
                     />
@@ -206,20 +209,24 @@
                         class="flex gap-2 items-center w-full md:translate-x-1"
                     >
                         <div class="overflow-hidden h-[25px]">
-                            <img 
-                                class="w-full h-full" 
-                                *ngIf="platform.name.toLowerCase()==='crunchyroll'"
-                                src="../../../assets/crunchy.png" />
-                            <img 
-                                class="w-full h-full" 
-                                *ngIf="platform.name.toLowerCase()==='netflix'"
-                                src="../../../assets/netflix.png" />
-                            <span
-                                *ngIf="platform.name.toLowerCase()!=='crunchyroll' || platform.name.toLowerCase()==='netflix'"
-                                class="material-icons-outlined" 
-                                style="font-weight: 100!important;">
-                                cast_connected
-                            </span>
+                            <ng-container [ngSwitch]="platform.name.toLowerCase()">
+                                <img 
+                                    loading="lazy"
+                                    class="w-full h-full" 
+                                    *ngSwitchCase="'crunchyroll'"
+                                    src="../../../assets/crunchy.png" />
+                                <img 
+                                    loading="lazy"
+                                    class="w-full h-full" 
+                                    *ngSwitchCase="'netflix'"
+                                    src="../../../assets/netflix.png" />
+                                <span
+                                    *ngSwitchDefault
+                                    class="material-icons-outlined" 
+                                    style="font-weight: 100!important;">
+                                    cast_connected
+                                </span>             
+                            </ng-container>
                         </div>
                         <a 
                             [href]="platform.url" 
@@ -254,6 +261,7 @@
             >
                 <div class="w-full max-w-[30%] h-[131px]">
                     <img 
+                        loading="lazy"
                         class="h-full w-full object-cover" 
                         [src]="character.character.images.webp.image_url" />
                 </div>
@@ -312,6 +320,7 @@
                         class="relative w-full h-[15rem] rounded-[.2rem] overflow-hidden sm:h-[17rem]"
                     >
                         <img 
+                            loading="lazy"
                             class="w-full h-full" [src]="item.entry.images.webp.large_image_url"
                             [alt]="item.entry.title" />
                     </div>
