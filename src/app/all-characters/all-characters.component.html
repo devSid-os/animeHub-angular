@@ -66,13 +66,26 @@
                 </ng-container>
             </ng-container>
         </div>
-        <div *ngIf="this.characterListPagination && this.characterListPagination.has_next_page"
-            class="mt-4 text-center flex items-center gap-3">
-            <span class="h-[1px] flex-1 bg-[#322f2f]"></span>
-            <button (click)="this.getMoreCharacters();"
-                class="tracking-wider bg-[#3e3e3e] p-2 px-3 rounded-md mx-auto">View More Characters</button>
-            <span class="h-[1px] flex-1 bg-[#322f2f]"></span>
-        </div>
+        <ng-container [ngSwitch]="this.searchQuery.length>0">
+            <ng-container *ngSwitchCase="false">
+                <div *ngIf="this.characterListPagination && this.characterListPagination.has_next_page"
+                    class="mt-4 text-center flex items-center gap-3">
+                    <span class="h-[1px] flex-1 bg-[#322f2f]"></span>
+                    <button (click)="this.getMoreCharacters();"
+                        class="tracking-wider bg-[#3e3e3e] p-2 px-3 rounded-md mx-auto">View More Characters</button>
+                    <span class="h-[1px] flex-1 bg-[#322f2f]"></span>
+                </div>
+            </ng-container>
+            <ng-container *ngSwitchCase="true">
+                <div *ngIf="this.searchedCharacterListPagination && this.searchedCharacterListPagination.has_next_page"
+                class="mt-4 text-center flex items-center gap-3">
+                    <span class="h-[1px] flex-1 bg-[#322f2f]"></span>
+                    <button (click)="this.getMoreCharacters();"
+                        class="tracking-wider bg-[#3e3e3e] p-2 px-3 rounded-md mx-auto">View More Characters</button>
+                    <span class="h-[1px] flex-1 bg-[#322f2f]"></span>
+                </div>
+            </ng-container>
+        </ng-container>
     </div>
 </div>
 
