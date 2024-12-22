@@ -12,17 +12,17 @@
         <div (click)="this.selectAnime(anime)"
             class="popular-anime-div p-2 w-full flex justify-between items-center gap-3"
             *ngFor="let anime of this.animeAsideData">
-            <img style="opacity: .9;" class="popular-anime-img select-none w-auto h-[130px] w-max rounded-sm"
+            <img style="opacity: .9;" class="popular-anime-img select-none min-w-[90px] w-[90px] h-[130px] rounded-sm"
                 [src]="anime.images.webp.image_url || anime.images.jpg.image_url" [alt]="anime.title" />
             <div class="flex-1">
                 <p class="popular-anime-title text-sm tracking-wider font-[600]">{{anime.title_english || anime.title}}
                 </p>
                 <p class="text-[12px] text-[#bebebe] mt-1">{{anime.title_japanese || anime.title}}</p>
                 <div class="flex items-center gap-1 mt-2">
-                    <span class="material-icons-outlined font-light text-[.9rem] -ml-1">
+                    <span class="material-icons-outlined font-light text-[1rem] -ml-1">
                         local_fire_department
                     </span>
-                    <p class="text-[.7rem] font-light tracking-wider mt-[2px]">{{anime.scored_by}}</p>
+                    <p class="text-[.8rem] font-light tracking-wider mt-[2px]">{{anime.scored_by}}</p>
                 </div>
             </div>
 

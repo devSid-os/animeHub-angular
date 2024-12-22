@@ -1,0 +1,12 @@
+<div class="w-full py-2">
+    <div id="anime-content" class="w-full flex flex-col justify-between items-center md:flex-row md:items-start">
+        <div class="w-full md:w-[75%]">
+            <app-manga-section [mangaData]="this.mangaData"></app-manga-section>
+        </div>
+        <aside class="w-full ml-[1rem] rounded-tl-2xl overflow-hidden md:w-[25%]">
+            <app-manga-aside [mangaAsideData]="this.mangaAsideData"></app-manga-aside>
+        </aside>
+    </div>
+</div>
+
+<app-loader *ngIf="this.loading"></app-loader>

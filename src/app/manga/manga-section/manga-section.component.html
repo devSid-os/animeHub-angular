@@ -1,0 +1,50 @@
+<div class="max-auto linear-gradient-bg w-full rounded-sm">
+    <div class="flex justify-between items-center">
+        <h3 class="text-base text-[#ffc119] p-3">
+            TOP MANGAS
+        </h3>
+        <button class="filter-manga-btn flex items-center bg-[#ffd600] text-black p-2 py-1 rounded-tl-[6px] rounded-bl-[6px]" style="letter-spacing: 0;">
+            Filter Mangas&nbsp;<span class="material-icons-outlined text-black text-[16px]">chevron_right</span>
+        </button>
+    </div>
+    <div *ngIf="this.mangaData.length > 0;"
+        class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-5 gap-2 p-3 py-2"
+        style="row-gap: 1.5rem!important;">
+        <div *ngFor="let manga of this.mangaData;">
+            <div class="h-[17rem]">
+                <div class="manga-card relative cursor-pointer w-full h-full rounded-[1px] overflow-hidden">
+                    <div class="w-full h-full">
+                        <img [src]="manga.images.webp.large_image_url || manga.images.webp.large_image_url || manga.images.webp.image_url || manga.images.webp.image_url" [alt]="manga.title"
+                            class="w-full h-full object-cover" />
+                        <div
+                            class="manga-text-div absolute bottom-0 left-0 w-full flex flex-col justify-end h-[70px] p-2">
+                            <p [matTooltip]="manga.title_english || manga.title" class="text-sm mb-1 font-bold">
+                                {{manga.title_english || manga.title}}
+                            </p>
+                            <p class="text-[#bebebe] text-[12px] font-bold">
+                                {{manga.title_japanese || manga.title}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="manga-extra-info w-full p-2 flex justify-between items-start rounded-bl-lg rounded-br-lg cursor-pointer">
+                <div class="max-w-[60%] flex flex-col">
+                    <p class="text-[12px] font-bold">#{{manga.rank}}</p>
+                    <p class="text-[11px] text-[gray] font-bold">{{manga.chapters|| '0'}} Chapter {{manga.chapters > 1 ? 's' : ''}}</p>
+                </div>
+                <div class="flex-1 flex justify-end items-center">
+                    <span class="material-icons-outlined text-[#ffc119] text-[12px]">
+                        star
+                    </span>
+                    <span class="text-[10px] mt-[1px]">{{manga.score || 'n/a'}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div *ngIf="this.isError" class="flex flex-col items-center gap-4 mt-12">
+        <img src="../../../assets/errorPlaceholder1.gif" class="w-[20%]" />
+        <p>Something went wrong!! Please Try Re-loading the page.</p>
+    </div> -->
+</div>

@@ -1,0 +1,35 @@
+<ng-container>
+    <div class="w-full">
+        <h3 class="p-3 text-lg tracking-wider flex items-center">
+            <span class="material-icons-outlined">
+                local_fire_department
+            </span>
+            Popular Mangas
+        </h3>
+    </div>
+    <!-- POPULAR MANGAS DIV -->
+    <div *ngIf="this.mangaAsideData.length > 0;" class="w-full flex flex-col gap-3 py-3">
+        <div class="popular-manga-div p-2 w-full flex justify-between items-center gap-3"
+            *ngFor="let manga of this.mangaAsideData">
+            <img style="opacity: .9;" class="popular-manga-img select-none min-w-[90px] h-[130px] w-[90px] rounded-sm"
+                [src]="manga.images.webp.image_url || manga.images.jpg.image_url" [alt]="manga.title" />
+            <div class="flex-1">
+                <p class="popular-manga-title text-sm tracking-wider font-[600]">{{manga.title_english || manga.title}}
+                </p>
+                <p class="text-[12px] text-[#bebebe] mt-1">{{manga.title_japanese || manga.title}}</p>
+                <div class="flex items-center gap-1 mt-2">
+                    <span class="material-icons-outlined font-light text-[1rem] -ml-1">
+                        local_fire_department
+                    </span>
+                    <p class="text-[.8rem] font-light tracking-wider mt-[2px]">{{manga.scored_by}}</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</ng-container>
+
+<!-- <div *ngIf="this.isErrorAside" class="flex flex-col items-center gap-4 mt-12 px-2">
+    <img src="../../../assets/errorPlaceholder2.gif" class="w-[20%]" />
+    <p class="text-center text-sm tracking-[2px]">Something went wrong!! Please Try Re-loading the page.</p>
+</div> -->
