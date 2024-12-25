@@ -1,0 +1,13 @@
+.manga-image {
+    transition: transform .1s ease-in-out, opacity .1s ease-in-out;
+}
+
+.manga-div:hover .manga-image {
+    transform: translateY(-3px);
+    opacity: .7;
+}
+
+.manga-div:hover .manga-title {
+    color: var(--color-yellow);
+    font-weight: 600;
+}

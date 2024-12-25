@@ -11,7 +11,7 @@ export class CheckOverflowDirective implements AfterViewInit {
     setTimeout(() => {
       const element = this.el.nativeElement.firstChild;
       const hasOverflow = element.scrollHeight > element.clientHeight;
-      console.log(hasOverflow)
+      // console.log(hasOverflow)
 
       if (hasOverflow) {
         this.renderer.addClass(element, 'blur-bottom');

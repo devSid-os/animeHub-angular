@@ -1,0 +1,106 @@
+<div class="flex flex-col justify-between md:items-center md:flex-row">
+    <h4 class="flex-1 p-4 py-3">Manga List</h4>
+    <nav>
+        <ul class="m-0 p-2">
+            <li (click)="this.updateQueryParam('publishing')"
+                [ngClass]="{'text-yellow': this.filtersApplied.status==='publishing'}"
+                class="tracking-wide opacity-70 cursor-pointer text-lg hover:opacity-100 md:text-xl">
+                Ongoing</li>
+            <li (click)="this.updateQueryParam('complete')"
+                [ngClass]="{'text-yellow': this.filtersApplied.status==='complete'}"
+                class="tracking-wide opacity-70 cursor-pointer text-lg hover:opacity-100 md:text-xl">
+                Completed</li>
+            <li (click)="this.updateQueryParam('discontinued')"
+                [ngClass]="{'text-yellow': this.filtersApplied.status==='discontinued'}"
+                class="tracking-wide opacity-70 cursor-pointer text-lg hover:opacity-100 md:text-xl">
+                Discontinued</li>
+        </ul>
+    </nav>
+</div>
+
+<div class="custom-container" style="margin-top: 1.5rem;">
+    <!-- FILTER BUTTONS DIV -->
+    <div class="mb-4 flex justify-end gap-2">
+        <button type="button"
+            class="group flex items-center border-1 p-1 px-3 rounded-[16px] hover:bg-[#ffd600] hover:text-black">
+            <span class="material-icons-outlined text-[16px] group-hover:text-black">swap_vert</span>&nbsp;A to Z
+        </button>
+        <button [ngClass]="{'chip-hover': this.genreFilterApplied}" (click)="this.filterByGenres();" type="button"
+            class="group flex items-center border-1 p-1 px-3 rounded-[16px] hover:bg-[#ffd600] hover:text-black">
+            <span [ngClass]="{'text-black': this.genreFilterApplied}"
+                class="material-icons-outlined text-[16px] group-hover:text-black">tune</span>&nbsp;Genres
+        </button>
+    </div>
+    <div style="row-gap: 1.2rem!important; column-gap: 1rem!important;"
+        class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-8">
+        <app-manga-item *ngFor="let manga of this.mangaData.data;trackBy: this.trackById"
+            [manga]="manga"></app-manga-item>
+    </div>
+    <!-- PAGINATION -->
+    <div class="my-4 flex flex-wrap justify-center items-center gap-2">
+        <button [disabled]="this.mangaData.pagination.current_page===1"
+            (click)="this.onPaginationButtonClick(this.mangaData.pagination.current_page-1);"
+            class="text-sm font-mulish bg-[#3e3e3e] p-2 py-1 font-bold hover:bg-[#6c6b6b]">
+            <span class="material-icons-outlined text-sm">keyboard_double_arrow_left</span>
+        </button>
+        <button (click)="this.onFirstPageClick();" *ngIf="(this.customPagination.buttonRange.from !== 1)"
+            class="font-mulish bg-[#3e3e3e] p-2 py-1 font-bold hover:bg-[#6c6b6b] text-[12px] sm:text-sm">
+            1
+        </button>
+        <button *ngIf="(this.customPagination.buttonRange.from !== 1)" class="font-mulish py-1 font-bold text-[12px] sm:text-sm"
+            style="cursor: default!important;">
+            ...
+        </button>
+        <button (click)="this.onPaginationButtonClick(num);" *ngFor="let num of this.getRange().splice(0,5)"
+            [ngClass]="{'bg-[seagreen]': this.mangaData.pagination.current_page===num}"
+            class="font-mulish bg-[#3e3e3e] p-2 py-1 font-bold text-[12px] hover:bg-[#6c6b6b] sm:text-sm">{{num}}</button>
+        <button *ngIf="((this.customPagination.buttonRange.last - this.customPagination.buttonRange.from) > 4)"
+            class="text-sm font-mulish py-1 font-bold" style="cursor: default!important;">
+            ...
+        </button>
+        <button (click)="this.onLastPageClick(this.customPagination.buttonRange.last)"
+            *ngIf="((this.customPagination.buttonRange.last - this.customPagination.buttonRange.from) > 4)"
+            class="font-mulish bg-[#3e3e3e] p-2 py-1 font-bold text-[12px] hover:bg-[#6c6b6b] sm:text-sm">
+            {{this.customPagination.buttonRange.last}}
+        </button>
+        <button [disabled]="!this.mangaData.pagination.has_next_page"
+            (click)="this.onPaginationButtonClick(this.mangaData.pagination.current_page+1);"
+            class="font-mulish bg-[#3e3e3e] p-2 py-1 font-bold text-[12px] hover:bg-[#6c6b6b] sm:text-sm">
+            <span class="material-icons-outlined text-sm">keyboard_double_arrow_right</span>
+        </button>
+    </div>
+</div>
+
+<div *ngIf="this.showGenreFilterModal" (click)="this.closeGenreModal();"
+    class="fixed top-0 left-0 h-screen w-screen overlay">
+    <div class="w-full h-full flex justify-center items-center">
+        <div (click)="$event.stopPropagation();"
+            class="relative bg-[#191919] w-[90%] max-h-[75%] p-3 overflow-auto md:w-[50%] md:max-h-[75%]">
+            <h6 class="mb-4">
+                Filter By Genres
+                <ng-container *ngIf="this.genresSelected.length">
+                    &nbsp;<span class="text-[gray] font-light">({{this.genresSelected.length}} Genres Selected)</span>
+                </ng-container>
+            </h6>
+            <div class="flex flex-wrap gap-[.7rem]">
+                <button [ngClass]="{'chip-hover': this.genresSelectedMap[manga_genre.mal_id]}"
+                    (click)="this.onGenreSelect(manga_genre.mal_id);"
+                    class="border-1 color-[#bebebe] px-[10px] py-1 text-[13px] tracking-wider rounded-[16px] hover:bg-[gray] hover:text-white"
+                    type="button" *ngFor="let manga_genre of this.mangaGenres;">
+                    {{manga_genre.name}}
+                </button>
+            </div>
+            <div *ngIf="this.genresSelected.length || this.genreFilterApplied"
+                class="absolute top-4 right-2 flex gap-2">
+                <button *ngIf="this.genresSelected.length || this.genreFilterApplied" (click)="this.clearAllGenres();"
+                    class="text-[11px] tracking-wider rounded-sm bg-[seagreen] text-white p-2 py-1 hover:bg-[red] md:text-[13px]">Clear
+                    Filters</button>
+                <button *ngIf="this.genresSelected.length" (click)="this.applyFilters(true);"
+                    class="text-[11px] tracking-wider rounded-sm bg-[#ffd600] text-black p-2 py-1 hover:bg-[#e1be08] md:text-[13px]">Apply
+                    Filters</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-loader *ngIf="this.loading"></app-loader>

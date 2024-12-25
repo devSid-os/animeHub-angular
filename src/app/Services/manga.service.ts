@@ -17,6 +17,10 @@ export class MangaService {
         return this._selectedManga;
     }
 
+    getMangaGenres(): Promise<any> {
+        return this._http.get(`${this._JIKAN_BASE_URL}/genres/manga`).toPromise();
+    }
+
     getMangaSearch(filters: any): Promise<any> {
         return this._http.get(`${this._JIKAN_BASE_URL}/manga`, {
             params: filters

@@ -81,7 +81,7 @@ export class AllCharactersComponent implements OnInit {
           if (!getMoreSearched) this.searchedCharacters = response.data;
           else {
             this.searchedCharacters = this.searchedCharacters.concat(response.data);
-            console.log("here")
+            // console.log("here")
           }
           this.searchedCharacterListPagination = response.pagination;
         }

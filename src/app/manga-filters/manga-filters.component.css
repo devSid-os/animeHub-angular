@@ -1,0 +1,78 @@
+h4 {
+    text-align: center;
+}
+
+nav {
+    background: -webkit-gradient(linear, right top, left top, from(#191919), color-stop(50%, #671b1b), to(#191919));
+    background: linear-gradient(270deg, #191919, #671b1b 50%, #191919);
+}
+
+nav ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+nav ul li:not(:last-child) {
+    border-right: 1px solid hsla(0, 0%, 100%, .2);
+}
+
+nav ul li {
+    text-align: center;
+}
+
+.text-yellow {
+    color: var(--color-yellow);
+    opacity: 1;
+}
+
+.custom-container {
+    width: 100%;
+    max-width: 1250px;
+    padding-left: 7px;
+    padding-right: 7px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.manga-image-overlay {
+    display: none;
+}
+
+.overlay {
+    background-color: rgba(0,0,0,.7);
+}
+
+.chip-hover {
+    background-color: #ffd600;
+    color: black;
+}
+
+@media screen and (min-width: 768px) {
+    nav {
+        background: -webkit-gradient(linear, left top, right top, from(#191919), to(#831518));
+        background: linear-gradient(90deg, #191919, #831518);
+    }
+
+    nav ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1.6rem;
+        padding-right: 1rem !important;
+    }
+
+    nav ul li:not(:last-child) {
+        padding-right: 1rem;
+    }
+
+    h4 {
+        background: -webkit-gradient(linear, left top, right top, from(#000), to(transparent));
+        background: linear-gradient(90deg, #000, transparent);
+        text-align: left;
+    }
+
+    .custom-container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}

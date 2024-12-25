@@ -1,0 +1,14 @@
+<div class="manga-div gap-1 flex flex-col items-center overflow-hidden hover:cursor-pointer">
+    <div class="w-[140px] h-[155px] overflow-hidden rounded-sm sm:h-[200px]">
+        <img loading="lazy" class="manga-image w-full h-full object-cover"
+            [src]="manga.images.webp.large_image_url || manga.images.jpg.large_image_url || manga.images.webp.image_url || manga.images.jpg.image_url" />
+    </div>
+    <div class="w-full">
+        <p class="text-[11px] tracking-wider w-full mb-0">#{{manga.rank || 'n/a'}}</p>
+        <p [matTooltip]="manga.title_english || manga.title"
+            class="manga-title tracking-wider w-full text-[13px] mb-0 whitespace-nowrap text-ellipsis overflow-hidden">
+            {{manga.title_english || manga.title}}</p>
+        <p class="tracking-wider w-full text-[gray] text-[11px] mb-0 whitespace-nowrap text-ellipsis overflow-hidden">
+            {{manga.title_japanese || manga.title}}</p>
+    </div>
+</div>
