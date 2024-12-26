@@ -1,5 +1,5 @@
 <div class="manga-div gap-1 flex flex-col items-center overflow-hidden hover:cursor-pointer">
-    <div class="w-[140px] h-[155px] overflow-hidden rounded-sm sm:h-[200px]">
+    <div [appMangaTooltip]="manga" class="w-[140px] h-[155px] overflow-hidden rounded-sm sm:h-[200px]">
         <img loading="lazy" class="manga-image w-full h-full object-cover"
             [src]="manga.images.webp.large_image_url || manga.images.jpg.large_image_url || manga.images.webp.image_url || manga.images.jpg.image_url" />
     </div>

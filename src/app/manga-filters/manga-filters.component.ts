@@ -11,12 +11,17 @@ import { MangaService } from '../Services/manga.service';
 export class MangaFiltersComponent implements OnInit, OnDestroy {
   loading: Boolean = false;
   showGenreFilterModal: Boolean = false;
+  showSortingFilterModal: Boolean = false;
   genreFilterApplied: Boolean = false;
   sub1: Subscription | null = null;
+  sortOptions: Array<any> = [{ value: 'asc', text: 'A to Z' }, { value: 'desc', text: 'Z to A' }];
+  orderByOptions: Array<any> = [{ value: 'title', text: 'Title' }, { value: 'rank', text: 'RANK' }, { value: 'popularity', text: 'Popularity' }];
   filtersApplied = {
     limit: 24,
     status: 'publishing',
-    genres: ''
+    genres: '',
+    sort: '',
+    order_by: ''
   }
   mangaData: any = { pagination: null, data: [] };
   customPagination: any = {
@@ -43,6 +48,18 @@ export class MangaFiltersComponent implements OnInit, OnDestroy {
     return item.mal_id;
   }
 
+  onRadioChange(option: any, type: string): void {
+    switch (type) {
+      case 'sort':
+        this.filtersApplied.sort = option.value;
+        break;
+      case 'order':
+        this.filtersApplied.order_by = option.value;
+        break;
+    }
+    // console.log(this.filtersApplied)
+  }
+
   // FUNCTIONS TO SHOW PAGINATION BUTTONS
   getRange(): number[] {
     const arr = [];
@@ -54,7 +71,7 @@ export class MangaFiltersComponent implements OnInit, OnDestroy {
   updatePaginationSlice(pageNo: number): void {
     this.customPagination.data[pageNo] = { data: this.mangaData.data, pagination: this.mangaData.pagination };
     if (pageNo === 1) return;
-    console.log(this.customPagination)
+    // console.log(this.customPagination)
     if (pageNo <= this.customPagination.buttonRange.from) {
       this.customPagination.buttonRange.from -= 1;
     }
@@ -111,6 +128,7 @@ export class MangaFiltersComponent implements OnInit, OnDestroy {
 
   closeGenreModal() { // CLOSE GENRE MODAL
     this.showGenreFilterModal = false;
+    this.showSortingFilterModal = false;
   }
 
   // FUNCTIONS TO APPLY FILTERS
