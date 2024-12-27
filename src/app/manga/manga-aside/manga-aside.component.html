@@ -9,7 +9,7 @@
     </div>
     <!-- POPULAR MANGAS DIV -->
     <div *ngIf="this.mangaAsideData.length > 0;" class="w-full flex flex-col gap-3 py-3">
-        <div class="popular-manga-div p-2 w-full flex justify-between items-center gap-3"
+        <div (click)="this.redirectToMangaDetailPage(manga.mal_id);" class="popular-manga-div p-2 w-full flex justify-between items-center gap-3"
             *ngFor="let manga of this.mangaAsideData">
             <img style="opacity: .9;" class="popular-manga-img select-none min-w-[90px] h-[130px] w-[90px] rounded-sm"
                 [src]="manga.images.webp.image_url || manga.images.jpg.image_url" [alt]="manga.title" />

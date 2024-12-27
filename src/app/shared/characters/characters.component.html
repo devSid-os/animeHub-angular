@@ -2,10 +2,8 @@
     <div class="grid grid-cols-1 md:grid-cols-5 gap-y-6 md:gap-x-4 md:gap-y-0">
         <div class="w-full flex justify-center">
             <div class="w-full max-w-[13rem] h-full max-h-[20rem] overflow-hidden rounded-md">
-                <img 
-                    class="w-full h-full object-cover"
-                    [src]="this.animeImages.webp.large_image_url || this.animeImages.jpg.large_image_url" 
-                />
+                <img class="w-full h-full object-cover"
+                    [src]="this.images?.webp?.large_image_url || this.images?.jpg?.large_image_url" />
             </div>
         </div>
         <div class="md:col-span-4">
@@ -17,30 +15,28 @@
                     <div *ngFor="let character of group.value; let i2 = index"
                         [ngStyle]="{'border-top': i2 === 0 ? '1px solid #353330' : '0'}"
                         style="border-bottom: 1px solid #353330"
-                        class="px-1 py-2 flex justify-between items-start gap-3 bg-[#242424] overflow-hidden"
-                    >
+                        class="px-1 py-2 flex justify-between items-start gap-3 bg-[#242424] overflow-hidden">
                         <!-- CHARACTER IMAGE -->
-                        <div 
-                            class="w-full max-w-[60px] h-full max-h-[100px] rounded-sm overflow-hidden"
-                        >
-                            <img 
-                                class="w-full h-full object-cover"
-                                [src]="character.character.images.webp.image_url || character.character.images.jpg.image_url" />
+                        <div class="w-full max-w-[60px] h-full max-h-[100px] rounded-sm overflow-hidden">
+                            <img class="w-full h-full object-cover"
+                                [src]="character?.character?.images?.webp?.image_url || character?.character?.images?.jpg?.image_url" />
                         </div>
                         <!-- CHARACTER NAME AND ROLE (ADDITIONAL INFO) -->
                         <div class="flex-1">
-                            <a [routerLink]="'/character/'+character.character.mal_id" class="tracking-wider text-[#aabee4] hover:text-[#fff]">
-                                {{character.character.name}}
+                            <a [routerLink]="'/character/'+character.character.mal_id"
+                                class="tracking-wider text-[#aabee4] hover:text-[#fff]">
+                                {{character?.character?.name}}
                             </a>
-                            <p class="tracking-wider text-[#bebebe] font-light text-sm mt-[2px] mb-0">
-                                Role: {{character.role}}
+                            <p class="trackin
+                            g-wider text-[#bebebe] font-light text-sm mt-[2px] mb-0">
+                                Role: {{character?.role}}
                             </p>
-                            <p *ngIf="character.voice_actors.length > 0"
+                            <p *ngIf="character?.voice_actors?.length > 0"
                                 class="text-[#bebebe] tracking-wider text-sm mt-2 mb-0">
                                 Voice Actors:
-                                <ng-container *ngFor="let vc of character.voice_actors">
-                                    <a [routerLink]="'/people/'+vc.person.mal_id" class="text-[#aabee4] vc-p">
-                                        {{vc.person.name}}
+                                <ng-container *ngFor="let vc of character?.voice_actors">
+                                    <a [routerLink]="'/people/'+vc?.person?.mal_id" class="text-[#aabee4] vc-p">
+                                        {{vc?.person?.name}}
                                     </a>
                                 </ng-container>
                             </p>

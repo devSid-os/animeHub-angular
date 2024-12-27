@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-manga-aside',
@@ -8,7 +9,11 @@ import { Component, Input, OnInit } from '@angular/core';
 export class MangaAsideComponent implements OnInit {
   @Input('mangaAsideData') mangaAsideData: Array<any> = [];
 
-  constructor() { }
+  constructor(private _router: Router) { }
+
+  redirectToMangaDetailPage(id: any): void {
+    this._router.navigate(['/manga/' + id]);
+  }
 
   ngOnInit(): void {
   }

@@ -3,26 +3,26 @@
         <div class="w-full flex justify-center">
             <div class="w-full max-w-[13rem] h-full max-h-[20rem] overflow-hidden rounded-md">
                 <img class="w-full h-full object-cover"
-                    [src]="this.animeImages.webp.large_image_url || this.animeImages.jpg.large_image_url" />
+                    [src]="this.images?.webp?.large_image_url || this.images?.jpg?.large_image_url" />
             </div>
         </div>
         <div class="md:col-span-4">
             <p class="tracking-wider font-mulish mb-8 text-lg">
-                If you are looking for anime similar to <span class="text-[#ffd600]">{{this.animeTitle}}</span>, Then
+                If you are looking for manga similar to <span class="text-[#ffd600]">{{this.title}}</span>, Then
                 you might like
             </p>
             <div class="grid gap-3 grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4">
-                <div *ngFor="let recommendation of this.animeRecommendations.slice(0,this.totalRecommendations);trackBy: this.trackById;"
-                    class="anime-card flex flex-col items-center gap-2">
-                    <div [routerLink]="'/anime/'+recommendation.entry.mal_id"
+                <div *ngFor="let recommendation of this.recommendations.slice(0,this.totalRecommendations);trackBy: this.trackById;"
+                    class="manga-card flex flex-col items-center gap-2">
+                    <div (click)="this.redirectToAnimeOrManga(this.type, recommendation?.entry?.mal_id)"
                         class="w-full max-w-[15rem] h-[17rem] rounded-md overflow-hidden sm:max-w-[17rem] sm:h-[17rem] md:max-w-[19rem] md:h-[19rem] lg:max-w-[23rem] lg:h-[21rem]">
                         <img class="cursor-pointer w-full h-full object-cover"
-                            [src]="recommendation.entry.images.webp.large_image_url || recommendation.entry.images.webp.image_url || recommendation.entry.images.jpg.large_image_url || recommendation.entry.images.jpg.image_url" />
+                            [src]="recommendation?.entry?.images?.webp?.large_image_url || recommendation?.entry?.images?.webp?.image_url || recommendation?.entry?.images?.jpg?.large_image_url || recommendation?.entry?.images?.jpg?.image_url" />
                     </div>
                     <p class="cursor-pointer tracking-wider text-center">{{recommendation.entry.title}}</p>
                 </div>
             </div>
-            <div *ngIf="this.totalRecommendations < this.animeRecommendations.length" class="w-full text-center">
+            <div *ngIf="this.totalRecommendations < this.recommendations.length" class="w-full text-center">
                 <button (click)="this.onTotalRecommendationsChange.emit(true);"
                     class="view-more-recom-btn mt-3 bg-[#3e3e3e] p-2 px-3 mx-auto rounded-md tracking-wider font-mulish hover:bg-[#585555]">
                     View More Recommendations

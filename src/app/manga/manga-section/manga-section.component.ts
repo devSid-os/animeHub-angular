@@ -14,6 +14,10 @@ export class MangaSectionComponent implements OnInit {
     // console.log(this.mangaData)
   }
 
+  redirectToMangaDetailPage(id: any): void {
+    this._router.navigate(['/manga/' + id]);
+  }
+
   redirectToMangaFilters(): void {
     this._router.navigate(['/manga-filters'], {
       queryParams: {

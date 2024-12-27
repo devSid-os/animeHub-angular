@@ -5,16 +5,31 @@ import { HttpClient } from "@angular/common/http";
 })
 export class MangaService {
     private readonly _JIKAN_BASE_URL = 'https://api.jikan.moe/v4';
-    private _selectedManga: any = null;
 
     constructor(private _http: HttpClient) { }
 
-    set selectedAnime(anime: any) {
-        this._selectedManga = anime;
+    getMangaRecommendations(mangaId: string): Promise<any> {
+        return this._http.get(`${this._JIKAN_BASE_URL}/manga/${mangaId}/recommendations`).toPromise();
     }
 
-    get selectedAnime() {
-        return this._selectedManga;
+    getMangaReviews(mangaId: string, page: any): Promise<any> {
+        return this._http.get(`${this._JIKAN_BASE_URL}/manga/${mangaId}/reviews`, {
+            params: {
+                page
+            }
+        }).toPromise();
+    }
+
+    getMangaCharacters(mangaId: string): Promise<any> {
+        return this._http.get(`${this._JIKAN_BASE_URL}/manga/${mangaId}/characters`).toPromise();
+    }
+
+    getMangaPictures(id: string): Promise<any> {
+        return this._http.get(`${this._JIKAN_BASE_URL}/manga/${id}/pictures`).toPromise();
+    }
+
+    getFullMangaById(id: string): Promise<any> {
+        return this._http.get(`${this._JIKAN_BASE_URL}/manga/${id}/full`).toPromise();
     }
 
     getMangaGenres(): Promise<any> {

@@ -206,6 +206,10 @@ export class MangaFiltersComponent implements OnInit, OnDestroy {
       });
   }
 
+  redirectToMangaDetailPage(id: any): void {
+    this._router.navigate(['/manga/' + id]);
+  }
+
   ngOnDestroy(): void {
     if (this.sub1 instanceof Subscription) this.sub1.unsubscribe();
   }

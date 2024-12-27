@@ -1,11 +1,11 @@
-<div *ngIf="this.anime" class="container-fluid w-full py-3">
+<div *ngIf="this.manga" class="container-fluid w-full py-3">
     <div id="overview-content">
-        <!-- ANIME TITLES -->
+        <!-- MANGA TITLES -->
         <h2 class="font-oswald tracking-wide">
-            {{anime.title_english || anime.title}}
+            {{this.manga.title_english || this.manga.title}}
         </h2>
         <h6 class="font-oswald tracking-wider text-[#bebebe]">
-            {{anime.title || anime.title_japanese}}
+            {{this.manga.title || this.manga.title_japanese}}
         </h6>
 
         <!-- TABS -->
@@ -18,21 +18,21 @@
                     OVERVIEW
                 </li>
                 <li 
-                    *ngIf="this.animeCharacters.length > 0"
+                    *ngIf="this.mangaCharacters.length > 0"
                     (click)="this.selectedTab=this.tabs.CHARACTERS"
                     [ngClass]="{'active-tab': this.selectedTab === this.tabs.CHARACTERS}"
                     class="tracking-wider text-[.9rem] cursor-pointer">
                     CHARACTERS
                 </li>
                 <li 
-                    *ngIf="this.animeReviews.data.length > 0"
+                    *ngIf="this.mangaReviews.data.length > 0"
                     (click)="this.selectedTab=this.tabs.REVIEWS"
                     [ngClass]="{'active-tab': this.selectedTab === this.tabs.REVIEWS}"
                     class="tracking-wider text-[.9rem] cursor-pointer">
                     REVIEWS
                 </li>
                 <li 
-                    *ngIf="this.animeRecommendations.length > 0"
+                    *ngIf="this.mangaRecommendations.length > 0"
                     (click)="this.selectedTab=this.tabs.RECOMMENDATIONS"
                     [ngClass]="{'active-tab': this.selectedTab === this.tabs.RECOMMENDATIONS}"
                     class="tracking-wider text-[.9rem] cursor-pointer">
@@ -40,44 +40,43 @@
                 </li>
             </ul>
         </nav>
-        <!-- ANIME-OVERVIEW-CONTENT -->
-        <app-anime-overview 
+        <!-- MANGA-OVERVIEW-CONTENT -->
+        <app-manga-overview 
             (tabChange)="this.selectedTab=$event"
-            [animeCharacters]="this.animeCharacters.slice(0, 8)"
-            [animeRecommendations]="this.animeRecommendations"
-            [animeStreamingData]="this.animeStreamingData" 
-            [animePictures]="this.animePictures" 
-            [anime]="this.anime"
+            [mangaCharacters]="this.mangaCharacters.slice(0, 8)"
+            [mangaPictures]="this.mangaPictures" 
+            [manga]="this.manga"
+            [mangaRecommendations]="this.mangaRecommendations"
             *ngIf="this.selectedTab===this.tabs.OVERVIEW"
         >
-        </app-anime-overview>
+        </app-manga-overview>
 
-        <!-- ALL ANIME-CHARACTERS -->
+        <!-- ALL MANGA-CHARACTERS -->
         <app-characters 
-            [characters]="this.animeCharacters"
-            [images]="this.anime.images"
-            *ngIf="this.animeCharacters.length > 0 && this.selectedTab===this.tabs.CHARACTERS"
+            [characters]="this.mangaCharacters"
+            [images]="this.manga.images"
+            *ngIf="this.mangaCharacters.length > 0 && this.selectedTab===this.tabs.CHARACTERS"
         >
         </app-characters>
 
-        <!-- ALL ANIME REVIEWS -->
+        <!-- ALL MANGA REVIEWS -->
         <app-reviews
-            [type]="'anime'"
-            [images]="this.anime.images"
-            [reviews]="this.animeReviews"
-            [id]="this.animeId"
-            *ngIf="this.animeReviews.data.length > 0 && this.selectedTab===this.tabs.REVIEWS"
+            [type]="'manga'"
+            [images]="this.manga.images"
+            [reviews]="this.mangaReviews"
+            [id]="this.mangaId"
+            *ngIf="this.mangaReviews.data.length > 0 && this.selectedTab===this.tabs.REVIEWS"
         >   
         </app-reviews>
 
         <app-recommendations
-            [type]="'anime'"
+            [type]="'manga'"
             (onTotalRecommendationsChange)="this.totalRecommendations = this.totalRecommendations + 12;"
             [totalRecommendations]="this.totalRecommendations"
-            [title]="this.anime.title_english || this.anime.title || this.anime.title_japanese"
-            [recommendations]="this.animeRecommendations"
-            [images]="this.anime.images"
-            *ngIf="this.animeRecommendations.length > 0 && this.selectedTab === this.tabs.RECOMMENDATIONS"
+            [title]="this.manga.title_english || this.manga.title || this.manga.title_japanese"
+            [recommendations]="this.mangaRecommendations"
+            [images]="this.manga.images"
+            *ngIf="this.mangaRecommendations.length > 0 && this.selectedTab === this.tabs.RECOMMENDATIONS"
         >
         </app-recommendations>
     </div>

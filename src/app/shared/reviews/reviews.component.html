@@ -3,7 +3,7 @@
         <div class="w-full flex justify-center">
             <div class="w-full max-w-[13rem] h-full max-h-[20rem] overflow-hidden rounded-md">
                 <img class="w-full h-full object-cover"
-                    [src]="this.animeImages.webp.large_image_url || this.animeImages.jpg.large_image_url" />
+                    [src]="this.images?.webp?.large_image_url || this.images?.jpg?.large_image_url" />
             </div>
         </div>
         <div class="md:col-span-4">
@@ -11,20 +11,20 @@
                 Reviews
             </h4>
             <div class="grid gap-y-8">
-                <div *ngFor="let review of this.animeReviews.data.slice(this.reviewPagination.from,this.reviewPagination.to); trackBy: this.trackByReviewId;"
+                <div *ngFor="let review of this.reviews.data.slice(this.reviewPagination.from,this.reviewPagination.to); trackBy: this.trackByReviewId;"
                     class="flex flex-col gap-4">
                     <!-- USER IMAGE AND NAME -->
                     <div class="flex items-center gap-2">
                         <div class="w-[35px] h-[35px] rounded-full overflow-hidden">
-                            <img [src]="review.user.images.webp.image_url || review.user.images.jpg.image_url"
+                            <img [src]="review?.user?.images?.webp?.image_url || review?.user?.images?.jpg?.image_url"
                                 class="w-full h-full object-cover" />
                         </div>
                         <div>
                             <p class="mb-0 tracking-wide text-[#aabee4] font-mulish text-xl md:text-2xl">
-                                {{review.user.username}}
+                                {{review?.user?.username}}
                             </p>
                             <p class="mb-0 tracking-wide font-mulish font-light text-[#ccc] text-[12px]">
-                                {{review.date | date : 'MMM dd, yyy'}}
+                                {{review?.date | date : 'MMM dd, yyy'}}
                             </p>
                         </div>
                     </div>
@@ -32,7 +32,7 @@
                     <div checkOverflow>
                         <div class="blur-bottom max-h-[208px] overflow-hidden">
                             <p class="font-mulish tracking-wide">
-                                {{review.review}}
+                                {{review?.review}}
                             </p>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                         {{page+1}}
                     </button>
                     <button (click)="this.onNextPageChange(this.reviewPagination.pageNo+1)"
-                        *ngIf="this.animeReviews.pagination.has_next_page" [disabled]="this.loading"
+                        *ngIf="this.reviews.pagination?.has_next_page" [disabled]="this.loading"
                         class="select-none text-[13px] tracking-[1px] bg-[#3e3e3e] px-2"
                         [ngClass]="{'hover:bg-[seagreen]': !this.loading}">
                         Next

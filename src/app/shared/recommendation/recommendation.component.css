@@ -16,18 +16,18 @@
     transition: background-color .1s linear;
 }
 
-.anime-card {
+.manga-card {
     img {
         opacity: .9;
         transition: opacity .2s ease-in-out, transform .2s ease-in-out;
     }
 }
 
-.anime-card p {
+.manga-card p {
     transition: color .1s linear;
 }
 
-.anime-card:hover {
+.manga-card:hover {
     img {
         opacity: 1;
         transform: scale(1.02);

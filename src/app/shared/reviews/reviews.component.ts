@@ -1,16 +1,18 @@
-import { Component, ElementRef, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { AnimeService } from 'src/app/Services/anime.service';
+import { MangaService } from 'src/app/Services/manga.service';
 
 @Component({
-  selector: 'app-anime-reviews',
-  templateUrl: './anime-reviews.component.html',
-  styleUrls: ['./anime-reviews.component.css']
+  selector: 'app-reviews',
+  templateUrl: './reviews.component.html',
+  styleUrls: ['./reviews.component.css']
 })
-export class AnimeReviewsComponent implements OnInit {
+export class ReviewsComponent implements OnInit {
 
-  @Input('animeImages') animeImages: any;
-  @Input('animeReviews') animeReviews: any;
-  @Input('animeId') animeId: string;
+  @Input('images') images: any;
+  @Input('reviews') reviews: any;
+  @Input('id') id: string;
+  @Input('type') type!: 'manga' | 'anime';
   @ViewChildren('pageBtns') pageBtns: QueryList<any>;
   items: Array<any> = [];
   reviewPagination = {
@@ -25,7 +27,7 @@ export class AnimeReviewsComponent implements OnInit {
   reviewParamPageNo: number = 1;
   loading: boolean = false;
 
-  constructor(private _animeService: AnimeService) { }
+  constructor(private _animeService: AnimeService, private _mangaService: MangaService) { }
 
   onPrevReviewChange(pageNo: number): void {
     this.reviewPagination.pageNo = pageNo;
@@ -35,7 +37,8 @@ export class AnimeReviewsComponent implements OnInit {
   onNextPageChange(pageNo: number): void {
     this.reviewPagination.pageNo = pageNo;
     if (this.reviewPagination.pageNo > (this.items[this.items.length - 1] + 1)) {
-      this.fetchMoreAnimeReviews();
+      if (this.type === 'anime') this.fetchMoreAnimeReviews();
+      else if (this.type === 'manga') this.fetchMoreMangaReviews();
       return;
     }
     this.onReviewPageChange(this.reviewPagination.pageNo);
@@ -56,13 +59,13 @@ export class AnimeReviewsComponent implements OnInit {
     }
 
     this.reviewPagination.from = (pageNo - 1) * 4;
-    this.reviewPagination.to = Math.min(this.reviewPagination.from + 4, this.animeReviews.data.length);
+    this.reviewPagination.to = Math.min(this.reviewPagination.from + 4, this.reviews.data.length);
 
     if (this.reviewPagination.from < 0) {
       this.reviewPagination.from = 0;
     }
-    if (this.reviewPagination.from >= this.animeReviews.data.length) {
-      this.reviewPagination.from = Math.floor(this.animeReviews.data.length / 4) * 4;
+    if (this.reviewPagination.from >= this.reviews.data.length) {
+      this.reviewPagination.from = Math.floor(this.reviews.data.length / 4) * 4;
     }
 
   }
@@ -70,13 +73,32 @@ export class AnimeReviewsComponent implements OnInit {
   fetchMoreAnimeReviews() {
     this.loading = true;
     this.reviewParamPageNo += 1;
-    this._animeService.getAnimeReviews(this.animeId, this.reviewParamPageNo)
+    this._animeService.getAnimeReviews(this.id, this.reviewParamPageNo)
       .then((response: any) => {
         var length = Math.floor(response.data.length / 4);
         if (((response.data.length / 4) % 4) !== 0) length += 1;
         this.items = this.items.concat(Array.from({ length: length - 1 }, (_, i) => this.items[this.items.length - 1] + i + 1));
-        this.animeReviews.data = this.animeReviews.data.concat(response.data);
-        this.animeReviews.pagination = response.pagination;
+        this.reviews.data = this.reviews.data.concat(response.data);
+        this.reviews.pagination = response.pagination;
+        this.loading = false;
+        this.onReviewPageChange(this.reviewPagination.pageNo);
+      })
+      .catch((error: any) => {
+        console.log("Error: ", error);
+        this.loading = false;
+      });
+  }
+
+  fetchMoreMangaReviews() {
+    this.loading = true;
+    this.reviewParamPageNo += 1;
+    this._mangaService.getMangaReviews(this.id, this.reviewParamPageNo)
+      .then((response: any) => {
+        var length = Math.floor(response.data.length / 4);
+        if (((response.data.length / 4) % 4) !== 0) length += 1;
+        this.items = this.items.concat(Array.from({ length: length - 1 }, (_, i) => this.items[this.items.length - 1] + i + 1));
+        this.reviews.data = this.reviews.data.concat(response.data);
+        this.reviews.pagination = response.pagination;
         this.loading = false;
         this.onReviewPageChange(this.reviewPagination.pageNo);
       })
@@ -91,8 +113,8 @@ export class AnimeReviewsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    var length: number = (Math.floor((this.animeReviews.data.length) / 4));
-    if (this.animeReviews.data.length % 4 !== 0) length += 1;
+    var length: number = (Math.floor((this.reviews?.data?.length) / 4));
+    if (this.reviews.data.length % 4 !== 0) length += 1;
     this.items = Array.from({ length }, (_, i) => (i));
     if (length > 5) this.reviewPagination.buttonRange.to = 5;
     else this.reviewPagination.buttonRange.to = length;

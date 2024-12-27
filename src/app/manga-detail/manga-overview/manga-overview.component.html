@@ -1,0 +1,280 @@
+<div class="container-fluid mt-2 py-3">
+    <div class="grid-cols-2 gap-y-8 grid gap-x-4 md:grid-cols-5 md:gap-x-8">
+        <!-- MANGA IMAGE FOR SMALLER SCREENS AND BELOW -->
+        <div 
+            style="display: flex;flex-direction: column; align-items: center;" 
+            id="manga-img-div-sm"
+        >
+            <div class="overflow-hidden h-full md:col-span-1 md:hidden">
+                <img 
+                    loading="lazy"
+                    class="rounded-md w-full h-full" 
+                    [src]="this.manga.images.webp.large_image_url"
+                    [alt]="this.manga.title" 
+                />
+            </div>
+            <button 
+                (click)="this.isScreenShotsModalOpen=true;" 
+                *ngIf="this.mangaPictures.length > 0;"
+                class="mt-3 bg-[#3e3e3e] p-2 px-3 text-[12px] rounded-md tracking-[1px] font-bold"
+            >
+                SCREESHOTS
+            </button>
+        </div>
+        <!-- MANGA DETAIL HEADER -->
+        <div
+            class="col-span-1 grid md:grid-cols-5 md:col-span-5">
+            <div class="detail-header gap-1 md:flex-1">
+                <span class="material-icons-outlined">
+                    import_contacts
+                </span>
+                <span class="font-[300]">
+                    {{'Vol: ' + (this.manga.volumes || '0') + '+; Ch: ' + (this.manga.chapters || '0') + '+'}}
+                </span>
+                <span 
+                    class="font-[300]" 
+                    *ngIf="this.manga.episodes"
+                >
+                    ({{this.manga.episodes}} episodes)
+                </span>
+            </div>
+            <div class="detail-header gap-1 md:flex-1">
+                <span class="font-[300]">
+                    {{(this.manga.type | uppercase) || 'MANGA'}}
+                </span>
+            </div>
+            <div class="detail-header gap-1 md:flex-1">
+                <span class="material-icons-outlined">
+                    calendar_month
+                </span>
+                <span 
+                    class="font-[300]">
+                    {{this.manga?.published?.string || '?'}}
+                </span>
+            </div>
+            <div class="detail-header gap-1 md:flex-1">
+                <span class="material-icons-outlined">
+                    local_fire_department
+                </span>
+                <span class="font-[300]">
+                    {{this.manga.scored_by || 'n/a'}}
+                </span>
+            </div>
+            <div class="detail-header gap-1 md:flex-1">
+                <span style="font-weight: normal!important;">
+                    Rank
+                </span>
+                <span 
+                    style="font-weight: 300!important;" 
+                    class="font-light">
+                    #{{this.manga.rank || 'n/a'}}
+                </span>
+            </div>
+        </div>
+        <!-- MANGA IMAGE FOR MEDIUM SCREENS AND ABOVE -->
+        <div 
+            id="manga-img-div-lg" 
+            style="display: flex;flex-direction: column; align-items: center;"
+            class="hidden col-span-1 min-h-[20rem] md:col-span-1 md:block"
+        >
+            <div class="overflow-hidden rounded-md h-full max-w-[15rem] max-h-[20rem]">
+                <img 
+                    loading="lazy"
+                    class="w-full h-full object-cover" 
+                    [src]="this.manga.images.webp.large_image_url"
+                    [alt]="this.manga.title" />
+            </div>
+            <button 
+                *ngIf="this.mangaPictures.length > 0;" 
+                type="button" 
+                (click)="this.isScreenShotsModalOpen = true;"
+                class="mt-3 bg-[#3e3e3e] p-2 px-3 text-sm rounded-md tracking-[1px] font-bold">
+                SCREESHOTS
+            </button>
+        </div>
+        <!-- MANGA SYNOPSIS or BACKGROUND, TAGS DIV -->
+        <div class="flex flex-col items-start gap-3 col-span-2 md:col-span-3">
+            <p class="font-mulish text-justify mb-0">
+                {{this.manga.synopsis || this.manga.background || 'Synopsis is currently unavailable at this time.'}}
+            </p>
+
+            <!-- MANGA GENRES -->
+            <div *ngIf="this.manga.genres.length>0;">
+                <p class="font-mulish font-[600] mb-2">
+                    Tags
+                </p>
+                <mat-chip-list>
+                    <mat-chip 
+                        *ngFor="let genre of this.manga.genres" 
+                        class="custom-chip">
+                        {{genre.name}}
+                    </mat-chip>
+                </mat-chip-list>
+            </div>
+        </div>
+        <!-- MANGA STATUS, THEMES AND PLATFORMS DIV -->
+        <div class="flex flex-col gap-4 col-span-2 md:col-span-1">
+            <!-- MANGA STATUS -->
+            <div *ngIf="this.manga.status">
+                <p class="mb-1 tracking-[1px] md:text-[15px]">
+                    {{this.manga.status}}
+                </p>
+                <div class="bg-[rgba(0,0,0,.3)] rounded-md">
+                    <div 
+                        [ngClass]="{'bg-[seagreen] airing': this.manga.status.toLowerCase() === 'publishing', 'bg-[red] completed':this.manga.status.toLowerCase()==='finished', 'bg-[#ffd600] upcoming': this.manga.status.toLowerCase()==='discontinued'}"
+                        style="padding: .1rem 0" 
+                        class="h-full rounded-md">
+                    </div>
+                </div>
+            </div>
+            <!-- RATINGS, SOURCE AND DURATION -->
+            <div class="flex flex-col gap-2">
+                <p class="mb-0 font-light tracking-wider md:text-[15px]">
+                    <span class="font-normal">
+                        Ratings: 
+                    </span>
+                    <span 
+                        *ngFor="let star of this.scoreArray" 
+                        class="text-[1rem] material-icons-outlined"
+                        [ngClass]="{'text-[#ffd600]': star ==='f' || star ==='h'}"
+                    >
+                        {{(star === 'f' || star === 'e') ? 'star' : 'star_half'}}
+                    </span>
+                </p>
+            </div>
+            <!-- MANGA THEMES -->
+            <div>
+                <p class="font-[400] tracking-wider mb-2 md:text-[15px]">
+                    THEMES
+                </p>
+                <ng-container 
+                    *ngIf="this.manga.themes.length > 0;else themesPlaceholder;"
+                >
+                    <div 
+                        class="theme-item cursor-pointer p-1 px-2 rounded-sm" 
+                        *ngFor="let theme of this.manga.themes"
+                    >
+                        <p class="mb-0 tracking-[.07rem] text-sm select-none">
+                            {{theme.name}}
+                        </p>
+                    </div>
+                </ng-container>
+            </div>
+            <ng-template #themesPlaceholder>
+                <p class="font-mulish mb-0">
+                    No themes are available for this manga.
+                </p>
+            </ng-template>
+
+        </div>
+    </div>
+
+    <!-- MANGA CHARACTERS DIV -->
+    <div 
+        *ngIf="this.mangaCharacters.length > 0;" 
+        class="mt-12"
+    >
+        <h4 
+            class="font-[400] tracking-wider"
+        >
+            Characters
+        </h4>
+        <div class="mt-3 grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <div 
+                class="flex gap-2 items-stretch bg-[#313131] rounded-[.25rem] overflow-hidden"
+                style="box-shadow: -2px 3px 3px rgba(0,0,0,.4);"
+                *ngFor="let character of this.mangaCharacters"
+            >
+                <div class="w-full max-w-[30%] h-[131px]">
+                    <img 
+                        loading="lazy"
+                        class="h-full w-full object-cover" 
+                        [src]="character.character.images.webp.image_url" />
+                </div>
+                <div class="flex flex-col justify-between p-2 flex-1 overflow-hidden">
+                    <div>
+                        <a [routerLink]="'/character/'+character.character.mal_id"
+                            class="text-[#aabee4] text-[.9rem] w-max tracking-wide font-bold mb-0 cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap font-mulish hover:text-[#fff]">
+                            {{character.character.name}}
+                        </a>
+                        <p *ngIf="character.voice_actors && character.voice_actors.length > 0"
+                            class="text-[12px] font-light text-[#bebebe] font-mulish"
+                        >
+                            {{character.voice_actors[0].person.name }}
+                        </p>
+
+                    </div>
+                    <p 
+                        class="font-[300] mb-1 tracking-wide text-sm font-mulish"
+                    >
+                        Role:&nbsp;{{character.role || 'n/a'}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="mt-3 text-center">
+            <button 
+                (click)="this.tabChange.emit(this.tabs.CHARACTERS)" 
+                type="button"
+                class="mx-auto bg-[#3e3e3e] p-2 px-3 text-sm rounded-md tracking-[1px] font-bold">
+                SEE ALL CHARACTERS
+            </button>
+        </div>
+    </div>
+
+    <!-- MANGA RECOMMENDATIONS DIV -->
+    <div 
+        *ngIf="this.mangaRecommendations.length > 0;" 
+        class="mt-12"
+    >
+        <h4 class="font-[400] tracking-wider">
+            If you like this manga, you might like...
+        </h4>
+        <div 
+            style="margin-top: 1rem;" 
+            class="p-4 border-1 border-[#353330]"
+        >
+            <div style="margin-top: 1rem;"
+                class="grid overflow-hidden gap-3 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6"
+            >
+                <div 
+                    (click)="this.redirectToMangaDetailPage(item.entry.mal_id);"
+                    class="manga-card cursor-pointer overflow-hidden h-max w-full max-w-[210px]"
+                    *ngFor="let item of this.mangaRecommendations.slice(0, 6);"
+                >
+                    <div 
+                        class="relative w-full h-[15rem] rounded-[.2rem] overflow-hidden sm:h-[17rem]"
+                    >
+                        <img 
+                            loading="lazy"
+                            class="w-full h-full" [src]="item.entry.images.webp.large_image_url"
+                            [alt]="item.entry.title" />
+                    </div>
+                    <p 
+                        (click)="this.redirectToMangaDetailPage(item.entry.mal_id);"
+                        class="text-center tracking-wider mt-1 overflow-hidden"
+                    >
+                        {{item.entry.title}}
+                    </p>
+                </div>
+            </div>
+            <div class="text-center mt-2 md:mt-0">
+                <button 
+                    (click)="this.tabChange.emit(this.tabs.RECOMMENDATIONS)" type="button"
+                    class="mx-auto bg-[#3e3e3e] p-2 px-3 text-sm rounded-md tracking-[1px] font-bold">
+                    SEE ALL RECOMMENDATIONS
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MANGA IMAGES VIEWER MODAL -->
+<app-image-viewer 
+    *ngIf="this.isScreenShotsModalOpen"  
+    [images]="this.mangaPictures"
+    [imageNumber]="this.imageNumber"
+    (onCloseImageViewer)="this.isScreenShotsModalOpen=!$event;"
+    (onImageChange)="$event === 'prev' ? this.showPrevImage() : this.showNextImage();"
+>
+</app-image-viewer>
