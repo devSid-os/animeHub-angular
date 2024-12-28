@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { LoaderModule } from './loader/loader.module';
 import { HomeCarouselComponent } from './home-carousel/home-carousel.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HomeCarouselComponent } from './home-carousel/home-carousel.component';
     HomeComponent,
     AnimeSectionComponent,
     AnimeAsideComponent,
-    HomeCarouselComponent
+    HomeCarouselComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,13 @@
+footer {
+    background: -webkit-gradient(linear, left bottom, left top, from(rgba(220, 9, 20, .5)), to(rgba(220, 9, 20, 0)));
+    background: linear-gradient(0deg, rgba(220, 9, 20, .5), rgba(220, 9, 20, 0));
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
