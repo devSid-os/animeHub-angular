@@ -8,13 +8,14 @@ import { CharacterOverviewComponent } from './character-overview/character-overv
 import { CharactersVoiceActorsComponent } from './characters-voice-actors/characters-voice-actors.component';
 import { CheckOverflowDirective2 } from './text-overflow.directive';
 import { LoaderModule } from '../loader/loader.module';
+import { MangaRolesComponent } from './manga-roles/manga-roles.component';
 
 const routes: Routes = [
   { path: '', component: CharacterDetailComponent }
 ]
 
 @NgModule({
-  declarations: [CharacterDetailComponent, AnimeRolesComponent, CharacterOverviewComponent, CharactersVoiceActorsComponent,CheckOverflowDirective2],
+  declarations: [CharacterDetailComponent, AnimeRolesComponent, CharacterOverviewComponent, CharactersVoiceActorsComponent,CheckOverflowDirective2, MangaRolesComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

@@ -19,8 +19,8 @@ export class CharacterDetailComponent implements OnInit, OnDestroy {
   characterPictures: Array<any> = [];
   imageNumber: number = 0;
   isScreenshotModalOpen: boolean = false;
-  loading:boolean = false;
-  selectedTab: TABS.OVERVIEW | TABS.VOICE_ACTORS = this.tabs.OVERVIEW;
+  loading: boolean = false;
+  selectedTab: TABS.OVERVIEW | TABS.VOICE_ACTORS | TABS.MANGA_ROLES = this.tabs.OVERVIEW;
   constructor(private _route: ActivatedRoute, private _animeService: AnimeService) { }
 
   ngOnInit(): void {
@@ -48,7 +48,7 @@ export class CharacterDetailComponent implements OnInit, OnDestroy {
           })
         );
       })
-      ,toArray(),
+      , toArray(),
       finalize(() => this.loading = false)
     ).subscribe(); // Execute the requests
   }

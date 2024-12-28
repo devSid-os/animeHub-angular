@@ -9,22 +9,23 @@
         </div>
         <div class="md:col-span-4">
             <h4 class="tracking-wider">
-                Who Brings <span class="text-[#ffd600]">{{this.characterName}}</span> to Life?
+                Dive into <span class="text-[#ffd600]">{{(this.characterName+"'s") || "Character's"}}</span> Manga Journey!
             </h4>
             <div class="mt-3 grid gap-3 sm:grid-cols-2 md:grid-cols-3">
                 <div class="flex gap-2 items-stretch bg-[#313131] rounded-[.25rem] overflow-hidden"
-                    style="box-shadow: -2px 3px 3px rgba(0,0,0,.4);" *ngFor="let actor of this.voices">
+                    style="box-shadow: -2px 3px 3px rgba(0,0,0,.4);" *ngFor="let manga of this.mangaRoles">
                     <div class="w-full max-w-[30%] h-[131px]">
                         <img class="h-full w-full object-cover"
-                            [src]="actor.person.images?.webp?.image_url || actor.person.images?.jpg?.image_url" />
+                            [src]="manga.manga.images?.webp?.large_image_url || manga.manga.images?.jpg?.large_image_url || manga.manga.images?.webp?.image_url || manga.manga.images?.jpg?.image_url" />
                     </div>
                     <div class="flex flex-col p-1 flex-1 overflow-hidden">
-                        <a [routerLink]="'/people/'+actor.person.mal_id" style="font-weight: 600;cursor:pointer!important;"
+                        <a [routerLink]="'/manga/'+manga?.manga?.mal_id"
+                            style="font-weight: 600;cursor:pointer!important;"
                             class="text-[#aabee4] w-max tracking-wider mb-0 font-mulish hover:text-[#fff]">
-                            {{actor.person.name}}
+                            {{manga.manga.title}}
                         </a>
                         <p class="font-bold mb-1 tracking-wider text-[13px] font-mulish">
-                            Language:&nbsp;{{actor.language || 'n/a'}}
+                            Role:&nbsp;{{manga.role || 'n/a'}}
                         </p>
                     </div>
                 </div>

@@ -27,7 +27,15 @@
                     OVERVIEW
                 </li>
                 <li 
-                    *ngIf="this.characterData.voices.length"
+                    *ngIf="this.characterData?.manga?.length"
+                    (click)="this.selectedTab=this.tabs.MANGA_ROLES"
+                    [ngClass]="{'active-tab': this.tabs.MANGA_ROLES===this.selectedTab}" 
+                    class="tracking-wider text-[.9rem] cursor-pointer"
+                >
+                    MANGA ROLES
+                </li>
+                <li 
+                    *ngIf="this.characterData?.voices?.length"
                     (click)="this.selectedTab=this.tabs.VOICE_ACTORS"
                     [ngClass]="{'active-tab': this.tabs.VOICE_ACTORS===this.selectedTab}" 
                     class="tracking-wider text-[.9rem] cursor-pointer"
@@ -51,6 +59,14 @@
             *ngIf="this.selectedTab===this.tabs.VOICE_ACTORS && this.characterData.voices.length"
         >
         </app-characters-voice-actors>
+
+        <app-manga-roles
+            [characterImage]="this.characterData.images"
+            [characterName]="this.characterData.name"
+            [mangaRoles]="this.characterData.manga"
+            *ngIf="this.selectedTab===this.tabs.MANGA_ROLES && this.characterData.manga.length"
+        >
+        </app-manga-roles>
         
     </div>
 </div>
