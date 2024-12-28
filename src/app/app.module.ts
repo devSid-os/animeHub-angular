@@ -11,6 +11,7 @@ import { AnimeAsideComponent } from './home-component/anime-aside/anime-aside.co
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { LoaderModule } from './loader/loader.module';
+import { HomeCarouselComponent } from './home-carousel/home-carousel.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { LoaderModule } from './loader/loader.module';
     HeaderComponent,
     HomeComponent,
     AnimeSectionComponent,
-    AnimeAsideComponent
+    AnimeAsideComponent,
+    HomeCarouselComponent
   ],
   imports: [
     BrowserModule,

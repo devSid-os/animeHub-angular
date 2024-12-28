@@ -50,6 +50,16 @@ export class AnimeOverviewComponent implements OnInit {
     }
   }
 
+  openTrailerModal(): void {
+    this.isTrailerModalOpen = true;
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeTrailerModal(): void {
+    this.isTrailerModalOpen = false;
+    document.body.style.overflow = 'auto';
+  }
+
   redirectToAnimeDetailPage(animeId: string) {
     this._animeService.selectedAnime = null;
     this._router.navigate(['/anime/', animeId]);

@@ -100,7 +100,7 @@
 
             <button 
                 *ngIf="this.anime.trailer.embed_url" 
-                (click)="this.isTrailerModalOpen=true;" 
+                (click)="this.openTrailerModal();" 
                 id="trailer-btn"
                 class="flex items-center gap-2 px-[.7rem] bg-black py-1 rounded-[.2rem]"
             >
@@ -345,7 +345,7 @@
 
 <!-- TRAILER MODAL -->
 <div 
-    *ngIf="this.isTrailerModalOpen" 
+    *ngIf="this.isTrailerModalOpen;" 
     style="z-index: 7!important"
     class="bg-[rgba(0,0,0,.7)] fixed top-0 left-0 w-screen h-screen"
 >
@@ -359,7 +359,7 @@
                 allowfullscreen>
             </iframe>
             <button 
-                (click)="this.isTrailerModalOpen=false;" 
+                (click)="this.closeTrailerModal();" 
                 type="button"
                 class="p-0 absolute -bottom-12 left-[50%] text-[2rem] bg-[#191919] rounded-full w-[25px] h-[25px] flex items-center justify-center border-1"
                 id="close-trailer-btn"

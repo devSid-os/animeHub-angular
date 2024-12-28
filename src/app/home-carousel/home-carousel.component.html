@@ -1,0 +1,27 @@
+<div class="px-2 mb-2 overflow-hidden">
+    <!-- Carousel Container -->
+    <div (mouseenter)="this.stopAutoSlide()" (mouseleave)="this.startAutoSlide()" #carousel
+        class="carousel flex items-stretch overflow-hidden touch-none rounded-lg py-3">
+        <div (click)="this.redirectToPage(i, image.url);"
+            [ngClass]="{'pr-4': (!this.isSmallScreen && (i%2==0) && i !== this.images.length-1)}"
+            *ngFor="let image of images; let i = index" [id]="'carousel-item-' + i"
+            class="min-w-[100%] max-h-[650px] cursor-pointer rounded-lg transition-all md:min-w-[50%] hover:scale-[1.02]">
+            <img class="w-full h-full rounded-lg overflow-hidden" [src]="image.src" [alt]="image.alt" />
+        </div>
+    </div>
+    <!-- Navigation Buttons -->
+    <div class="mb-2">
+        <div class="navigation-btns-div w-max flex justify-center gap-3 p-2 rounded-lg bg-black md:justify-end">
+            <button (click)="this.onNavigationClick(0);"
+                [ngClass]="{'bg-[#ffd600]': (!this.isSmallScreen && this.currentIndex<2) || (this.isSmallScreen && this.currentIndex===0)}"
+                type="button" class="w-[11px] h-[11px] rounded-full bg-[#6e6e6e]"></button>
+            <button (click)="this.onNavigationClick(1);"
+                [ngClass]="{'bg-[#ffd600]': (!this.isSmallScreen && this.currentIndex>1) || (this.isSmallScreen && this.currentIndex===1)}"
+                type="button" class="w-[11px] h-[11px] rounded-full bg-[#6e6e6e]"></button>
+            <button (click)="this.onNavigationClick(2);" type="button" [ngClass]="{'bg-[#ffd600]': (this.isSmallScreen && this.currentIndex===2)}"
+                *ngIf="this.isSmallScreen" class="w-[11px] h-[11px] rounded-full bg-[#6e6e6e]"></button>
+            <button (click)="this.onNavigationClick(3);" [ngClass]="{'bg-[#ffd600]': (this.isSmallScreen && this.currentIndex===3)}" type="button"
+                *ngIf="this.isSmallScreen" class="w-[11px] h-[11px] rounded-full bg-[#6e6e6e]"></button>
+        </div>
+    </div>
+</div>

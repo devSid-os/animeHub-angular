@@ -1,0 +1,14 @@
+.carousel {
+    scroll-behavior: smooth;
+}
+
+.navigation-btns-div {
+    margin-left: auto;
+}
+
+@media screen and (max-width: 768px) {
+    .navigation-btns-div {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
