@@ -1,0 +1,40 @@
+<div class="mt-2 py-3 sm:container-fluid">
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-y-6 md:gap-x-4 md:gap-y-0">
+        <div class="w-full flex justify-center">
+            <div class="w-full max-w-[13rem] h-full max-h-[20rem] overflow-hidden rounded-md">
+                <img class="w-full h-full object-cover"
+                    [src]="this.images?.webp?.large_image_url || this.images?.jpg?.large_image_url || this.images?.webp?.image_url || this.images?.jpg?.image_url" />
+            </div>
+        </div>
+        <div class="md:col-span-4">
+            <div class="mb-4">
+                <h4 class="tracking-wider font-normal mb-2">
+                    Anime Staff
+                </h4>
+                <div class="grid gap-x-3 gap-y-2 sm:grid-cols-2">
+                    <div *ngFor="let staff of this.animeStaff;"
+                        [ngStyle]="{'border-top': i2 === 0 ? '1px solid #353330' : '0'}"
+                        style="border-bottom: 1px solid #353330"
+                        class="px-1 py-2 flex justify-between items-start gap-3 bg-[#242424] overflow-hidden">
+                        <!-- STAFF IMAGE -->
+                        <div class="w-full max-w-[60px] h-full max-h-[100px] rounded-sm overflow-hidden">
+                            <img class="w-full h-full object-cover"
+                                [src]="staff?.person?.images?.webp?.large_image_url || staff?.person?.images?.jpg?.large_image_url || staff?.person?.images?.webp?.image_url || staff?.person?.images?.jpg?.image_url" />
+                        </div>
+                        <!-- CHARACTER NAME AND ROLE (ADDITIONAL INFO) -->
+                        <div class="flex-1">
+                            <a [routerLink]="'/people/'+staff?.person?.mal_id"
+                                class="tracking-wider text-[#aabee4] hover:text-[#fff]">
+                                {{staff?.person?.name}}
+                            </a>
+                            <p *ngIf="staff?.positions?.length"
+                                class="tracking-wider text-[#bebebe] font-light text-sm mt-[2px] mb-0">
+                                {{this.concatStaffPosition(staff.positions)}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

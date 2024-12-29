@@ -15,15 +15,15 @@ export class AnimeDetailComponent implements OnInit, OnDestroy {
   tabs: typeof TABS = TABS;
   loading: boolean = false;
   anime: any = null;
-  animeStats: any = null;
   animePictures: Array<any> = [];
   animeStreamingData: Array<any> = [];
   animeCharacters: Array<any> = [];
   animeRecommendations: Array<any> = [];
+  animeStaff: Array<any> = [];
   animeReviews: { pagination: Object, data: Array<any> } = { pagination: {}, data: [] };
   animeId: string | null = null;
   totalRecommendations: number = 12;
-  selectedTab: TABS.OVERVIEW | TABS.RECOMMENDATIONS | TABS.REVIEWS | TABS.CHARACTERS = this.tabs.OVERVIEW;
+  selectedTab: TABS.OVERVIEW | TABS.RECOMMENDATIONS | TABS.REVIEWS | TABS.CHARACTERS | TABS.STAFF = this.tabs.OVERVIEW;
   sub1: Subscription | null = null;
 
   constructor(private _animeService: AnimeService, private _route: ActivatedRoute) { }
@@ -45,8 +45,8 @@ export class AnimeDetailComponent implements OnInit, OnDestroy {
     this.selectedTab = this.tabs.OVERVIEW;
     this._animeService.selectedAnime = null;
     this.anime = null;
-    this.animeStats = null;
     this.animePictures = [];
+    this.animeStaff = [];
     this.animeStreamingData = [];
     this.animeCharacters = [];
     this.animeRecommendations = [];
@@ -67,7 +67,8 @@ export class AnimeDetailComponent implements OnInit, OnDestroy {
       () => this.getAnimePictures(animeId),
       () => this.getAnimeStreaming(animeId),
       () => this.getAnimeRecommendations(animeId),
-      () => this.getAnimeReviews(animeId, '1')
+      () => this.getAnimeReviews(animeId, '1'),
+      () => this.getAnimeStaff(animeId)
     ];
 
     from(requests).pipe(
@@ -80,7 +81,7 @@ export class AnimeDetailComponent implements OnInit, OnDestroy {
           })
         );
       })
-      ,toArray(),
+      , toArray(),
       finalize(() => this.loading = false)
     ).subscribe(); // Execute the requests
   }
@@ -89,6 +90,13 @@ export class AnimeDetailComponent implements OnInit, OnDestroy {
     return this._animeService.getFullAnimeById(animeId)
       .then((response: any) => {
         this.anime = response.data;
+      });
+  }
+
+  getAnimeStaff(animeId: string): Promise<any> {
+    return this._animeService.getAnimeStaff(animeId)
+      .then((response: any) => {
+        this.animeStaff = response.data;
       });
   }
 

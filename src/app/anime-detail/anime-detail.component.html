@@ -32,6 +32,13 @@
                     REVIEWS
                 </li>
                 <li 
+                    *ngIf="this.animeStaff.length > 0"
+                    (click)="this.selectedTab=this.tabs.STAFF"
+                    [ngClass]="{'active-tab': this.selectedTab === this.tabs.STAFF}"
+                    class="tracking-wider text-[.9rem] cursor-pointer">
+                    STAFF
+                </li>
+                <li 
                     *ngIf="this.animeRecommendations.length > 0"
                     (click)="this.selectedTab=this.tabs.RECOMMENDATIONS"
                     [ngClass]="{'active-tab': this.selectedTab === this.tabs.RECOMMENDATIONS}"
@@ -69,6 +76,12 @@
             *ngIf="this.animeReviews.data.length > 0 && this.selectedTab===this.tabs.REVIEWS"
         >   
         </app-reviews>
+
+        <app-anime-staff
+            [staff]="this.animeStaff"
+            [images]="this.anime.images"
+            *ngIf="this.animeStaff.length > 0 && this.selectedTab===this.tabs.STAFF"
+        ></app-anime-staff>
 
         <app-recommendations
             [type]="'anime'"

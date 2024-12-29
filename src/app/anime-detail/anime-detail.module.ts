@@ -6,13 +6,14 @@ import { AnimeOverviewComponent } from "./anime-overview/anime-overview.componen
 import { MatChipsModule } from "@angular/material/chips";
 import { SharedModule } from '../shared/shared.module';
 import { LoaderModule } from '../loader/loader.module';
+import { AnimeStaffComponent } from './anime-staff/anime-staff.component';
 
 const routes: Routes = [
     { path: '', component: AnimeDetailComponent }
 ];
 
 @NgModule({
-    declarations: [AnimeDetailComponent, AnimeOverviewComponent],
+    declarations: [AnimeDetailComponent, AnimeOverviewComponent, AnimeStaffComponent],
     imports: [
         CommonModule,
         RouterModule.forChild(routes),

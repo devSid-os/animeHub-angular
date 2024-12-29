@@ -24,7 +24,8 @@
                     class="tracking-wider text-[.9rem] cursor-pointer">
                     OVERVIEW
                 </li>
-                <li (click)="this.selectedTab=this.tabs.VOICE_ROLES"
+                <li *ngIf="this.personData?.voices?.length"
+                    (click)="this.selectedTab=this.tabs.VOICE_ROLES"
                     [ngClass]="{'active-tab': this.tabs.VOICE_ROLES===this.selectedTab}"
                     class="tracking-wider text-[.9rem] cursor-pointer">
                     VOICE ROLES

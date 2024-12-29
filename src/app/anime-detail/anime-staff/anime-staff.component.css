@@ -1,0 +1,26 @@
+* {
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.material-icons-outlined {
+    font-family: 'Material Icons Outlined' !important;
+}
+
+.vc-p:hover {
+    color: #fff;
+}
+
+.vc-p::after {
+    content: '|';
+}
+
+.vc-p:last-child:after {
+    content: '';
+}

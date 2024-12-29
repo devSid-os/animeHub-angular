@@ -47,6 +47,10 @@ export class AnimeService {
         }).toPromise();
     }
 
+    getAnimeStaff(animeId: string): Promise<any> {
+        return this._http.get(`${this._JIKAN_BASE_URL}/anime/${animeId}/staff`).toPromise();
+    }
+
     getAnimeCharacters(animeId: string): Promise<any> {
         return this._http.get(`${this._JIKAN_BASE_URL}/anime/${animeId}/characters`).toPromise();
     }
