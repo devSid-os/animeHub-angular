@@ -30,6 +30,12 @@
                     class="tracking-wider text-[.9rem] cursor-pointer">
                     VOICE ROLES
                 </li>
+                <li *ngIf="this.personData?.anime?.length"
+                    (click)="this.selectedTab=this.tabs.ANIME_CONTRIBUTIONS"
+                    [ngClass]="{'active-tab': this.tabs.ANIME_CONTRIBUTIONS===this.selectedTab}"
+                    class="tracking-wider text-[.9rem] cursor-pointer">
+                    ANIME CONTRIBUTIONS
+                </li>
             </ul>
         </nav>
         <app-people-overwiew [personData]="this.personData" [personPictures]="this.personPictures"
@@ -38,7 +44,15 @@
 
         <app-people-voice-roles [personVoices]="this.personData.voices" [personName]="this.personData.name"
             [personImage]="this.personData.images"
-            *ngIf="this.selectedTab===this.tabs.VOICE_ROLES && this.personData?.voices.length > 0"></app-people-voice-roles>
+            *ngIf="this.selectedTab===this.tabs.VOICE_ROLES && this.personData?.voices.length > 0">
+        </app-people-voice-roles>
+
+        <app-anime-contributions
+            [personName]="this.personData.name"
+            [personImage]="this.personData.images"
+            [contributions]="this.personData.anime"
+            *ngIf="this.selectedTab===this.tabs.ANIME_CONTRIBUTIONS && this.personData?.anime?.length > 0"
+        ></app-anime-contributions>
 
     </div>
 </div>

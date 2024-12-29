@@ -7,13 +7,14 @@ import { PeopleOverwiewComponent } from './people-overwiew/people-overwiew.compo
 import { SharedModule } from '../shared/shared.module';
 import { CheckOverflowDirective } from './text-overflow.directive';
 import { PeopleVoiceRolesComponent } from './people-voice-roles/people-voice-roles.component';
+import { AnimeContributionsComponent } from './anime-contributions/anime-contributions.component';
 
 const routes: Routes = [
   { path: '', component: PeopleDetailsComponent }
 ]
 
 @NgModule({
-  declarations: [PeopleDetailsComponent, PeopleOverwiewComponent, CheckOverflowDirective, PeopleVoiceRolesComponent],
+  declarations: [PeopleDetailsComponent, PeopleOverwiewComponent, CheckOverflowDirective, PeopleVoiceRolesComponent, AnimeContributionsComponent],
   imports: [
     CommonModule,
     LoaderModule,

@@ -16,7 +16,7 @@ export class PeopleDetailsComponent implements OnInit, OnDestroy {
   personData: any = null;
   personId: string | null = null;
   personPictures: Array<any> = [];
-  selectedTab: string = this.tabs.OVERVIEW;
+  selectedTab: TABS.OVERVIEW | TABS.ANIME_CONTRIBUTIONS | TABS.VOICE_ROLES = this.tabs.OVERVIEW;
   private _sub1: Subscription | null = null;
   constructor(private _route: ActivatedRoute, private _animeService: AnimeService) { }
 

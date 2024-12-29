@@ -1,0 +1,33 @@
+<div class="mt-2 py-3 content-container">
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-y-6 md:gap-x-8 md:gap-y-0">
+        <div class="w-full flex flex-col items-center">
+            <div class="w-full max-w-[13rem] h-[18rem] overflow-hidden rounded-[5px]">
+                <img loading="lazy" class="w-full h-full object-cover" [alt]="this.personName + ' Image'"
+                    [src]="this.personImage?.webp?.image_url || this.personImage?.jpg?.image_url" />
+            </div>
+        </div>
+        <div class="md:col-span-4">
+            <h4 class="tracking-wider font-normal mb-2">Contributions to Anime Universe</h4>
+            <div class="grid gap-x-3 gap-y-2 sm:grid-cols-2">
+                <div *ngFor="let position of this.contributions;"
+                    [ngStyle]="{'border-top': i2 === 0 ? '1px solid #353330' : '0'}"
+                    style="border-bottom: 1px solid #353330"
+                    class="p-1 flex justify-between items-start gap-2 bg-[#242424] overflow-hidden">
+                    <!-- ANIME IMAGE -->
+                    <div class="w-full max-w-[60px] h-full max-h-[100px] rounded-sm overflow-hidden">
+                        <img class="w-full h-full object-cover" loading="lazy"
+                            [src]="position?.anime?.images?.webp?.large_image_url || position?.anime?.images?.jpg?.large_image_url || position?.anime?.images?.webp?.image_url || position?.anime?.images?.jpg?.image_url" />
+                    </div>
+                    <!-- ANIME TITLE AND POSITION (ADDITIONAL INFO) -->
+                    <div class="flex-1">
+                        <a [routerLink]="'/anime/'+position?.anime?.mal_id"
+                            class="tracking-wider text-[#aabee4] hover:text-[#fff]">
+                            {{position?.anime?.title}}
+                        </a>
+                        <p class="text-[#bebebe] tracking-wider text-sm">Position: {{position.position}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

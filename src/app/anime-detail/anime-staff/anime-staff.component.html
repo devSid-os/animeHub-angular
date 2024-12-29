@@ -15,13 +15,13 @@
                     <div *ngFor="let staff of this.animeStaff;"
                         [ngStyle]="{'border-top': i2 === 0 ? '1px solid #353330' : '0'}"
                         style="border-bottom: 1px solid #353330"
-                        class="px-1 py-2 flex justify-between items-start gap-3 bg-[#242424] overflow-hidden">
+                        class="p-1 flex justify-between items-start gap-3 bg-[#242424] overflow-hidden">
                         <!-- STAFF IMAGE -->
                         <div class="w-full max-w-[60px] h-full max-h-[100px] rounded-sm overflow-hidden">
-                            <img class="w-full h-full object-cover"
+                            <img loading="lazy" class="w-full h-full object-cover"
                                 [src]="staff?.person?.images?.webp?.large_image_url || staff?.person?.images?.jpg?.large_image_url || staff?.person?.images?.webp?.image_url || staff?.person?.images?.jpg?.image_url" />
                         </div>
-                        <!-- CHARACTER NAME AND ROLE (ADDITIONAL INFO) -->
+                        <!-- STAFF NAME AND POSITIONS -->
                         <div class="flex-1">
                             <a [routerLink]="'/people/'+staff?.person?.mal_id"
                                 class="tracking-wider text-[#aabee4] hover:text-[#fff]">

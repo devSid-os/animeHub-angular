@@ -6,5 +6,6 @@ export enum TABS {
     VOICE_ACTORS = 'voice_actors',
     VOICE_ROLES = 'voice_roles',
     MANGA_ROLES = 'manga_roles',
-    STAFF = 'staff'
+    STAFF = 'staff',
+    ANIME_CONTRIBUTIONS = 'anime_contributions'
 }
