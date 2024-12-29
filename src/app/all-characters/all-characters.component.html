@@ -18,9 +18,11 @@
         <!-- CHARACTERS LIST -->
         <div class="mt-8 grid gap-y-2 sm:gap-x-4 sm:grid-cols-2 md:grid-cols-3">
             <!-- CHARACTERS ITEMS -->
-            <ng-container *ngIf="!this.characters.length">
+            <ng-container *ngIf="this.searchQuery.length && !this.searchedCharacters.length">
                 <div class="col-span-8">
-                    <p class="font-mulish tracking-wider text-lg">No Results found for "{{this.searchQuery}}"</p>
+                    <p class="font-mulish tracking-wider text-md text-center text-[#bebebe] md:text-lg">
+                        Sorry, No Results Found
+                    </p>
                 </div>
             </ng-container>
             <ng-container [ngSwitch]="this.searchQuery.length > 0">
