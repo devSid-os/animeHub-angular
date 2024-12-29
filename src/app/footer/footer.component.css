@@ -11,3 +11,13 @@ hr {
     margin: 1em 0;
     padding: 0;
 }
+
+.copy-right-para {
+    padding-top: 0;
+}
+
+@media screen and (max-width: 576px) {
+    .copy-right-para {
+        padding-top: .5rem;
+    }
+}
