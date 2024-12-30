@@ -17,6 +17,13 @@ export class AnimeService {
         return this._selectedAnime;
     }
 
+    getAnimeMovies(filters: any): Promise<any> {
+        filters['type'] = 'movie';
+        return this._http.get(`${this._JIKAN_BASE_URL}/top/anime`, {
+            params: filters
+        }).toPromise();
+    }
+
     getPersonPictures(personId: string): Promise<any> {
         return this._http.get(`${this._JIKAN_BASE_URL}/people/${personId}/pictures`).toPromise();
     }

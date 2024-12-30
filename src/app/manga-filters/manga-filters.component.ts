@@ -94,7 +94,7 @@ export class MangaFiltersComponent implements OnInit, OnDestroy {
   onPaginationButtonClick(num: any): void {
     if (num in this.customPagination.data) {
       this.mangaData.data = this.customPagination.data[num].data;
-      this.mangaData.pagination = this.customPagination.data[num].pagination;;
+      this.mangaData.pagination = this.customPagination.data[num].pagination;
       this.updatePaginationSlice(num);
     }
     else {

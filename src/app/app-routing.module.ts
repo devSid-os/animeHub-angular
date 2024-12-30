@@ -10,7 +10,8 @@ const routes: Routes = [
   { path: "all-characters", loadChildren: () => import('./all-characters/all-characters.module').then(mod => mod.AllCharactersModule) },
   { path: "manga", loadChildren: () => import('./manga/manga.module').then(mod => mod.MangaModule) },
   { path: "manga-filters", loadChildren: () => import("./manga-filters/manga-filters.module").then(mod => mod.MangaFiltersModule) },
-  { path: "manga/:id", loadChildren: () => import("./manga-detail/manga-detail.module").then(mod => mod.MangaDetailModule) }
+  { path: "manga/:id", loadChildren: () => import("./manga-detail/manga-detail.module").then(mod => mod.MangaDetailModule) },
+  { path: "movies", loadChildren: () => import("./movies/movies.module").then(mod => mod.MoviesModule) }
 ];
 
 @NgModule({

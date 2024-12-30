@@ -25,6 +25,7 @@ export class AnimeDetailComponent implements OnInit, OnDestroy {
   totalRecommendations: number = 12;
   selectedTab: TABS.OVERVIEW | TABS.RECOMMENDATIONS | TABS.REVIEWS | TABS.CHARACTERS | TABS.STAFF = this.tabs.OVERVIEW;
   sub1: Subscription | null = null;
+  sub2: Subscription | null = null;
 
   constructor(private _animeService: AnimeService, private _route: ActivatedRoute) { }
 
@@ -38,6 +39,7 @@ export class AnimeDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.sub1 instanceof Subscription) this.sub1.unsubscribe();
+    if (this.sub2 instanceof Subscription) this.sub2.unsubscribe();
     this.resetProperties();
   }
 
@@ -71,7 +73,7 @@ export class AnimeDetailComponent implements OnInit, OnDestroy {
       () => this.getAnimeStaff(animeId)
     ];
 
-    from(requests).pipe(
+    this.sub2 = from(requests).pipe(
       concatMap((requestFunc) => {
         return from(requestFunc()).pipe(
           delay(333), // Add delay for subsequent requests

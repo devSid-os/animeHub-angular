@@ -1,0 +1,13 @@
+<div class="movie-div gap-1 flex flex-col items-center overflow-hidden hover:cursor-pointer">
+    <div [appMovieTooltip]="movie" class="w-full h-[170px] overflow-hidden rounded-sm sm:h-[200px]">
+        <img loading="lazy" class="movie-image w-full h-full object-cover"
+            [src]="movie.images.webp.large_image_url || movie.images.jpg.large_image_url || movie.images.webp.image_url || movie.images.jpg.image_url" />
+    </div>
+    <div class="w-full">
+        <p class="text-[11px] tracking-wider w-full mb-0">#{{movie.rank || 'n/a'}}</p>
+        <p class="movie-title tracking-wider w-full text-[13px] mb-0 whitespace-nowrap text-ellipsis overflow-hidden">
+            {{movie.title_english || movie.title}}</p>
+        <p class="tracking-wider w-full text-[gray] text-[11px] mb-0 whitespace-nowrap text-ellipsis overflow-hidden">
+            {{movie.title_japanese || movie.title}}</p>
+    </div>
+</div>

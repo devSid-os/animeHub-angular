@@ -1,0 +1,13 @@
+.movie-image {
+    transition: transform .1s ease-in-out, opacity .1s ease-in-out;
+}
+
+.movie-div:hover .movie-image {
+    transform: translateY(-3px);
+    opacity: .7;
+}
+
+.movie-div:hover .movie-title {
+    color: var(--color-yellow);
+    font-weight: 600;
+}

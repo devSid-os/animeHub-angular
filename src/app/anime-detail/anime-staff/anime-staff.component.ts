@@ -12,7 +12,7 @@ export class AnimeStaffComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.images)
+    // console.log(this.images)
   }
 
   concatStaffPosition(data: Array<string>): string {
