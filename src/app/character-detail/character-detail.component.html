@@ -1,11 +1,11 @@
 <div *ngIf="this.characterData" class="container-fluid w-full py-3">
     <!-- CHARACTER NAME -->
     <div id="overview-content">
-        <h2 class="tracking-wide">
+        <h2 class="tracking-wide text-[2rem] mb-[4px]">
             {{this.characterData?.name}}
         </h2>
         <h6 *ngIf="this.characterData.nicknames.length || this.characterData.name_kanji"
-            class="tracking-wider text-[#bebebe]">
+            class="tracking-wider text-[#bebebe] text-[1rem]">
             <ng-container *ngIf="this.characterData.nicknames.length;else name_kanji;">
                 Aka: <span class="text-[#bebebe] tracking-wider"
                     *ngFor="let name of this.characterData.nicknames;let i = index;">
