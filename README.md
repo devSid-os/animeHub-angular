@@ -1,27 +1,18 @@
-# Animehub
+**Anime Web App 🚀**
+Welcome to the Anime Web App! Your ultimate destination for discovering and exploring the fascinating world of anime, manga, and characters. Built using Angular and powered by the Jikan API, this app lets you dive deep into your favorite anime universe with just a few clicks.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.4.
+**🎬 Explore Anime & Manga**
+Whether you're a die-hard anime fan or a manga lover, this app has it all! Easily browse through an extensive collection of anime and manga titles, and filter them by genres to find your next binge-watch or reading session. From action-packed adventures to heartwarming romances, there's something for everyone!
 
-## Development server
+**🌟 Discover Characters**
+Curious about your favorite character’s backstory? You can search for detailed profiles of anime characters and explore their journey in the anime world.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+**🎥 Anime Movies**
+Experience the world of anime movies like never before. With just a few taps, get access to some of the most iconic and beautifully animated movies in the anime industry.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+**🔍 Key Features:**
+Anime & Manga Search – Find and filter anime and manga by genres.
+Character Search – Search and explore detailed character profiles.
+Anime Movies – Discover popular anime movies to watch.
+Responsive Design – Optimized for all screen sizes, so you can enjoy it on the go!
+So, whether you're new to the world of anime or a long-time enthusiast, this app will keep you up to date with all the latest and greatest anime and manga.
