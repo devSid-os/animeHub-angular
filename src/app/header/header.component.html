@@ -1,4 +1,4 @@
-<header style="z-index: 4!important;"
+<header style="z-index: 4!important;background: rgba(0,0,0,0.2);"
     class="container-fluid relative flex justify-center align-center py-3 sm:justify-between sm:py-4">
     <div>
         <h1 class="logo text-2xl select-none text-white mb-0 sm:text-2xl md:text-3xl">Anime Stop</h1>
@@ -11,8 +11,9 @@
     <nav class="flex">
         <ul class="hidden gap-4 align-center my-auto text-white sm:flex">
             <li *ngFor="let menuItem of this.headerMenuItems" class="text-sm select-none hover:-translate-y-px sm:mt-1">
-                <a (click)="this.isMobileMenuOpen=false;" class="text-[#bebebe] hover:text-white" [routerLink]="menuItem.urlRoute"
-                    routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+                <a (click)="this.isMobileMenuOpen=false;" class="text-[#bebebe] hover:text-white"
+                    [routerLink]="menuItem.urlRoute" routerLinkActive="active-link"
+                    [routerLinkActiveOptions]="{ exact: true }">
                     {{menuItem.name.toUpperCase()}}
                 </a>
             </li>
@@ -24,8 +25,9 @@
             <ul class="h-screen flex flex-col gap-8 items-end p-4">
                 <li *ngFor="let menuItem of this.headerMenuItems"
                     class="select-none text-[#bebebe] text-xl hover:text-white hover:-translate-y-px">
-                    <a (click)="this.isMobileMenuOpen=false;" class="text-[#bebebe] hover:text-white" [routerLink]="menuItem.urlRoute"
-                        routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+                    <a (click)="this.isMobileMenuOpen=false;" class="text-[#bebebe] hover:text-white"
+                        [routerLink]="menuItem.urlRoute" routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }">
                         {{menuItem.name.toUpperCase()}}
                     </a>
                 </li>
