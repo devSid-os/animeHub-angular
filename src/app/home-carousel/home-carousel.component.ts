@@ -10,10 +10,10 @@ export class HomeCarouselComponent implements OnInit, OnDestroy {
   @ViewChild('carousel') carousel!: ElementRef;
 
   images = [
-    { src: '../../assets/carousel_img1.jpg', alt: 'Image 1', url: '/manga/156308' },
-    { src: '../../assets/carousel_img2.jpg', alt: 'Image 2' },
-    { src: '../../assets/carousel_img3.jpg', alt: 'Image 3', url: '/manga/13' },
-    { src: '../../assets/carousel_img4.jpg', alt: 'Image 4', url: 'https://en.dragon-ball-official.com/specials/dragonball40th/?utm_source=dbos&utm_medium=di[%E2%80%A6]ampaign=dragonball40th_open&utm_content=banner_20241120' }
+    { src: 'assets/carousel_img1.jpg', alt: 'Image 1', url: '/manga/156308' },
+    { src: 'assets/carousel_img2.jpg', alt: 'Image 2' },
+    { src: 'assets/carousel_img3.jpg', alt: 'Image 3', url: '/manga/13' },
+    { src: 'assets/carousel_img4.jpg', alt: 'Image 4', url: 'https://en.dragon-ball-official.com/specials/dragonball40th/?utm_source=dbos&utm_medium=di[%E2%80%A6]ampaign=dragonball40th_open&utm_content=banner_20241120' }
   ];
 
   currentIndex = 0;
