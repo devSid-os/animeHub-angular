@@ -50,6 +50,12 @@ export class AnimeOverviewComponent implements OnInit {
     }
   }
 
+  redirectToAnimeFilterPage(genreId: string) {
+    this._router.navigate(['/anime-filters'], {
+      queryParams: { genres: genreId }
+    });
+  }
+
   openTrailerModal(): void {
     this.isTrailerModalOpen = true;
     document.body.style.overflow = 'hidden';

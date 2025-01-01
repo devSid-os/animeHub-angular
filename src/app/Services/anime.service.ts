@@ -17,6 +17,10 @@ export class AnimeService {
         return this._selectedAnime;
     }
 
+    getAnimeGenres(): Promise<any> {
+        return this._http.get(`${this._JIKAN_BASE_URL}/genres/anime`).toPromise();
+    }
+
     getAnimeMovies(filters: any): Promise<any> {
         filters['type'] = 'movie';
         return this._http.get(`${this._JIKAN_BASE_URL}/top/anime`, {
@@ -79,7 +83,6 @@ export class AnimeService {
     }
 
     getAnimeSearch(filters: any): Promise<any> {
-
         return this._http.get(`${this._JIKAN_BASE_URL}/anime`, {
             params: filters
         }).toPromise();

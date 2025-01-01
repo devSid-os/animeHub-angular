@@ -1,0 +1,13 @@
+.anime-image {
+    transition: transform .1s ease-in-out, opacity .1s ease-in-out;
+}
+
+.anime-div:hover .anime-image {
+    transform: translateY(-3px);
+    opacity: .7;
+}
+
+.anime-div:hover .anime-title {
+    color: var(--color-yellow);
+    font-weight: 600;
+}

@@ -123,8 +123,9 @@
                 </p>
                 <mat-chip-list>
                     <mat-chip 
+                        (click)="this.redirectToAnimeFilterPage(genre.mal_id);"
                         *ngFor="let genre of this.anime.genres" 
-                        class="custom-chip">
+                        class="custom-chip cursor-pointer">
                         {{genre.name}}
                     </mat-chip>
                 </mat-chip-list>

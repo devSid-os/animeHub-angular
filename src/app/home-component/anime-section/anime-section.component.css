@@ -53,3 +53,12 @@ h3 {
     background-color: #5d0914;
     border-top: 1px solid #5d0914;
 }
+
+.filter-anime-btn {
+    padding-left: 1rem !important;
+    transition: all .3s ease-in-out;
+}
+
+.filter-anime-btn:hover {
+    padding-right: .8rem !important;
+}

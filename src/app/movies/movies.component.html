@@ -2,15 +2,18 @@
     <h4 class="flex-1 p-4 py-3">Manga List</h4>
     <nav>
         <ul class="m-0 p-2">
-            <li (click)="this.updateQueryParam('bypopularity')" [ngClass]="{'text-yellow': this.filtersApplied.filter==='bypopularity'}"
+            <li (click)="this.updateQueryParam('bypopularity')"
+                [ngClass]="{'text-yellow': this.filtersApplied.filter==='bypopularity'}"
                 class="tracking-wide opacity-70 cursor-pointer text-lg hover:opacity-100 md:text-xl">
                 Most Popular
             </li>
-            <li (click)="this.updateQueryParam('upcoming')" [ngClass]="{'text-yellow': this.filtersApplied.filter==='upcoming'}"
+            <li (click)="this.updateQueryParam('upcoming')"
+                [ngClass]="{'text-yellow': this.filtersApplied.filter==='upcoming'}"
                 class="tracking-wide opacity-70 cursor-pointer text-lg hover:opacity-100 md:text-xl">
                 Upcoming
             </li>
-            <li (click)="this.updateQueryParam('airing')" [ngClass]="{'text-yellow': this.filtersApplied.filter==='airing'}"
+            <li (click)="this.updateQueryParam('airing')"
+                [ngClass]="{'text-yellow': this.filtersApplied.filter==='airing'}"
                 class="tracking-wide opacity-70 cursor-pointer text-lg hover:opacity-100 md:text-xl">
                 Ongoing
             </li>
@@ -23,7 +26,8 @@
     <div style="row-gap: 1.2rem!important; column-gap: 1rem!important;"
         class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-8">
         <ng-container *ngIf="this.movieData.length;else noDataDiv;">
-            <div (click)="this.redirectToAnimeDetailPage(movie.mal_id);" *ngFor="let movie of this.movieData;" class="relative w-full">
+            <div (click)="this.redirectToAnimeDetailPage(movie.mal_id);" *ngFor="let movie of this.movieData;"
+                class="relative w-full">
                 <app-movie-item [movie]="movie"></app-movie-item>
             </div>
         </ng-container>
@@ -38,21 +42,19 @@
     <!-- PAGINATION DIV -->
     <div class="my-8 flex-wrap flex justify-center items-center gap-2">
 
-        <button type="button"
+        <button [disabled]="1 === this.customPagination.current_page"
+            (click)="this.onPageChange(this.customPagination.current_page - 1);" type="button"
             class="bg-[#3e3e3e] text-[12px] px-2 py-1 rounded-md border-1 border-[gray] tracking-wider hover:bg-[#ffd600] hover:text-black md:text-sm">
             PREV
         </button>
 
-        <button (click)="this.onFirstPageClick();"
-            *ngIf="this.customPagination.buttonStart>=2"
-            type="button"
+        <button (click)="this.onFirstPageClick();" *ngIf="this.customPagination.buttonStart>=2" type="button"
             class="bg-[#3e3e3e] text-[12px] px-2 py-1 rounded-md border-1 border-[gray] hover:bg-[#ffd600] hover:text-black md:text-sm">
             1
         </button>
 
-        <button
-            *ngIf="this.customPagination.buttonStart>=3"
-            type="button" class="text-[12px] px-2 py-1 rounded-md border-1 border-[gray] md:text-sm">
+        <button *ngIf="this.customPagination.buttonStart>=3" type="button"
+            class="text-[12px] px-2 py-1 rounded-md border-1 border-[gray] md:text-sm">
             ...
         </button>
 
@@ -63,20 +65,19 @@
             {{num}}
         </button>
 
-        <button
-            *ngIf="(this.customPagination.last_page - this.customPagination.buttonStart) > 10"
-            type="button" class="text-[12px] px-2 py-1 rounded-md border-1 border-[gray] md:text-sm">
+        <button *ngIf="(this.customPagination.last_page - this.customPagination.buttonStart) > 10" type="button"
+            class="text-[12px] px-2 py-1 rounded-md border-1 border-[gray] md:text-sm">
             ...
         </button>
 
         <button (click)="this.onLastPageClick();"
-            *ngIf="(this.customPagination.last_page - this.customPagination.buttonStart) >= 10"
-            type="button"
+            *ngIf="(this.customPagination.last_page - this.customPagination.buttonStart) >= 10" type="button"
             class="bg-[#3e3e3e] text-[12px] px-2 py-1 rounded-md border-1 border-[gray] hover:bg-[#ffd600] hover:text-black md:text-sm">
             {{this.customPagination.last_page}}
         </button>
 
-        <button type="button"
+        <button [disabled]="this.customPagination.last_page === this.customPagination.current_page"
+            (click)="this.onPageChange(this.customPagination.current_page + 1);" type="button"
             class="bg-[#3e3e3e] text-[12px] px-2 py-1 text-sm rounded-md border-1 border-[gray] tracking-wider hover:bg-[#ffd600] hover:text-black md:text-sm">
             NEXT
         </button>

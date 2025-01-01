@@ -15,10 +15,18 @@ export class AnimeSectionComponent implements OnInit {
   constructor(private _animeService: AnimeService, private _router: Router) { }
 
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   selectAnime(anime: any): void {
     this._animeService.selectedAnime = anime;
     this._router.navigate(['/anime', anime.mal_id]);
+  }
+
+  redirectToAnimeFilterPage(): void {
+    this._router.navigate(['/anime-filters'], {
+      queryParams: {
+        status: 'airing'
+      }
+    });
   }
 }

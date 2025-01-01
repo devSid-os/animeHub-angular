@@ -1,0 +1,13 @@
+<div class="anime-div gap-1 flex flex-col items-center overflow-hidden hover:cursor-pointer">
+    <div class="w-full h-[170px] overflow-hidden rounded-sm sm:h-[200px]">
+        <img loading="lazy" class="anime-image w-full h-full object-cover"
+            [src]="anime.images.webp.large_image_url || anime.images.jpg.large_image_url || anime.images.webp.image_url || anime.images.jpg.image_url" />
+    </div>
+    <div class="w-full">
+        <p class="text-[11px] tracking-wider w-full mb-0">#{{anime.rank || 'n/a'}}</p>
+        <p class="anime-title tracking-wider w-full text-[13px] mb-0 whitespace-nowrap text-ellipsis overflow-hidden">
+            {{anime.title_english || anime.title}}</p>
+        <p class="tracking-wider w-full text-[gray] text-[11px] mb-0 whitespace-nowrap text-ellipsis overflow-hidden">
+            {{anime.title_japanese || anime.title}}</p>
+    </div>
+</div>
