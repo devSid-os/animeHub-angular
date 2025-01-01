@@ -30,6 +30,7 @@ export class HomeCarouselComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.currentIndex = 0;
     setTimeout(() => {
       this.isSmallScreen = window.innerWidth <= 768;
       this.startAutoSlide();
