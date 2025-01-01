@@ -16,28 +16,28 @@ export class MovieTooltipDirective {
     // Create tooltip element
     this.tooltipElement = this.renderer.createElement('div');
 
-    // MANGA TITLE
+    // MOVIE TITLE
     const movieTitleTextH6 = this.renderer.createElement('h6');
-    this.addClasses(movieTitleTextH6, ['font-bold', 'break-words', 'tracking-wide', 'text-[15px]', 'font-mulish']);
+    this.addClasses(movieTitleTextH6, ['font-bold', 'break-words', 'tracking-wide', 'text-[15px]', 'font-mulish', 'mb-[5px]']);
     const movieTitleText = this.renderer.createText(this.movie.title_english || this.movie.title);
     this.renderer.appendChild(movieTitleTextH6, movieTitleText);
     this.renderer.appendChild(this.tooltipElement, movieTitleTextH6);
 
-    // MANGA ALT TITLES 
+    // MOVIE ALT TITLES 
     if (this.movie.title_synonyms.length) {
-      const altMangaTitlesH6 = this.renderer.createElement('h6');
+      const altMovieTitlesH6 = this.renderer.createElement('h6');
       const span = this.renderer.createElement("span");
-      this.addClasses(span, ['font-mulish', 'text-[12px]', 'italic', 'font-normal', 'tracking-wider'])
+      this.addClasses(span, ['font-mulish', 'text-[12px]', 'italic', 'font-normal', 'tracking-wider', 'mb-[5px]'])
       this.renderer.appendChild(span, this.renderer.createText('Alt Titles: '));
-      this.renderer.appendChild(altMangaTitlesH6, span);
-      this.renderer.appendChild(altMangaTitlesH6, this.renderer.createText(this.movie.title_synonyms.join(', ')));
-      this.addClasses(altMangaTitlesH6, ['text-[12px]', 'tracking-wider', 'italic', 'font-mulish']);
-      this.renderer.setStyle(altMangaTitlesH6, 'font-weight', '300');
-      this.renderer.appendChild(this.tooltipElement, altMangaTitlesH6);
+      this.renderer.appendChild(altMovieTitlesH6, span);
+      this.renderer.appendChild(altMovieTitlesH6, this.renderer.createText(this.movie.title_synonyms.join(', ')));
+      this.addClasses(altMovieTitlesH6, ['text-[12px]', 'tracking-wider', 'italic', 'font-mulish']);
+      this.renderer.setStyle(altMovieTitlesH6, 'font-weight', '300');
+      this.renderer.appendChild(this.tooltipElement, altMovieTitlesH6);
     }
 
-    const extraMangaDetailsDiv = this.renderer.createElement('div');
-    this.addClasses(extraMangaDetailsDiv, ['flex', 'items-center', 'gap-2', 'flex-wrap']);
+    const extraMovieDetailsDiv = this.renderer.createElement('div');
+    this.addClasses(extraMovieDetailsDiv, ['flex', 'items-center', 'gap-2', 'flex-wrap']);
 
     // MOVIE DURATION
     const chapterTextElement = this.renderer.createElement('p');
@@ -49,14 +49,14 @@ export class MovieTooltipDirective {
     this.renderer.appendChild(chapterTextElement, this.renderer.createText((this.movie?.duration || 'Duration not available')));
     this.addClasses(chapterTextElement, ['flex', 'items-center', 'gap-1', 'pr-2', 'mb-0']);
     this.renderer.setStyle(chapterTextElement, 'border-right', '1px solid rgb(73, 72, 72)');
-    this.renderer.appendChild(extraMangaDetailsDiv, chapterTextElement);
+    this.renderer.appendChild(extraMovieDetailsDiv, chapterTextElement);
 
     // MOVIE TYPE
     const movieTypeTextElement = this.renderer.createElement('p');
     this.addClasses(movieTypeTextElement, ['flex', 'items-center', 'gap-1', 'pr-2', 'mb-0']);
     this.renderer.setStyle(movieTypeTextElement, 'border-right', '1px solid rgb(73, 72, 72)');
     this.renderer.appendChild(movieTypeTextElement, this.renderer.createText(this.movie.type || 'MOVIE'));
-    this.renderer.appendChild(extraMangaDetailsDiv, movieTypeTextElement);
+    this.renderer.appendChild(extraMovieDetailsDiv, movieTypeTextElement);
 
     // PUBLISHED FROM-TO
     const publishedTextElement = this.renderer.createElement('p');
@@ -68,7 +68,7 @@ export class MovieTooltipDirective {
     this.renderer.appendChild(publishedTextElement, this.renderer.createText((this.movie?.aired?.string) || '?'));
     this.addClasses(publishedTextElement, ['flex', 'items-center', 'gap-1', 'pr-2', 'mb-0']);
     this.renderer.setStyle(publishedTextElement, 'border-right', '1px solid rgb(73, 72, 72)');
-    this.renderer.appendChild(extraMangaDetailsDiv, publishedTextElement);
+    this.renderer.appendChild(extraMovieDetailsDiv, publishedTextElement);
 
     // MOVIE RATINGS
     const scoreTextElement = this.renderer.createElement('p');
@@ -80,9 +80,9 @@ export class MovieTooltipDirective {
     this.renderer.appendChild(scoreTextElement, ratingIconElement);
     this.renderer.appendChild(scoreTextElement, this.renderer.createText((this.movie?.score) || 'n/a'));
     this.addClasses(scoreTextElement, ['flex', 'items-center', 'gap-1', 'mb-0']);
-    this.renderer.appendChild(extraMangaDetailsDiv, scoreTextElement);
+    this.renderer.appendChild(extraMovieDetailsDiv, scoreTextElement);
 
-    this.renderer.appendChild(this.tooltipElement, extraMangaDetailsDiv);
+    this.renderer.appendChild(this.tooltipElement, extraMovieDetailsDiv);
 
     // BACKGROUND OR SYNOPSIS
     const backgroundTextElement = this.renderer.createElement('p');

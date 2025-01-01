@@ -26,7 +26,7 @@ export class MangaTooltipDirective {
 
     // MANGA TITLE
     const mangaTitleTextH6 = this.renderer.createElement('h6');
-    this.addClasses(mangaTitleTextH6, ['font-bold', 'break-words', 'tracking-wide', 'text-[15px]', 'font-mulish']);
+    this.addClasses(mangaTitleTextH6, ['font-bold', 'break-words', 'tracking-wide', 'text-[15px]', 'font-mulish', 'mb-[5px]']);
     const mangaTitleText = this.renderer.createText(this.manga.title_english || this.manga.title);
     this.renderer.appendChild(mangaTitleTextH6, mangaTitleText);
     this.renderer.appendChild(this.tooltipElement, mangaTitleTextH6);
@@ -35,7 +35,7 @@ export class MangaTooltipDirective {
     if (this.manga.title_synonyms.length) {
       const altMangaTitlesH6 = this.renderer.createElement('h6');
       const span = this.renderer.createElement("span");
-      this.addClasses(span, ['font-mulish', 'text-[12px]', 'italic', 'font-normal', 'tracking-wider'])
+      this.addClasses(span, ['font-mulish', 'text-[12px]', 'italic', 'font-normal', 'tracking-wider', 'mb-[5px]'])
       this.renderer.appendChild(span, this.renderer.createText('Alt Titles: '));
       this.renderer.appendChild(altMangaTitlesH6, span);
       this.renderer.appendChild(altMangaTitlesH6, this.renderer.createText(this.manga.title_synonyms.join(', ')));
