@@ -1,5 +1,5 @@
 <div class="anime-div gap-1 flex flex-col items-center overflow-hidden hover:cursor-pointer">
-    <div class="w-full h-[170px] overflow-hidden rounded-sm sm:h-[200px]">
+    <div [appAnimeTooltip]="anime" class="w-full h-[170px] overflow-hidden rounded-sm sm:h-[200px]">
         <img loading="lazy" class="anime-image w-full h-full object-cover"
             [src]="anime.images.webp.large_image_url || anime.images.jpg.large_image_url || anime.images.webp.image_url || anime.images.jpg.image_url" />
     </div>
