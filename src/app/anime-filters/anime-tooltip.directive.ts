@@ -27,11 +27,11 @@ export class AnimeTooltipDirective {
     if (this.anime.title_synonyms.length) {
       const altAnimeTitlesH6 = this.renderer.createElement('h6');
       const span = this.renderer.createElement("span");
-      this.addClasses(span, ['font-mulish', 'text-[12px]', 'italic', 'font-normal', 'tracking-wider', 'mb-[5px]'])
+      this.addClasses(span, ['font-mulish', 'text-[12px]', 'italic', 'font-normal', 'tracking-wider'])
       this.renderer.appendChild(span, this.renderer.createText('Alt Titles: '));
       this.renderer.appendChild(altAnimeTitlesH6, span);
       this.renderer.appendChild(altAnimeTitlesH6, this.renderer.createText(this.anime.title_synonyms.join(', ')));
-      this.addClasses(altAnimeTitlesH6, ['text-[12px]', 'tracking-wider', 'italic', 'font-mulish']);
+      this.addClasses(altAnimeTitlesH6, ['text-[12px]', 'tracking-wider', 'italic', 'font-mulish', 'mb-[5px]']);
       this.renderer.setStyle(altAnimeTitlesH6, 'font-weight', '300');
       this.renderer.appendChild(this.tooltipElement, altAnimeTitlesH6);
     }

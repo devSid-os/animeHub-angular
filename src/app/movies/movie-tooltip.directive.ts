@@ -27,11 +27,11 @@ export class MovieTooltipDirective {
     if (this.movie.title_synonyms.length) {
       const altMovieTitlesH6 = this.renderer.createElement('h6');
       const span = this.renderer.createElement("span");
-      this.addClasses(span, ['font-mulish', 'text-[12px]', 'italic', 'font-normal', 'tracking-wider', 'mb-[5px]'])
+      this.addClasses(span, ['font-mulish', 'text-[12px]', 'italic', 'font-normal', 'tracking-wider'])
       this.renderer.appendChild(span, this.renderer.createText('Alt Titles: '));
       this.renderer.appendChild(altMovieTitlesH6, span);
       this.renderer.appendChild(altMovieTitlesH6, this.renderer.createText(this.movie.title_synonyms.join(', ')));
-      this.addClasses(altMovieTitlesH6, ['text-[12px]', 'tracking-wider', 'italic', 'font-mulish']);
+      this.addClasses(altMovieTitlesH6, ['text-[12px]', 'tracking-wider', 'italic', 'font-mulish', 'mb-[5px]']);
       this.renderer.setStyle(altMovieTitlesH6, 'font-weight', '300');
       this.renderer.appendChild(this.tooltipElement, altMovieTitlesH6);
     }

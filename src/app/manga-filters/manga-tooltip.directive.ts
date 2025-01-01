@@ -35,11 +35,11 @@ export class MangaTooltipDirective {
     if (this.manga.title_synonyms.length) {
       const altMangaTitlesH6 = this.renderer.createElement('h6');
       const span = this.renderer.createElement("span");
-      this.addClasses(span, ['font-mulish', 'text-[12px]', 'italic', 'font-normal', 'tracking-wider', 'mb-[5px]'])
+      this.addClasses(span, ['font-mulish', 'text-[12px]', 'italic', 'font-normal', 'tracking-wider'])
       this.renderer.appendChild(span, this.renderer.createText('Alt Titles: '));
       this.renderer.appendChild(altMangaTitlesH6, span);
       this.renderer.appendChild(altMangaTitlesH6, this.renderer.createText(this.manga.title_synonyms.join(', ')));
-      this.addClasses(altMangaTitlesH6, ['text-[12px]', 'tracking-wider', 'italic', 'font-mulish']);
+      this.addClasses(altMangaTitlesH6, ['text-[12px]', 'tracking-wider', 'italic', 'font-mulish', 'mb-[5px]']);
       this.renderer.setStyle(altMangaTitlesH6, 'font-weight', '300');
       this.renderer.appendChild(this.tooltipElement, altMangaTitlesH6);
     }
