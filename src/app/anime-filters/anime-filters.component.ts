@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AnimeService } from '../Services/anime.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 interface Pagination {
   current_page: number,
@@ -16,12 +17,13 @@ interface Pagination {
   templateUrl: './anime-filters.component.html',
   styleUrls: ['./anime-filters.component.css']
 })
-export class AnimeFiltersComponent implements OnInit {
+export class AnimeFiltersComponent implements OnInit, OnDestroy {
   loading: boolean = false;
   showGenreFilterModal: boolean = false;
   genreFilterApplied: boolean = false;
   animeData: Array<any> = [];
-  genresSelectedMap: any = {}
+  genresSelectedMap: any = {};
+  sub: Subscription | null = null;
   customPagination: Pagination = {
     limit: 24,
     data: {},
@@ -39,7 +41,7 @@ export class AnimeFiltersComponent implements OnInit {
   constructor(private _animeService: AnimeService, private _route: ActivatedRoute, private _router: Router) { }
 
   ngOnInit(): void {
-    this._route.queryParamMap.subscribe((queryParam) => {
+    this.sub = this._route.queryParamMap.subscribe((queryParam) => {
       this.customPagination.buttonStart = 1;
       this.customPagination.current_page = 1;
       this.customPagination.last_page = 1;
@@ -56,6 +58,10 @@ export class AnimeFiltersComponent implements OnInit {
       }
       this.getAnimeSearch({ ...this.filtersApplied }, this.customPagination.current_page);
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.sub instanceof Subscription) this.sub.unsubscribe();
   }
 
   updatePagination(pageNo: number): void {

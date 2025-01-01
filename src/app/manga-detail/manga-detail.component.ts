@@ -23,6 +23,7 @@ export class MangaDetailComponent implements OnInit {
   totalRecommendations: number = 12;
   selectedTab: TABS.OVERVIEW | TABS.RECOMMENDATIONS | TABS.REVIEWS | TABS.CHARACTERS = this.tabs.OVERVIEW;
   sub1: Subscription | null = null;
+  sub2: Subscription | null = null;
 
   constructor(private mangaService: MangaService, private _route: ActivatedRoute) { }
 
@@ -36,6 +37,7 @@ export class MangaDetailComponent implements OnInit {
 
   ngOnDestroy(): void {
     if (this.sub1 instanceof Subscription) this.sub1.unsubscribe();
+    if (this.sub2 instanceof Subscription) this.sub1.unsubscribe();
     this.resetProperties();
   }
 
@@ -61,7 +63,7 @@ export class MangaDetailComponent implements OnInit {
       () => this.getMangaRecommendations(mangaId)
     ];
 
-    from(requests).pipe(
+    this.sub2 = from(requests).pipe(
       concatMap((requestFunc) => {
         return from(requestFunc()).pipe(
           delay(333), // Add delay for subsequent requests

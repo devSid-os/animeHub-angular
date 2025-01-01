@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AnimeService } from '../Services/anime.service';
-import { from, of } from 'rxjs';
+import { from, of, Subscription } from 'rxjs';
 import { catchError, concatMap, delay, finalize, toArray } from 'rxjs/operators';
 
 @Component({
@@ -8,7 +8,7 @@ import { catchError, concatMap, delay, finalize, toArray } from 'rxjs/operators'
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
   animePage: number = 1;
   animeData: Array<any> = [];
@@ -16,11 +16,16 @@ export class HomeComponent implements OnInit {
   animeAsideData: Array<any> = [];
   isErrorAside: boolean = false;
   loading: boolean = false;
+  sub: Subscription | null = null;
 
   constructor(private _animeService: AnimeService) { }
 
   ngOnInit(): void {
     this.executeApis();
+  }
+
+  ngOnDestroy(): void {
+    if (this.sub instanceof Subscription) this.sub.unsubscribe();
   }
 
   executeApis() {
@@ -32,7 +37,7 @@ export class HomeComponent implements OnInit {
       () => this.getPopularAnimes({ limit: "20", filter: "bypopularity" })
     ];
 
-    from(requests).pipe(
+    this.sub = from(requests).pipe(
       concatMap((requestFunc) => {
         return from(requestFunc()).pipe(
           delay(333), // Add delay for subsequent requests
