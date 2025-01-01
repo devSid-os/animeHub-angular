@@ -2,7 +2,6 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { AnimeService } from 'src/app/Services/anime.service';
 import { TABS } from 'src/app/enums';
 
 type emitValue = TABS.CHARACTERS | TABS.OVERVIEW | TABS.RECOMMENDATIONS | TABS.REVIEWS;
@@ -25,7 +24,7 @@ export class AnimeOverviewComponent implements OnInit {
   isScreenShotsModalOpen: boolean = false;
   isTrailerModalOpen: boolean = false;
 
-  constructor(public sanitizer: DomSanitizer, private _router: Router, private _animeService: AnimeService) { }
+  constructor(public sanitizer: DomSanitizer, private _router: Router) { }
 
   ngOnInit(): void {
     // RATINGS LOGIC
@@ -67,7 +66,6 @@ export class AnimeOverviewComponent implements OnInit {
   }
 
   redirectToAnimeDetailPage(animeId: string) {
-    this._animeService.selectedAnime = null;
     this._router.navigate(['/anime/', animeId]);
   }
 

@@ -45,7 +45,6 @@ export class AnimeDetailComponent implements OnInit, OnDestroy {
 
   private resetProperties(): void {
     this.selectedTab = this.tabs.OVERVIEW;
-    this._animeService.selectedAnime = null;
     this.anime = null;
     this.animePictures = [];
     this.animeStaff = [];
@@ -58,13 +57,10 @@ export class AnimeDetailComponent implements OnInit, OnDestroy {
   }
 
   fetchAnimeData(animeId: string) {
-    if (this._animeService.selectedAnime) {
-      this.anime = this._animeService.selectedAnime;
-    }
     this.loading = true;
     // Create an array of functions that return promises
     const requests = [
-      ...(this._animeService.selectedAnime ? [] : [() => this.getFullAnime(animeId)]),
+      () => this.getFullAnime(animeId),
       () => this.getAnimeCharacters(animeId),
       () => this.getAnimePictures(animeId),
       () => this.getAnimeStreaming(animeId),

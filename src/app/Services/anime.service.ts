@@ -5,17 +5,8 @@ import { HttpClient } from "@angular/common/http";
 })
 export class AnimeService {
     private readonly _JIKAN_BASE_URL = 'https://api.jikan.moe/v4';
-    private _selectedAnime: any = null;
 
     constructor(private _http: HttpClient) { }
-
-    set selectedAnime(anime: any) {
-        this._selectedAnime = anime;
-    }
-
-    get selectedAnime() {
-        return this._selectedAnime;
-    }
 
     getAnimeGenres(): Promise<any> {
         return this._http.get(`${this._JIKAN_BASE_URL}/genres/anime`).toPromise();
