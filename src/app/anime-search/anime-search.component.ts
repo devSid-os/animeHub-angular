@@ -39,7 +39,7 @@ export class AnimeSearchComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.sub$ = this._route.queryParamMap.subscribe((param: ParamMap) => {
       this.resetPagination();
-      this.filtersApplied.searchQuery = param.get("query");
+      this.filtersApplied.searchQuery = (param.get("query") || '');
       this.searchValue = this.filtersApplied.searchQuery;
       this.searchAnime(this.filtersApplied.searchQuery, this.customPagination.current_page);
     });

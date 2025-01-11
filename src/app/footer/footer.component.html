@@ -1,5 +1,12 @@
 <footer class="px-3">
     <hr />
+    <!-- NAVIGATION LINKS -->
+    <div class="w-full justify-center flex py-2">
+        <ul class="flex-wrap justify-center flex gap-2">
+            <li *ngFor="let item of this.navLinks" class="tracking-wider font-light select-none"><a class="text-white p-1 px-2 rounded-md nav-links text-sm sm:text-base" [routerLink]="item.url">{{item.name}}</a></li>
+        </ul>
+    </div>
+
     <div class="flex justify-center items-center jikan-credits-div">
         <img #jikanImg class="h-max cursor-pointer" width="90" src="assets/jikan_logo.png" />
         <div>
@@ -15,5 +22,5 @@
         </div>
     </div>
 
-    <p class="copy-right-para text-center text-[#bebebe] pb-2 mb-0 text-[10px] md:text-[12px]">&copy;{{this.currentYear || '2024'}} Anime Stop All Rights Reserved</p>
+    <p class="copy-right-para text-center text-[#bebebe] pb-2 mb-0 font-[600] text-[10px] md:text-[12px]">&copy;{{this.copyRightText}} <a href="https://www.linkedin.com/in/siddharth-jain-3ab1ab294/" target="_blank">Linkedin</a></p>
 </footer>
