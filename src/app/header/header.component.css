@@ -37,3 +37,13 @@ a {
 .close-hamburger-icon {
     color: red !important;
 }
+
+.searchAnimeInputDiv:focus-within {
+    border-bottom: 1px solid #bd0912;
+    
+}
+
+.searchAnimeInputDiv {
+    border-bottom: 1px solid #bebebe;
+    transition: border-bottom .2s ease-in-out;
+}

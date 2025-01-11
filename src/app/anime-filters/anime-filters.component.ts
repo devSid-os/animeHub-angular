@@ -58,9 +58,12 @@ export class AnimeFiltersComponent implements OnInit, OnDestroy {
       }
       this.getAnimeSearch({ ...this.filtersApplied }, this.customPagination.current_page);
     });
+
+    this._animeService.showAnimeSearch.next(true);
   }
 
   ngOnDestroy(): void {
+    this._animeService.showAnimeSearch.next(false);
     if (this.sub instanceof Subscription) this.sub.unsubscribe();
   }
 

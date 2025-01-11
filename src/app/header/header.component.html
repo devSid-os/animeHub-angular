@@ -8,6 +8,13 @@
         type="button" class="z-10 left-2 text-2xl text-white material-icons-outlined sm:hidden">
         {{this.isMobileMenuOpen ? 'close' : 'menu'}}
     </button>
+
+    <button (click)="this.redirectToSearchPage();" *ngIf="this.showAnimeSearch" type="button" class="absolute right-4" style="transform: translateY(-40%);top:50%;">
+        <span class="material-icons-outlined hover:text-[#ffd600] sm:hidden">
+            search
+        </span>
+    </button>
+    <!-- MENU FOR MEDIUM/LARGE SCREENS -->
     <nav class="flex">
         <ul class="hidden gap-4 align-center my-auto text-white sm:flex">
             <li *ngFor="let menuItem of this.headerMenuItems" class="text-sm select-none hover:-translate-y-px sm:mt-1">
@@ -16,6 +23,17 @@
                     [routerLinkActiveOptions]="{ exact: true }">
                     {{menuItem.name.toUpperCase()}}
                 </a>
+            </li>
+            <li *ngIf="this.showAnimeSearch">
+                <div style="background-color: rgba(0, 0, 0, .5);" class="flex searchAnimeInputDiv items-center rounded-sm">
+                    <input spellcheck="false" class="w-[190px] p-2 py-1 text-[13px] bg-transparent focus:outline-none"
+                        placeholder="Search anime by title" type="text" #searchInput />
+                    <button (click)="this.redirectToSearchPage(searchInput.value);" type="button" class="bg-transparent pt-1">
+                        <span class="material-icons-outlined text-[18px] hover:text-[#ffd600]">
+                            search
+                        </span>
+                    </button>
+                </div>
             </li>
         </ul>
     </nav>

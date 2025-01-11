@@ -62,6 +62,7 @@ a {
     border-radius: 6px;
     font-weight: 400 !important;
     font-size: .8rem;
+    cursor: pointer!important;
 }
 
 .custom-chip:hover {

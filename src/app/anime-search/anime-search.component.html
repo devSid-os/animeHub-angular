@@ -1,0 +1,79 @@
+<div class="searchInputDiv relative w-full flex justify-center my-4">
+    <input [(ngModel)]="this.searchValue" [value]="this.searchValue" spellcheck="false"
+        (keypress)="this.onSearchEnter($event);" type="text"
+        class="min-w-[300px] py-3 tracking-wider text-center focus:outline-none" placeholder="Search Anime by Title" />
+    <button (click)="this.updateQueryParams(this.searchValue)" type="button"
+        class="absolute right-4 top-[50%] lg:right-16" style="transform: translateY(-50%);">
+        <span class="material-icons-outlined text-[32px] text-[#4f4f4f] hover:text-[#bebebe]">
+            search
+        </span>
+    </button>
+</div>
+
+<div class="custom-container" style="margin-top: .8rem;">
+
+    <div style="row-gap: 1.2rem!important; column-gap: 1rem!important;"
+        class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-8">
+        <ng-container *ngIf="this.searchData.length;else noDataDiv;">
+            <div (click)="this.redirectToAnimePage(anime.mal_id);" *ngFor="let anime of this.searchData;"
+                class="relative w-full">
+                <app-anime-item [anime]="anime"></app-anime-item>
+            </div>
+        </ng-container>
+
+        <ng-template #noDataDiv>
+            <p class="col-span-8 text-center tracking-wider text-[#bebebe] text-md md:text-lg">
+                Sorry, No Results Found
+            </p>
+        </ng-template>
+    </div>
+
+    <!-- PAGINATION DIV -->
+    <div class="my-8 flex-wrap flex justify-center items-center gap-2">
+
+        <button [disabled]="1 === this.customPagination.current_page"
+            (click)="this.onPageChange(this.customPagination.current_page - 1);" type="button"
+            class="bg-[#3e3e3e] text-[12px] px-2 py-1 rounded-md border-1 border-[gray] tracking-wider hover:bg-[#ffd600] hover:text-black md:text-sm">
+            PREV
+        </button>
+
+        <button (click)="this.onFirstPageClick();" *ngIf="this.customPagination.buttonStart>=2" type="button"
+            class="bg-[#3e3e3e] text-[12px] px-2 py-1 rounded-md border-1 border-[gray] hover:bg-[#ffd600] hover:text-black md:text-sm">
+            1
+        </button>
+
+        <button *ngIf="this.customPagination.buttonStart>=3" type="button"
+            class="text-[12px] px-2 py-1 rounded-md border-1 border-[gray] md:text-sm">
+            ...
+        </button>
+
+        <button type="button" [ngClass]="{'active-page-btn': this.customPagination.current_page===num}"
+            *ngFor="let num of this.rangePaginationButtons(0, this.customPagination.last_page).slice(this.customPagination.buttonStart, this.customPagination.buttonStart+this.customPagination.range)"
+            (click)="this.onPageChange(num)"
+            class="bg-[#3e3e3e] text-[12px] px-2 py-1 rounded-md border-1 border-[gray] hover:bg-[#ffd600] hover:text-black md:text-sm">
+            {{num}}
+        </button>
+
+        <button *ngIf="(this.customPagination.last_page - this.customPagination.buttonStart) > 10" type="button"
+            class="text-[12px] px-2 py-1 rounded-md border-1 border-[gray] md:text-sm">
+            ...
+        </button>
+
+        <button (click)="this.onLastPageClick();"
+            *ngIf="(this.customPagination.last_page - this.customPagination.buttonStart) >= 10" type="button"
+            class="bg-[#3e3e3e] text-[12px] px-2 py-1 rounded-md border-1 border-[gray] hover:bg-[#ffd600] hover:text-black md:text-sm">
+            {{this.customPagination.last_page}}
+        </button>
+
+        <button [disabled]="this.customPagination.last_page === this.customPagination.current_page"
+            (click)="this.onPageChange(this.customPagination.current_page + 1);" type="button"
+            class="bg-[#3e3e3e] text-[12px] px-2 py-1 text-sm rounded-md border-1 border-[gray] tracking-wider hover:bg-[#ffd600] hover:text-black md:text-sm">
+            NEXT
+        </button>
+    </div>
+
+</div>
+
+
+
+<app-loader *ngIf="this.loading"></app-loader>

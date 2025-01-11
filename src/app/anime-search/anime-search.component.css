@@ -1,0 +1,79 @@
+::ng-deep.mat-radio-button ::ng-deep.mat-radio-outer-circle {
+    border-color: white !important;
+    /* Change the border to white */
+}
+
+::ng-deep.mat-radio-button.mat-accent ::ng-deep.mat-radio-checked .mat-radio-inner-circle {
+    background-color: white !important;
+    /* Optional: Change the inner circle to white when selected */
+}
+
+::ng-deep.mat-radio-button ::ng-deep.mat-radio-outer-circle:hover {
+    border-color: white !important;
+    /* Ensure hover state matches */
+}
+
+/* Change the inner circle to yellow when checked */
+::ng-deep.mat-radio-inner-circle {
+    background-color: #ffd600 !important;
+}
+
+::ng-deep.mat-radio-ripple .mat-ripple-element {
+    background-color: #ffd600 !important;
+}
+
+h4 {
+    text-align: center;
+}
+
+.text-yellow {
+    color: var(--color-yellow);
+    opacity: 1;
+}
+
+.custom-container {
+    width: 100%;
+    max-width: 1250px;
+    padding-left: 7px;
+    padding-right: 7px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.manga-image-overlay {
+    display: none;
+}
+
+.overlay {
+    background-color: rgba(0, 0, 0, .7);
+}
+
+.chip-hover {
+    background-color: #ffd600;
+    color: black;
+}
+
+.active-page-btn {
+    color: black;
+    background-color: var(--color-yellow);
+}
+
+.searchInputDiv {
+    input {
+        background: #000;
+        background: -webkit-gradient(linear, left top, right top, from(transparent), color-stop(50%, #000), to(transparent));
+        background: linear-gradient(90deg, transparent, #000 50%, transparent);
+        /* padding: 10px; */
+    }
+}
+
+@media screen and (min-width: 768px) {
+    /* h4 {
+        text-align: left;
+    } */
+
+    .custom-container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}

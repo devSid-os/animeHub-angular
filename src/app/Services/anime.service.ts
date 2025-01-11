@@ -1,10 +1,13 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { BehaviorSubject } from "rxjs";
 @Injectable({
     providedIn: 'root'
 })
 export class AnimeService {
     private readonly _JIKAN_BASE_URL = 'https://api.jikan.moe/v4';
+
+    showAnimeSearch: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     constructor(private _http: HttpClient) { }
 
